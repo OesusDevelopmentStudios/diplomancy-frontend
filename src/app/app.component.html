@@ -1,4 +1,29 @@
 <main>
-    Hello World!
+    <div class="container">
+        <div class="nav">
+            <button class="tab_button">{{ 'app.login' | translate }}</button>
+            <button class="tab_button">{{ 'app.logon' | translate }}</button>
+        </div>
+        <div class="mode_wrapper">
+            <div class="login">
+                <label for="username">Username/Email: </label>
+                <input type="text" id="username" name="username">
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="logon">
+                <label for="new_username">Username: </label>
+                <input type="text" id="new_username" name="new_username">
+                <label for="new_email">Email: </label>
+                <input type="email" id="new_email" name="new_email">
+                <label for="new_password">Password: </label>
+                <input type="password" id="new_password" name="new_password">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button class="language_button" (click)="changeLanguage('pl')">PL</button>
+        <button class="language_button" (click)="changeLanguage('en')">EN</button>
+    </div>
     <router-outlet/>
 </main>
