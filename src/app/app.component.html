@@ -1,29 +1,41 @@
 <main>
     <div class="container">
-        <div class="nav">
-            <button class="tab_button">{{ 'app.login' | translate }}</button>
-            <button class="tab_button">{{ 'app.logon' | translate }}</button>
-        </div>
-        <div class="mode_wrapper">
-            <div class="login">
-                <label for="username">Username/Email: </label>
-                <input type="text" id="username" name="username">
-                <label for="password">Password: </label>
-                <input type="password" id="password" name="password">
+        <h1>Diplomancy</h1>
+        <div class="main_dialoge">
+            <div class="nav">
+                <div class="tab_button" [ngClass]="mode == 'login' ? 'active_left' : 'disabled'"
+                        (click)="switchMode('login')">
+                    {{ 'app.login' | translate }}
+                </div>
+                <div class="tab_button" [ngClass]="mode == 'logon' ? 'active_right' : 'disabled'"
+                        (click)="switchMode('logon')">
+                    {{ 'app.logon' | translate }}
+                </div>
             </div>
-            <div class="logon">
-                <label for="new_username">Username: </label>
-                <input type="text" id="new_username" name="new_username">
-                <label for="new_email">Email: </label>
-                <input type="email" id="new_email" name="new_email">
-                <label for="new_password">Password: </label>
-                <input type="password" id="new_password" name="new_password">
+            <div class="mode_wrapper">
+                <div class="login" [ngClass]="mode == 'login' ? 'active' : 'disabled'">
+                    <label for="username">Username/Email: </label>
+                    <input type="text" id="username" name="username">
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" name="password">
+                    <button class="submit_button">{{ 'app.login' | translate }}</button>
+                </div>
+                <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">
+                    <label for="new_username">Username: </label>
+                    <input type="text" id="new_username" name="new_username">
+                    <label for="new_email">Email: </label>
+                    <input type="email" id="new_email" name="new_email">
+                    <label for="new_password">Password: </label>
+                    <input type="password" id="new_password" name="new_password">
+                    <button class="submit_button">{{ 'app.logon' | translate }}</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="footer">
-        <button class="language_button" (click)="changeLanguage('pl')">PL</button>
-        <button class="language_button" (click)="changeLanguage('en')">EN</button>
+        <img class="language_button" src="assets/pl.png" (click)="changeLanguage('pl')"/>
+        <div class="lang_spacer"></div>
+        <img class="language_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
     </div>
     <router-outlet/>
 </main>

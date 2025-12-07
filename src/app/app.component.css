@@ -1,4 +1,111 @@
-container {
+/* Common */
+
+.submit_button:hover, .language_button:hover {
+    cursor: pointer;
+}
+
+.language_button:hover {
+    filter: brightness(80%)
+}
+
+.tab_button.active_left, .tab_button.active_right {
+    cursor: default;
+}
+
+.tab_button.disabled {
+    cursor: pointer;
+}
+
+.login.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.login.disabled {
+    display: none;
+}
+
+.logon.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.logon.disabled {
+    display: none;
+}
+
+/* Main content */
+
+.tab_button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 50%;
+    text-align: center;
+}
+
+.tab_button.active_left {
+    background-color: #27272c;
+    border-top-left-radius: 12px;
+}
+
+.tab_button.active_right {
+    background-color: #27272c;
+    border-top-right-radius: 12px;
+}
+
+.container {
+    height: 96%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: grey;
+}
+
+.mode_wrapper {
+    padding: 20px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.submit_button {
+    width: max-content;
+}
+
+/* Footer styles */
+.footer {
+    height: 4%;
+    width: match-parent;
+    min-height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.language_button {
+    height: match-parent;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lang_spacer {
+    width: 10px;
+}
+
+/* Colours */
+
+main {
+    background-color: #25252b;
+}
+
+.main_dialoge {
+    background-color: #313136;
+    border: 1px solid #abbeaf;
+    border-radius: 12px;
 }

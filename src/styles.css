@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    overflow: auto;
+    height: 100%;
+}
+
+@font-face {
+    font-family: mil-font;
+    src: url("../public/fonts/gunplay.ttf");
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    color: #abbeaf;
+    font-family: mil-font;
+}
+
+app-root:host {
+    height: 100%;
+}
+
+main {
+    height: 100vh;
+}
