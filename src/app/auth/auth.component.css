@@ -72,8 +72,33 @@
 }
 
 .submit_button {
+    margin-top: 20px;
     width: max-content;
+    align-self: center;
+    background-color: #abbeaf;
+    border-radius: 12px;
+    border: 2px solid #abbeaf;
 }
+
+.submit_button:active {
+    border: 2px solid #313136;
+}
+
+input {
+    background-color: #313136;
+    color: #abbeaf;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.inputIdle {
+    border: 1px solid #abbeaf;
+}
+
+.inputFail {
+    border: 1px solid #ff4d4d;
+}
+
 
 /* Footer styles */
 .footer {
