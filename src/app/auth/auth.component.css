@@ -96,9 +96,32 @@ input {
 }
 
 .inputFail {
-    border: 1px solid #ff4d4d;
+    border: 1px solid #841616;
+    animation: shake 0.4s;
 }
 
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+}
+
+.hintIdle, .spacerFail {
+    display: none
+}
+
+.hintFail {
+    display: block;
+    color: #aa1616;
+    font-size: 12px;
+    align-self: end;
+}
+
+.spacerIdle {
+    height: 16px;
+    display: block;
+}
 
 /* Footer styles */
 .footer {
@@ -124,10 +147,6 @@ input {
 }
 
 /* Colours */
-
-main {
-    background-color: #25252b;
-}
 
 .main_dialoge {
     background-color: #313136;

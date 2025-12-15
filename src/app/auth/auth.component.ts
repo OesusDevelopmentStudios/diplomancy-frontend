@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-auth',
@@ -18,8 +19,13 @@ export class AuthComponent
     emailOk: boolean = true;
     passwordOk: boolean = true;
 
+    usernameMsg: string = 'Translation error';
+    emailMsg: string = 'Translation error';
+    passwordMsg: string = 'Translation error';
+
     private supportedLanguages: Array<string> = ['en', 'pl'];
     private defaultLanguage: string = 'en';
+    private translationSubGuard: Subscription
 
 
     constructor(private translate : TranslateService, private router: Router)
@@ -33,6 +39,12 @@ export class AuthComponent
                 ? browserLang
                 : this.defaultLanguage
         );
+
+        this.translationSubGuard = translate.stream('auth').subscribe((auth: any) => {
+            this.usernameMsg = auth.invalid_username;
+            this.emailMsg = auth.invalid_email;
+            this.passwordMsg = auth.invalid_password;
+        });
     }
 
     changeLanguage(lang: string): void
@@ -45,6 +57,8 @@ export class AuthComponent
 
     switchMode(mode: string): void
     {
+        if (this.mode === mode) return;
+
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;
@@ -57,13 +71,20 @@ export class AuthComponent
         this.emailOk = true;
         this.passwordOk = true;
 
-        this.router.navigate(['/dashboard', "token123"]);
+        this.router.navigate(['/dashboard', this.translate.getCurrentLang()]);
     }
 
     validateLogon(): void
     {
         this.usernameOk = false;
         this.emailOk = false;
+        this.passwordOk = true;
+    }
+
+    reset(): void
+    {
+        this.usernameOk = true;
+        this.emailOk = true;
         this.passwordOk = true;
     }
 }

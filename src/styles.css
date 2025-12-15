@@ -21,4 +21,9 @@ app-root:host {
 
 main {
     height: 100vh;
+    background-color: #25252b;
+}
+
+p {
+    margin: 0px;
 }

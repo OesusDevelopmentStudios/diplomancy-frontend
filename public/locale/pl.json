@@ -1,6 +1,12 @@
 {
-    "app": {
+    "auth": {
         "login": "Zaloguj",
-        "logon": "Zarejestruj"
+        "logon": "Zarejestruj",
+        "username": "Nazwa użytkownika",
+        "email": "Email",
+        "password": "Hasło",
+        "invalid_username": "Niepoprawna nazwa użytkownika",
+        "invalid_email": "Niepoprawny email",
+        "invalid_password": "Błędne hasło"
     }
 }

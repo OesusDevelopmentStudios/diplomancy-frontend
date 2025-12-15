@@ -5,32 +5,42 @@
             <div class="nav">
                 <div class="tab_button" [ngClass]="mode == 'login' ? 'active_left' : 'disabled'"
                         (click)="switchMode('login')">
-                    {{ 'app.login' | translate }}
+                    {{ 'auth.login' | translate }}
                 </div>
                 <div class="tab_button" [ngClass]="mode == 'logon' ? 'active_right' : 'disabled'"
                         (click)="switchMode('logon')">
-                    {{ 'app.logon' | translate }}
+                    {{ 'auth.logon' | translate }}
                 </div>
             </div>
             <div class="mode_wrapper">
                 <div class="login" [ngClass]="mode == 'login' ? 'active' : 'disabled'">
-                    <label for="username">Username/Email: </label>
+                    <label for="username">{{ 'auth.username' | translate }}/{{ 'auth.email' | translate }}:</label>
                     <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="username" name="username">
-                    <label for="password">Password: </label>
+                    <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
+                    <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <label for="password">{{ 'auth.password' | translate }}:</label>
                     <input [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'" type="password" id="password"
                         name="password">
-                    <button class="submit_button" (click)="validateLogin()">{{ 'app.login' | translate }}</button>
+                    <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
+                    <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
                 </div>
                 <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">
-                    <label for="new_username">Username: </label>
+                    <label for="new_username">{{ 'auth.username' | translate }}:</label>
                     <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="new_username"
                         name="new_username">
-                    <label for="new_email">Email: </label>
+                    <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
+                    <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <label for="new_email">{{ 'auth.email' | translate}}:</label>
                     <input [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" type="email" id="new_email" name="new_email">
-                    <label for="new_password">Password: </label>
+                    <div [ngClass]="emailOk ? 'hintIdle' : 'hintFail'">{{ emailMsg }}</div>
+                    <div [ngClass]="emailOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <label for="new_password">{{ 'auth.password' | translate }}:</label>
                     <input [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'" type="password" id="new_password"
                         name="new_password">
-                    <button class="submit_button" (click)="validateLogon()">{{ 'app.logon' | translate }}</button>
+                    <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ passwordMsg }}</div>
+                    <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <button class="submit_button" (click)="validateLogon()">{{ 'auth.logon' | translate }}</button>
                 </div>
             </div>
         </div>

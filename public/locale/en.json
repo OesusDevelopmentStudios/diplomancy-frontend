@@ -1,6 +1,12 @@
 {
-    "app": {
+    "auth": {
         "login": "Login",
-        "logon": "Logon"
+        "logon": "Logon",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "invalid_username": "Invalid username",
+        "invalid_email": "Invalid email",
+        "invalid_password": "Invalid password"
     }
 }

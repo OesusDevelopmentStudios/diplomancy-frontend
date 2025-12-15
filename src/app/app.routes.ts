@@ -11,11 +11,11 @@ export const routes: Routes = [
         component: AuthComponent
     },
     {
-        path: 'dashboard/:token',
+        path: 'dashboard/:lang',
         component: DashboardComponent
     },
     {
-        path: 'game/:token/:game',
+        path: 'game/:lang/:id',
         component: GameComponent
     },
     {
