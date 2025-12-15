@@ -23,6 +23,10 @@
                         name="password">
                     <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <label>
+                        <input type="checkbox" id="remember" name="remember" unchecked />
+                        Remember me
+                    </label>
                     <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
                 </div>
                 <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">
@@ -41,7 +45,7 @@
                     <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ passwordMsg }}</div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <button class="submit_button" (click)="validateLogon()">{{ 'auth.logon' | translate }}</button>
-                </div>
+                    </div>
             </div>
         </div>
     </div>

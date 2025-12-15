@@ -1,6 +1,6 @@
 /* Common */
 
-.submit_button:hover, .language_button:hover {
+.submit_button:hover, .language_button:hover, input:hover {
     cursor: pointer;
 }
 
@@ -121,6 +121,34 @@ input {
 .spacerIdle {
     height: 16px;
     display: block;
+}
+
+input[type="checkbox"] {
+    appearance: none; /* Removes browser default */
+    height: 20px;
+    border: 1px solid #abbeaf;
+    background-color: #313136;
+    border-radius: 4px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #abbeaf;
+    accent-color: #313136;
+    position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    width: 6px;
+    height: 12px;
+    border: solid #313136;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    pointer-events: none;
 }
 
 /* Footer styles */
