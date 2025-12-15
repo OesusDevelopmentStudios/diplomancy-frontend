@@ -72,6 +72,18 @@ export class AuthComponent
         this.mode = mode;
     }
 
+    onKeyPress(): void
+    {
+        if (this.mode === 'login')
+        {
+            this.validateLogin();
+        }
+        else
+        {
+            this.validateLogon();
+        }
+    }
+
     validateLogin(): void
     {
         this.usernameOk = true;
