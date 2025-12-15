@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-auth',
-    imports: [TranslateModule, NgClass],
+    imports: [TranslateModule, NgClass, FormsModule],
     templateUrl: './auth.component.html',
     styleUrl: './auth.component.css'
 })
@@ -23,9 +24,15 @@ export class AuthComponent
     emailMsg: string = 'Translation error';
     passwordMsg: string = 'Translation error';
 
+    inUsername: string = '';
+    inEmail: string = '';
+    inPassword: string = '';
+    rememberMe: boolean = false;
+
+    translationSubGuard: Subscription
+
     private supportedLanguages: Array<string> = ['en', 'pl'];
     private defaultLanguage: string = 'en';
-    private translationSubGuard: Subscription
 
 
     constructor(private translate : TranslateService, private router: Router)
@@ -70,6 +77,10 @@ export class AuthComponent
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;
+
+        // Placeholder for real authentication logic
+        console.log('Remember me:', this.rememberMe);
+        console.log('Logging in with', this.inUsername, this.inPassword);
 
         this.router.navigate(['/dashboard', this.translate.getCurrentLang()]);
     }

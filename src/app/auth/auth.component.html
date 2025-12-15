@@ -15,16 +15,17 @@
             <div class="mode_wrapper">
                 <div class="login" [ngClass]="mode == 'login' ? 'active' : 'disabled'">
                     <label for="username">{{ 'auth.username' | translate }}/{{ 'auth.email' | translate }}:</label>
-                    <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="username" name="username">
+                    <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="username" name="username"
+                        [(ngModel)]="inUsername">
                     <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
                     <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="password">{{ 'auth.password' | translate }}:</label>
                     <input [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'" type="password" id="password"
-                        name="password">
+                        name="password" [(ngModel)]="inPassword">
                     <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label>
-                        <input type="checkbox" id="remember" name="remember" unchecked />
+                        <input type="checkbox" id="remember" name="remember" unchecked [(ngModel)]="rememberMe"/>
                         Remember me
                     </label>
                     <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
@@ -32,16 +33,17 @@
                 <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">
                     <label for="new_username">{{ 'auth.username' | translate }}:</label>
                     <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="new_username"
-                        name="new_username">
+                        name="new_username" [(ngModel)]="inUsername">
                     <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">{{ usernameMsg }}</div>
                     <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="new_email">{{ 'auth.email' | translate}}:</label>
-                    <input [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" type="email" id="new_email" name="new_email">
+                    <input [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" type="email" id="new_email" name="new_email"
+                        [(ngModel)]="inEmail">
                     <div [ngClass]="emailOk ? 'hintIdle' : 'hintFail'">{{ emailMsg }}</div>
                     <div [ngClass]="emailOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="new_password">{{ 'auth.password' | translate }}:</label>
                     <input [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'" type="password" id="new_password"
-                        name="new_password">
+                        name="new_password" [(ngModel)]="inPassword">
                     <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">{{ passwordMsg }}</div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <button class="submit_button" (click)="validateLogon()">{{ 'auth.logon' | translate }}</button>
