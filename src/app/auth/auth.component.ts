@@ -6,7 +6,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
-import { supportedLanguages, defaultLanguage } from '../common/common.data';
+import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { changeLanguage, loadLanguage } from '../common/common.helpers';
 
 @Component({
@@ -61,9 +61,9 @@ export class AuthComponent implements OnInit
         }
 
         // TODO: Validate token with server
-        // this.router.navigate(['/dashboard', this.translate.getCurrentLang()]);
-        console.log('Existing token:', token);
-        sessionStorage.setItem('token', token.toString());
+
+        sessionStorage.setItem(tokenStorageKey, token.toString());
+        // this.router.navigate(['/dashboard']);
     }
 
     changeLanguage(lang: string): void
@@ -103,17 +103,18 @@ export class AuthComponent implements OnInit
         console.log('Remember me:', this.rememberMe);
         console.log('Logging in with', this.inUsername, this.inPassword);
 
+        // TODO: Replace with real token from server
+        const token = 'PLACEHOLDER_AUTH_TOKEN';
         if (this.rememberMe)
         {
-            // TODO: Replace with real token from server
-            const token = 'PLACEHOLDER_AUTH_TOKEN';
             const date = new Date();
             date.setDate(date.getDate() + 30);
             console.log('Token will expire on:', date.toUTCString());
             document.cookie = `${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
         }
 
-        //this.router.navigate(['/dashboard']);
+        sessionStorage.setItem(tokenStorageKey, token);
+        this.router.navigate(['/dashboard']);
     }
 
     validateLogon(): void

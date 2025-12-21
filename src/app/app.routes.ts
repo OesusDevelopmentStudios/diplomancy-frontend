@@ -11,7 +11,7 @@ export const routes: Routes = [
         component: AuthComponent
     },
     {
-        path: 'dashboard/',
+        path: 'dashboard',
         component: DashboardComponent
     },
     {
