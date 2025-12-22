@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { loadLanguage } from '../common/common.helpers';
+import { loadLanguage, decrypt } from '../common/common.helpers';
 
 @Component({
     selector: 'app-dashboard',
@@ -26,11 +26,18 @@ export class DashboardComponent implements OnInit
     ngOnInit(): void
     {
         loadLanguage(this.translate);
-        this.token = sessionStorage.getItem(tokenStorageKey);
-        if (!this.token)
-        {
-            this.router.navigate(['/']);
-            return;
-        }
+        const token = sessionStorage.getItem(tokenStorageKey)
+        decrypt(token ? token : '').then(decryptedToken => {
+            this.validateToken(decryptedToken);
+        });
+    }
+    validateToken(token: string): void
+    {
+        // TODO: Validate token with server
+        console.log('Validating token:', token);
+        // Token is valid
+        this.token = token;
+        // Token is invalid
+        // this.router.navigate(['/']);
     }
 }

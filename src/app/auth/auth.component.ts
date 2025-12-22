@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { changeLanguage, loadLanguage } from '../common/common.helpers';
+import { changeLanguage, decrypt, encrypt, loadLanguage } from '../common/common.helpers';
 
 @Component({
     selector: 'app-auth',
@@ -54,13 +54,18 @@ export class AuthComponent implements OnInit
 
     loadTokenAndRedirect(): void
     {
-        const token: String = document.cookie;
+        const token: string = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || '';
         if (!token)
         {
-            return
+            return;
         }
 
         // TODO: Validate token with server
+        decrypt(token).then(decryptedToken => {
+            console.log('Decrypted token: ', decryptedToken);
+        });
+        // TODO: If not valid remove cookie
+        // document.cookie = `token=; path=/`;
 
         sessionStorage.setItem(tokenStorageKey, token.toString());
         // this.router.navigate(['/dashboard']);
@@ -103,14 +108,21 @@ export class AuthComponent implements OnInit
         console.log('Remember me:', this.rememberMe);
         console.log('Logging in with', this.inUsername, this.inPassword);
 
-        // TODO: Replace with real token from server
+        // TODO: Get token from server
         const token = 'PLACEHOLDER_AUTH_TOKEN';
+        encrypt(token).then(encryptedToken => {
+            this.loign(encryptedToken);
+        });
+    }
+
+    loign(token: string): void
+    {
         if (this.rememberMe)
         {
             const date = new Date();
             date.setDate(date.getDate() + 30);
             console.log('Token will expire on:', date.toUTCString());
-            document.cookie = `${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
+            document.cookie = `token=${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
         }
 
         sessionStorage.setItem(tokenStorageKey, token);
