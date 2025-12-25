@@ -21,9 +21,29 @@ app-root:host {
 
 main {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: #25252b;
+    overflow: auto;
 }
 
 p {
     margin: 0px;
+}
+
+button {
+    margin-top: 20px;
+    width: max-content;
+    align-self: center;
+    background-color: #abbeaf;
+    border-radius: 12px;
+    border: 2px solid #abbeaf;
+}
+
+button:active {
+    border: 2px solid #313136;
+}
+
+button:hover {
+    cursor: pointer;
 }

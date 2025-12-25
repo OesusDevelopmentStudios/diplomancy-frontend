@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { loadLanguage, decrypt } from '../common/common.helpers';
+import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
 
 @Component({
     selector: 'app-dashboard',
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit
             this.validateToken(decryptedToken);
         });
     }
+
     validateToken(token: string): void
     {
         // TODO: Validate token with server
@@ -39,5 +40,10 @@ export class DashboardComponent implements OnInit
         this.token = token;
         // Token is invalid
         // this.router.navigate(['/']);
+    }
+
+    changeLanguage(lang: string): void
+    {
+        changeLanguage(this.translate, lang);
     }
 }

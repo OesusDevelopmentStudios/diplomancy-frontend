@@ -8,5 +8,8 @@
         "invalid_username": "Niepoprawna nazwa użytkownika",
         "invalid_email": "Niepoprawny email",
         "invalid_password": "Błędne hasło"
+    },
+    "dashboard": {
+        "friends": "Znajomi"
     }
 }

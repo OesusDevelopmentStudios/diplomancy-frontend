@@ -1,3 +1,25 @@
 <main>
-    <p>dashboard works!</p>
+    <div class="titlebar">
+        <h1>Diplomancy</h1>
+        <div class="buttons_wrapper">
+            <img class="img_button" src="assets/pl.png" (click)="changeLanguage('pl')"/>
+            <div class="btn_spacer"></div>
+            <img class="img_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
+            <div class="btn_spacer"></div>
+            <img class="img_button" src="assets/settings.png"/>
+        </div>
+    </div>
+    <div class="content">
+        <div class="game_view">
+            Random content
+        </div>
+        <div class="sidebar">
+            <div class="sidebar_controls">
+                <button class="vertical">{{'dashboard.friends' | translate}}</button>
+            </div>
+            <div class="friend_view">
+                Friend List
+            </div>
+        </div>
+    </div>
 </main>
