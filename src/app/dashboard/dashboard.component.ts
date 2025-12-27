@@ -6,6 +6,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
 
+import { Friend } from './dashboard.friend';
+
 @Component({
     selector: 'app-dashboard',
     imports: [TranslateModule],
@@ -15,6 +17,9 @@ import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers'
 
 export class DashboardComponent implements OnInit
 {
+    sidebarOpen: boolean = false;
+    friends: Friend[] = [];
+
     private token: String | null = null;
 
     constructor(private translate : TranslateService, private router: Router)
@@ -45,5 +50,10 @@ export class DashboardComponent implements OnInit
     changeLanguage(lang: string): void
     {
         changeLanguage(this.translate, lang);
+    }
+
+    toggleSidebar(): void
+    {
+        this.sidebarOpen = !this.sidebarOpen;
     }
 }

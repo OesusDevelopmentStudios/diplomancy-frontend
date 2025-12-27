@@ -10,16 +10,32 @@
         </div>
     </div>
     <div class="content">
-        <div class="game_view">
-            Random content
-        </div>
-        <div class="sidebar">
-            <div class="sidebar_controls">
-                <button class="vertical">{{'dashboard.friends' | translate}}</button>
-            </div>
-            <div class="friend_view">
-                Friend List
-            </div>
-        </div>
+        Random content
     </div>
+    <aside class="sidebar" [class.open]="sidebarOpen">
+        <div class="sidebar_controls">
+            <button class="vertical" (click)="toggleSidebar()">
+                {{'dashboard.friends' | translate}} {{sidebarOpen ? '▼' : '▲'}}
+            </button>
+        </div>
+        <div class="friend_view">
+            <form class="search">
+                <input type="text" placeholder="{{'dashboard.search_friend' | translate}}" />
+                <img class="img_button" src="assets/search.png"/>
+            </form>
+            @if (friends.length == 0)
+            {
+                <p>{{'dashboard.no_friends' | translate}}</p>
+            }
+            @else
+            {
+                @for (friend of friends; track $index)
+                {
+                    <!-- Friend display template here -->
+                }
+            }
+            <button class="refresh_button">{{'dashboard.refresh' | translate}}</button>
+        </div>
+    </aside>
+    <div class="backdrop" [class.show]="sidebarOpen" (click)="toggleSidebar()"></div>
 </main>

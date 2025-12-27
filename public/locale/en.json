@@ -10,6 +10,9 @@
         "invalid_password": "Invalid password"
     },
     "dashboard": {
-        "friends": "Friends"
+        "friends": "Friends",
+        "search_friend": "Search...",
+        "no_friends": "Add some friends to see them here!",
+        "refresh": "Refresh"
     }
 }

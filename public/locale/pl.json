@@ -10,6 +10,9 @@
         "invalid_password": "Błędne hasło"
     },
     "dashboard": {
-        "friends": "Znajomi"
+        "friends": "Znajomi",
+        "search_friend": "Szukaj...",
+        "no_friends": "Dodaj znajomych, aby zobaczyć ich tutaj!",
+        "refresh": "Odśwież"
     }
 }

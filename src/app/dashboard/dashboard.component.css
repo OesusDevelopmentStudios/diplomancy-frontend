@@ -4,8 +4,7 @@
     align-items: center;
     display: flex;
     flex-direction: row;
-    height: 4%;
-    min-height: 30px;
+    height: 50px;
     padding-left: 10px;
     padding-right: 10px;
     justify-content: space-between;
@@ -38,22 +37,26 @@
 
 .content {
     display: flex;
+    background-color: #313136;
     flex-grow: 1;
-    flex-direction: row;
     width: 100%;
 }
 
-.game_view {
-    height: match-parent;
-    width: 100%;
-    border: 12px solid #313136;
-    background-color: aquamarine;
-}
 /* Sidebar */
 
 .sidebar {
     display: flex;
-    flex-direction: row;
+    position: fixed;
+    top: 55px;
+    bottom: 5px;
+    right: -320px;
+    width: 345px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    right: 0;
 }
 
 .sidebar_controls {
@@ -62,7 +65,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
+    width: 25px;
 }
 
 .vertical {
@@ -79,4 +82,46 @@
     width: 1000px;
     align-items: center;
     align-content: center;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    top: 50px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+}
+
+.backdrop.show {
+    opacity: 0.5;
+    pointer-events: auto;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.search button {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.search input {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.search img {
+    padding: 0px;
+    margin: 0px;
+    height: 14px;
 }
