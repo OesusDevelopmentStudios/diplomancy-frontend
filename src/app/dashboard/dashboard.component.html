@@ -21,7 +21,9 @@
         <div class="friend_view">
             <form class="search">
                 <input type="text" placeholder="{{'dashboard.search_friend' | translate}}" />
-                <img class="img_button" src="assets/search.png"/>
+                <div class="img_bg">
+                    <img src="assets/search.png"/>
+                </div>
             </form>
             @if (friends.length == 0)
             {

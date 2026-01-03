@@ -1,10 +1,7 @@
 /* Common */
 
-.language_button:hover, input:hover {
+.language_button:hover{
     cursor: pointer;
-}
-
-.language_button:hover {
     filter: brightness(80%)
 }
 
@@ -72,8 +69,6 @@
 }
 
 input {
-    background-color: #313136;
-    color: #abbeaf;
     padding-left: 10px;
     padding-right: 10px;
 }

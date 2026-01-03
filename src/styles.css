@@ -31,6 +31,17 @@ p {
     margin: 0px;
 }
 
+input {
+    background-color: #313136;
+    color: #abbeaf;
+    outline: none;
+    border: solid #25252b;
+}
+
+input:focus {
+    border: solid #abbeaf;
+}
+
 button {
     margin-top: 20px;
     width: max-content;
