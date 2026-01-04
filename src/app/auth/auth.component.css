@@ -135,7 +135,6 @@ input[type="checkbox"]:checked::after {
 
 /* Footer styles */
 .footer {
-    height: 4%;
     width: match-parent;
     height: 50px;
     display: flex;

@@ -19,24 +19,56 @@
             </button>
         </div>
         <div class="friend_view">
-            <form class="search">
-                <input type="text" placeholder="{{'dashboard.search_friend' | translate}}" />
-                <div class="img_bg">
-                    <img src="assets/search.png"/>
-                </div>
-            </form>
-            @if (friends.length == 0)
+            <div class="search_bar">
+                <form class="search">
+                    <input type="text" placeholder="{{'dashboard.search_friend' | translate}}" />
+                    <div class="img_bg">
+                        <img src="assets/search.png"/>
+                    </div>
+                </form>
+                <app-switch [size]="'20px'" [(state)]="showBlacklist">
+                    {{'dashboard.show_blacklist' | translate}}
+                </app-switch>
+            </div>
+            @if ((showBlacklist && enemies.length == 0) || friends.length == 0)
             {
-                <p>{{'dashboard.no_friends' | translate}}</p>
+                <p>{{(showBlacklist ? 'dashboard.no_enemies' : 'dashboard.no_friends') | translate}}</p>
             }
             @else
             {
-                @for (friend of friends; track $index)
-                {
-                    <!-- Friend display template here -->
-                }
+                <div class="friend_list">
+                    @if (showBlacklist)
+                    {
+                        @for (enemy of enemies; track $index)
+                        {
+                            <div class="friend" [ngClass]="getFriendClass($index)">
+                                <p>{{enemy.username}}</p>
+                                <div class="img_bt">
+                                    <img src="assets/unblacklist.png"/>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @else
+                    {
+                        @for (friend of friends; track $index)
+                        {
+                            <div class="friend" [ngClass]="getFriendClass($index)">
+                                <div class="status" [class.online]="friend.online"
+                                    [class.offline]="!friend.online"></div>
+                                <p>{{friend.username}}</p>
+                                <div class="img_bt">
+                                    <img src="assets/remove.png"/>
+                                </div>
+                                <div class="img_bt">
+                                    <img src="assets/blacklist.png"/>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
             }
-            <button class="refresh_button">{{'dashboard.refresh' | translate}}</button>
+            <button class="refresh_button" (click)="refresghFriends()">{{'dashboard.refresh' | translate}}</button>
         </div>
     </aside>
     <div class="backdrop" [class.show]="sidebarOpen" (click)="toggleSidebar()"></div>

@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
+import { SwitchComponent } from '../common/switch/switch.component';
 
 import { Friend } from './dashboard.friend';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [TranslateModule],
+    imports: [TranslateModule, NgClass, FormsModule, SwitchComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -19,6 +22,8 @@ export class DashboardComponent implements OnInit
 {
     sidebarOpen: boolean = false;
     friends: Friend[] = [];
+    enemies: Friend[] = [];
+    showBlacklist: boolean = false;
 
     private token: String | null = null;
 
@@ -55,5 +60,20 @@ export class DashboardComponent implements OnInit
     toggleSidebar(): void
     {
         this.sidebarOpen = !this.sidebarOpen;
+    }
+
+    refresghFriends(): void
+    {
+        // TODO: Fetch friends status from server, for refresh will just display random dummy data
+        for (let i = 0; i < 20; i++)
+        {
+            this.friends.push(new Friend('Friend ' + (i + 1), Math.random() < 0.5));
+        }
+    }
+
+    getFriendClass(index: number): string
+    {
+        if (index == this.friends.length - 1) return "last";
+        return "middle";
     }
 }

@@ -36,6 +36,7 @@ input {
     color: #abbeaf;
     outline: none;
     border: solid #25252b;
+    cursor: pointer;
 }
 
 input:focus {

@@ -13,6 +13,8 @@
         "friends": "Friends",
         "search_friend": "Search...",
         "no_friends": "Add some friends to see them here!",
-        "refresh": "Refresh"
+        "refresh": "Refresh",
+        "show_blacklist": "Show Blacklist",
+        "no_enemies": "No data"
     }
 }
