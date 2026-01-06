@@ -83,8 +83,8 @@
     border-bottom-left-radius: 12px;
     background-color: #313136;
     align-items: center;
-    padding: 5%;
-    width: 100%;
+    padding: 16px;
+    width: 288px;
 }
 
 .friend_view p {
@@ -177,9 +177,14 @@
     margin-right: 15px;
 }
 
+.friend_list img {
+    height: 90%;
+}
+
 .friend {
     display: flex;
     flex-direction: row;
+    justify-content:space-between;
     height: 3%;
     min-height: 30px;
     width: 100%;
@@ -205,16 +210,46 @@
     border-bottom-right-radius: 12px;
 }
 
-.friend .status {
-    height: 10px;
-    width: 10px;
-    border-radius: 12px;
-}
-
 .friend .status.online {
     background-color: #4ade80;
 }
 
 .friend .status.offline {
     background-color: #f87171;
+}
+
+.friend_left, .friend_right {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.friend_left {
+    width: 70%;
+    text-overflow: clip;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.friend_left .status {
+    height: 25%;
+    width: 4.5%;
+    border-radius: 12px;
+    margin-right: 10px;
+    cursor: help;
+}
+
+.friend_left p {
+    text-align: start;
+    width: 95.5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.friend_right {
+    width: 18%;
+    margin-right: 4%;
+    justify-content: space-around;
 }

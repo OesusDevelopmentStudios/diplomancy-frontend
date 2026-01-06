@@ -65,15 +65,17 @@ export class DashboardComponent implements OnInit
     refresghFriends(): void
     {
         // TODO: Fetch friends status from server, for refresh will just display random dummy data
-        for (let i = 0; i < 20; i++)
+        for (let i = 0; i < 1; i++)
         {
-            this.friends.push(new Friend('Friend ' + (i + 1), Math.random() < 0.5));
+            this.friends.push(new Friend('Friend with a long ass name test' + (i + 1), Math.random() < 0.5));
         }
     }
 
-    getFriendClass(index: number): string
+    getFriendClass(list: Friend[], index: number): string
     {
-        if (index == this.friends.length - 1) return "last";
+        if (list.length == 1) return "single";
+        if (index == 0) return "first";
+        if (index == list.length - 1) return "last";
         return "middle";
     }
 }

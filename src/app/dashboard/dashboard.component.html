@@ -41,10 +41,14 @@
                     {
                         @for (enemy of enemies; track $index)
                         {
-                            <div class="friend" [ngClass]="getFriendClass($index)">
-                                <p>{{enemy.username}}</p>
-                                <div class="img_bt">
-                                    <img src="assets/unblacklist.png"/>
+                            <div class="friend" [ngClass]="getFriendClass(enemies, $index)">
+                                <div class="friend_left">
+                                    <p>{{enemy.username}}</p>
+                                </div>
+                                <div class="friend_right">
+                                    <div class="img_button">
+                                        <img src="assets/block.png"/>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -53,15 +57,19 @@
                     {
                         @for (friend of friends; track $index)
                         {
-                            <div class="friend" [ngClass]="getFriendClass($index)">
-                                <div class="status" [class.online]="friend.online"
-                                    [class.offline]="!friend.online"></div>
-                                <p>{{friend.username}}</p>
-                                <div class="img_bt">
-                                    <img src="assets/remove.png"/>
+                            <div class="friend" [ngClass]="getFriendClass(friends, $index)">
+                                <div class="friend_left">
+                                    <div class="status" [class.online]="friend.online"
+                                        [class.offline]="!friend.online"></div>
+                                    <p>{{friend.username}}</p>
                                 </div>
-                                <div class="img_bt">
-                                    <img src="assets/blacklist.png"/>
+                                <div class="friend_right">
+                                    <div class="img_button">
+                                        <img src="assets/cancel.png"/>
+                                    </div>
+                                    <div class="img_button">
+                                        <img src="assets/block.png"/>
+                                    </div>
                                 </div>
                             </div>
                         }
