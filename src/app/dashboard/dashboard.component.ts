@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -7,27 +6,21 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
-import { SwitchComponent } from '../common/switch/switch.component';
 
-import { Friend } from './dashboard.friend';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [TranslateModule, NgClass, FormsModule, SwitchComponent],
+    imports: [TranslateModule, FormsModule, SidebarComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 
 export class DashboardComponent implements OnInit
 {
-    sidebarOpen: boolean = false;
-    friends: Friend[] = [];
-    enemies: Friend[] = [];
-    showBlacklist: boolean = false;
-
     private token: String | null = null;
 
-    constructor(private translate : TranslateService, private router: Router)
+    constructor(public translate : TranslateService, private router: Router)
     {
         this.translate.addLangs(supportedLanguages);
         this.translate.setFallbackLang(defaultLanguage);
@@ -55,27 +48,5 @@ export class DashboardComponent implements OnInit
     changeLanguage(lang: string): void
     {
         changeLanguage(this.translate, lang);
-    }
-
-    toggleSidebar(): void
-    {
-        this.sidebarOpen = !this.sidebarOpen;
-    }
-
-    refresghFriends(): void
-    {
-        // TODO: Fetch friends status from server, for refresh will just display random dummy data
-        for (let i = 0; i < 1; i++)
-        {
-            this.friends.push(new Friend('Friend with a long ass name test' + (i + 1), Math.random() < 0.5));
-        }
-    }
-
-    getFriendClass(list: Friend[], index: number): string
-    {
-        if (list.length == 1) return "single";
-        if (index == 0) return "first";
-        if (index == list.length - 1) return "last";
-        return "middle";
     }
 }
