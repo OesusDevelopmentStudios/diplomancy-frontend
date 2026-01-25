@@ -7,16 +7,14 @@
     <div class="friend_view">
         <div class="search_bar">
             <form class="search">
-                <input type="text" placeholder="{{'dashboard.search_friend' | translate}}" />
-                <div class="img_bg">
-                    <img src="assets/search.png"/>
-                </div>
+                <input #query type="text" placeholder="{{'dashboard.search_friend' | translate}}"
+                    (input)="onSearchInput(query.value)" (keydown.enter)="$event.preventDefault()"/>
             </form>
             <app-switch [size]="'20px'" [(state)]="showBlacklist">
                 {{'dashboard.show_blacklist' | translate}}
             </app-switch>
         </div>
-        @if ((showBlacklist && enemies.length == 0) || friends.length == 0)
+        @if ((showBlacklist && matchedEnemies.length == 0) || (!showBlacklist && matchedFriends.length == 0))
         {
             <p>{{(showBlacklist ? 'dashboard.no_enemies' : 'dashboard.no_friends') | translate}}</p>
         }
@@ -25,9 +23,9 @@
             <div class="friend_list">
                 @if (showBlacklist)
                 {
-                    @for (enemy of enemies; track $index)
+                    @for (enemy of matchedEnemies; track $index)
                     {
-                        <div class="friend" [ngClass]="getFriendClass(enemies, $index)">
+                        <div class="friend" [ngClass]="getFriendClass(matchedEnemies, $index)">
                             <div class="friend_left">
                                 <p>{{enemy.username}}</p>
                             </div>
@@ -41,9 +39,9 @@
                 }
                 @else
                 {
-                    @for (friend of friends; track $index)
+                    @for (friend of matchedFriends; track $index)
                     {
-                        <div class="friend" [ngClass]="getFriendClass(friends, $index)">
+                        <div class="friend" [ngClass]="getFriendClass(matchedFriends, $index)">
                             <div class="friend_left">
                                 <div class="status" [class.online]="friend.online"
                                     [class.offline]="!friend.online"></div>
@@ -62,7 +60,7 @@
                 }
             </div>
         }
-        <button class="refresh_button" (click)="refresghFriends()">{{'dashboard.refresh' | translate}}</button>
+        <button class="refresh_button" (click)="refreshFriends()">{{'dashboard.refresh' | translate}}</button>
     </div>
 </aside>
 <div class="backdrop" [class.show]="sidebarOpen" (click)="toggleSidebar()"></div>
