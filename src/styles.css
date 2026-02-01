@@ -59,3 +59,15 @@ button:active {
 button:hover {
     cursor: pointer;
 }
+
+.img_button {
+    height: 50%;
+    border-radius: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.img_button:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}

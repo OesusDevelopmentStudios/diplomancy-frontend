@@ -4,7 +4,7 @@
             {{'dashboard.friends' | translate}} {{sidebarOpen ? '▼' : '▲'}}
         </button>
     </div>
-    <div class="friend_view">
+    <div class="friend_view" [class.open]="sidebarOpen">
         <div class="search_bar">
             <form class="search">
                 <input #query type="text" placeholder="{{'dashboard.search_friend' | translate}}"
@@ -63,4 +63,3 @@
         <button class="refresh_button" (click)="refreshFriends()">{{'dashboard.refresh' | translate}}</button>
     </div>
 </aside>
-<div class="backdrop" [class.show]="sidebarOpen" (click)="toggleSidebar()"></div>

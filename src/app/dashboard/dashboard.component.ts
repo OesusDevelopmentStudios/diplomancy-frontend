@@ -8,16 +8,19 @@ import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/
 import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [TranslateModule, FormsModule, SidebarComponent],
+    imports: [TranslateModule, FormsModule, SidebarComponent, SettingsComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
 
 export class DashboardComponent implements OnInit
 {
+    showSettings: boolean = false;
+
     private token: String | null = null;
 
     constructor(public translate : TranslateService, private router: Router)
@@ -33,6 +36,11 @@ export class DashboardComponent implements OnInit
         decrypt(token ? token : '').then(decryptedToken => {
             this.validateToken(decryptedToken);
         });
+    }
+
+    manageSettings(): void
+    {
+        this.showSettings = !this.showSettings;
     }
 
     validateToken(token: string): void

@@ -8,7 +8,6 @@ import { tokenStorageKey } from '../../common/common.data';
 import { decrypt } from '../../common/common.helpers';
 
 import { Friend } from './sidebar.friend';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-sidebar',
@@ -98,7 +97,6 @@ export class SidebarComponent implements OnInit
 
     getFriendClass(list: Friend[], index: number): string
     {
-        console.error("Getting class for index " + index + " in list of length " + list.length);
         if (list.length == 1) return "single";
         if (index == 0) return "first";
         if (index == list.length - 1) return "last";
@@ -114,7 +112,6 @@ export class SidebarComponent implements OnInit
 
     filterData(): void
     {
-        console.info("Current mode: " + (this.showBlacklist ? "Blacklist" : "Friendslist"));
         if (this.filter.length == 0)
         {
             this.matchedFriends = this.friends;
@@ -122,19 +119,7 @@ export class SidebarComponent implements OnInit
             return;
         }
 
-        console.warn("Filtering friends: "  + this.filter);
-        for (const enemy of this.enemies)
-        {
-            console.log(enemy.username.toLocaleLowerCase());
-        }
-
         this.matchedFriends = this.friends.filter(friend => friend.username.toLowerCase().includes(this.filter));
         this.matchedEnemies = this.enemies.filter(enemy => enemy.username.toLowerCase().includes(this.filter));
-
-        console.warn("Matched friends: " + this.matchedEnemies.length);
-        for (const enemy of this.matchedEnemies)
-        {
-            console.log(enemy.username);
-        }
     }
 }

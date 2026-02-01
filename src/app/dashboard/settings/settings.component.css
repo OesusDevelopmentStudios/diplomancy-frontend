@@ -1,0 +1,54 @@
+.settings-wrapper {
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    margin-top: -250px;
+    left: 50%;
+    margin-left: -175px;
+    width: 350px;
+    height: 500px;
+    background-color: #313136;
+    border: 2px solid #abbeaf;
+    border-radius: 12px;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.button_wrapper {
+    width: 100%;
+    height: 50px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.settings-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.title {
+    color: #abbeaf;
+    font-size: 20px;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    top: 50px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1900;
+}
+
+.backdrop.show {
+    opacity: 0.8;
+    pointer-events: auto;
+}

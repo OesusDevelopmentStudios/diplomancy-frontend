@@ -1,27 +1,17 @@
-.img_button {
-    height: 50%;
-    border-radius: 12px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.img_button:hover {
-    filter: brightness(80%);
-    cursor: pointer;
-}
-
 .sidebar {
     display: flex;
-    position: fixed;
+    /* position: fixed;
     top: 55px;
     bottom: 5px;
-    right: -320px;
-    width: 345px;
-    transition: right 0.3s ease;
+    right: -320px;*/
+    width: 25px;
+    height: 100%;
+    transition: width 0.3s ease;
     z-index: 1000;
 }
 
 .sidebar.open {
+    width: 345px;
     right: 0;
 }
 
@@ -42,36 +32,23 @@
 }
 
 .friend_view {
+    display: none;
+}
+
+.friend_view.open {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-left: solid #abbeaf;
     background-color: #313136;
     align-items: center;
     padding: 16px;
     width: 288px;
 }
 
+
 .friend_view p {
     text-align: center;
-}
-
-.backdrop {
-    position: fixed;
-    inset: 0;
-    top: 50px;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 900;
-}
-
-.backdrop.show {
-    opacity: 0.5;
-    pointer-events: auto;
 }
 
 .search_bar {

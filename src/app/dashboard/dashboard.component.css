@@ -41,3 +41,10 @@
     flex-grow: 1;
     width: 100%;
 }
+
+/* Game View */
+
+.game_view {
+    flex-grow: 1;
+    width: 100%;
+}
