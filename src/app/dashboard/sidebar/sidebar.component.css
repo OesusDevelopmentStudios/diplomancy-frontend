@@ -1,18 +1,18 @@
 .sidebar {
     display: flex;
-    /* position: fixed;
-    top: 55px;
-    bottom: 5px;
-    right: -320px;*/
     width: 25px;
     height: 100%;
     transition: width 0.3s ease;
-    z-index: 1000;
 }
 
 .sidebar.open {
     width: 345px;
-    right: 0;
+}
+
+.border {
+    border-left: solid #abbeaf;
+    height: 100%;
+    width: 100%;
 }
 
 .sidebar_controls {
@@ -37,9 +37,9 @@
 
 .friend_view.open {
     display: flex;
+    height: 100%;
     flex-direction: column;
     justify-content: space-between;
-    border-left: solid #abbeaf;
     background-color: #313136;
     align-items: center;
     padding: 16px;

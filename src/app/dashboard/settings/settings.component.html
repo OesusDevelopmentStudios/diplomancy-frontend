@@ -1,7 +1,13 @@
 <div class="settings-wrapper" [class.show]="showSettings()">
-  <div class="button_wrapper">
-    <img class="img_button" src="assets/cancel.png"/>
-  </div>
-  <p class="title"> Settings </p>
+    <div class="button_wrapper">
+        <img class="img_button" src="assets/cancel.png" (click)="close()"/>
+    </div>
+    <p class="title">{{'dashboard.settings.title' | translate}}</p>
+    <app-settings-item title="{{'dashboard.settings.email' | translate}}">
+        placeholder
+    </app-settings-item>
+    <app-settings-item title="{{'dashboard.settings.password' | translate}}">
+        placeholder
+    </app-settings-item>
 </div>
 <div class="backdrop" [class.show]="showSettings()"></div>

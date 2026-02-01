@@ -10,11 +10,18 @@
         "invalid_password": "Błędne hasło"
     },
     "dashboard": {
-        "friends": "Znajomi",
-        "search_friend": "Szukaj...",
-        "no_friends": "Dodaj znajomych, aby zobaczyć ich tutaj!",
-        "refresh": "Odśwież",
-        "show_blacklist": "Pokaż zablokowanych",
-        "no_enemies": "Brak danych"
+        "sidebar": {
+            "friends": "Znajomi",
+            "search_friend": "Szukaj...",
+            "no_friends": "Dodaj znajomych, aby zobaczyć ich tutaj!",
+            "refresh": "Odśwież",
+            "show_blacklist": "Pokaż zablokowanych",
+            "no_enemies": "Brak danych"
+        },
+        "settings": {
+            "title": "Ustawienia",
+            "email": "Email",
+            "password": "Hasło"
+        }
     }
 }

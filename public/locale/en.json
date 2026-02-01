@@ -10,11 +10,18 @@
         "invalid_password": "Invalid password"
     },
     "dashboard": {
-        "friends": "Friends",
-        "search_friend": "Search...",
-        "no_friends": "Add some friends to see them here!",
-        "refresh": "Refresh",
-        "show_blacklist": "Show Blacklist",
-        "no_enemies": "No data"
+        "sidebar": {
+            "friends": "Friends",
+            "search_friend": "Search...",
+            "no_friends": "Add some friends to see them here!",
+            "refresh": "Refresh",
+            "show_blacklist": "Show Blacklist",
+            "no_enemies": "No data"
+        },
+        "settings": {
+            "title": "Settings",
+            "email": "Email",
+            "password": "Password"
+        }
     }
 }

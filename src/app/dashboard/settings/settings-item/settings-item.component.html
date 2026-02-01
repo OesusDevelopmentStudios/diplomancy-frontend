@@ -1,0 +1,9 @@
+<div class="header" (click)="toggle()">
+    <div class="title"> {{title()}} </div>
+    <img src={{arrow}}/>
+</div>
+<div class="wrapper" [class.open]="deployed">
+    <div class="content" [class.open]="deployed">
+        <ng-content/>
+    </div>
+</div>

@@ -36,6 +36,11 @@
     font-size: 20px;
 }
 
+app-settings-item {
+    margin-top: 20px;
+    width: 100%;
+}
+
 .backdrop {
     position: fixed;
     inset: 0;

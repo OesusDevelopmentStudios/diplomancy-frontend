@@ -1,65 +1,67 @@
 <aside class="sidebar" [class.open]="sidebarOpen">
     <div class="sidebar_controls">
         <button class="vertical" (click)="toggleSidebar()">
-            {{'dashboard.friends' | translate}} {{sidebarOpen ? '▼' : '▲'}}
+            {{'dashboard.sidebar.friends' | translate}} {{sidebarOpen ? '▼' : '▲'}}
         </button>
     </div>
-    <div class="friend_view" [class.open]="sidebarOpen">
-        <div class="search_bar">
-            <form class="search">
-                <input #query type="text" placeholder="{{'dashboard.search_friend' | translate}}"
-                    (input)="onSearchInput(query.value)" (keydown.enter)="$event.preventDefault()"/>
-            </form>
-            <app-switch [size]="'20px'" [(state)]="showBlacklist">
-                {{'dashboard.show_blacklist' | translate}}
-            </app-switch>
-        </div>
-        @if ((showBlacklist && matchedEnemies.length == 0) || (!showBlacklist && matchedFriends.length == 0))
-        {
-            <p>{{(showBlacklist ? 'dashboard.no_enemies' : 'dashboard.no_friends') | translate}}</p>
-        }
-        @else
-        {
-            <div class="friend_list">
-                @if (showBlacklist)
-                {
-                    @for (enemy of matchedEnemies; track $index)
-                    {
-                        <div class="friend" [ngClass]="getFriendClass(matchedEnemies, $index)">
-                            <div class="friend_left">
-                                <p>{{enemy.username}}</p>
-                            </div>
-                            <div class="friend_right">
-                                <div class="img_button" (click)="removeFromBlacklist($index)">
-                                    <img src="assets/cancel.png"/>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-                @else
-                {
-                    @for (friend of matchedFriends; track $index)
-                    {
-                        <div class="friend" [ngClass]="getFriendClass(matchedFriends, $index)">
-                            <div class="friend_left">
-                                <div class="status" [class.online]="friend.online"
-                                    [class.offline]="!friend.online"></div>
-                                <p>{{friend.username}}</p>
-                            </div>
-                            <div class="friend_right">
-                                <div class="img_button" (click)="removeFriend($index)">
-                                    <img src="assets/cancel.png"/>
-                                </div>
-                                <div class="img_button" (click)="addToBlackList($index)">
-                                    <img src="assets/block.png"/>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
+    <div class="border">
+        <div class="friend_view" [class.open]="sidebarOpen">
+            <div class="search_bar">
+                <form class="search">
+                    <input #query type="text" placeholder="{{'dashboard.sidebar.search_friend' | translate}}"
+                        (input)="onSearchInput(query.value)" (keydown.enter)="$event.preventDefault()"/>
+                </form>
+                <app-switch [size]="'20px'" [(state)]="showBlacklist">
+                    {{'dashboard.sidebar.show_blacklist' | translate}}
+                </app-switch>
             </div>
-        }
-        <button class="refresh_button" (click)="refreshFriends()">{{'dashboard.refresh' | translate}}</button>
+            @if ((showBlacklist && matchedEnemies.length == 0) || (!showBlacklist && matchedFriends.length == 0))
+            {
+                <p>{{(showBlacklist ? 'dashboard.sidebar.no_enemies' : 'dashboard.sidebar.no_friends') | translate}}</p>
+            }
+            @else
+            {
+                <div class="friend_list">
+                    @if (showBlacklist)
+                    {
+                        @for (enemy of matchedEnemies; track $index)
+                        {
+                            <div class="friend" [ngClass]="getFriendClass(matchedEnemies, $index)">
+                                <div class="friend_left">
+                                    <p>{{enemy.username}}</p>
+                                </div>
+                                <div class="friend_right">
+                                    <div class="img_button" (click)="removeFromBlacklist($index)">
+                                        <img src="assets/cancel.png"/>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @else
+                    {
+                        @for (friend of matchedFriends; track $index)
+                        {
+                            <div class="friend" [ngClass]="getFriendClass(matchedFriends, $index)">
+                                <div class="friend_left">
+                                    <div class="status" [class.online]="friend.online"
+                                        [class.offline]="!friend.online"></div>
+                                    <p>{{friend.username}}</p>
+                                </div>
+                                <div class="friend_right">
+                                    <div class="img_button" (click)="removeFriend($index)">
+                                        <img src="assets/cancel.png"/>
+                                    </div>
+                                    <div class="img_button" (click)="addToBlackList($index)">
+                                        <img src="assets/block.png"/>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+            <button class="refresh_button" (click)="refreshFriends()">{{'dashboard.sidebar.refresh' | translate}}</button>
+        </div>
     </div>
 </aside>
