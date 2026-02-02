@@ -4,10 +4,25 @@
     </div>
     <p class="title">{{'dashboard.settings.title' | translate}}</p>
     <app-settings-item title="{{'dashboard.settings.email' | translate}}">
-        placeholder
+        <div class="item">
+            <div>Your email is: us********le.com</div>
+            <label for="new_email">New email:</label>
+            <input type="email" id="new_email"/>
+            <label for="password">Password:</label>
+            <input type="password" id="password"/>
+            <button class="submit_button">Change Email</button>
+        </div>
     </app-settings-item>
     <app-settings-item title="{{'dashboard.settings.password' | translate}}">
-        placeholder
+        <div class="item">
+            <label for="old_password">Old password:</label>
+            <input type="password" id="new_password"/>
+            <label for="new_password">New password:</label>
+            <input type="password" id="new_password"/>
+            <label for="confirm_password">Confirm new password:</label>
+            <input type="password" id="confirm_password"/>
+            <button class="submit_button">Change Password</button>
+        </div>
     </app-settings-item>
 </div>
 <div class="backdrop" [class.show]="showSettings()"></div>
