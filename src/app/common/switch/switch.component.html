@@ -1,4 +1,6 @@
-<label>
-    <span class="slider"><ng-content/></span>
-    <input type="checkbox" [style.--size]="size()" unchecked [(ngModel)]="state">
-</label>
+<div class="wrapper">
+    <label>
+        <span class="slider"><ng-content/></span>
+    </label>
+    <input type="checkbox" (click)="onChange.emit()" [style.--size]="size()" unchecked [(ngModel)]="state"/>
+</div>

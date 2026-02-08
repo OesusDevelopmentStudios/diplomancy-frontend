@@ -41,6 +41,12 @@ export function changeLanguage(translate: TranslateService, lang: string): void
     }
 }
 
+export function validateEmail(email: string): boolean
+{
+    const regex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    return regex.test(email);
+}
+
 export async function encrypt(text : string): Promise<string>
 {
     const iv = window.crypto.getRandomValues(new Uint8Array(12));

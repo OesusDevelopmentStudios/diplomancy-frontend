@@ -1,11 +1,12 @@
-label {
+.wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
 }
 
 label span {
     margin-right: 5px;
+    pointer-events: none;
 }
 
 input {

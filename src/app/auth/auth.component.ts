@@ -3,11 +3,10 @@ import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { changeLanguage, decrypt, encrypt, loadLanguage } from '../common/common.helpers';
+import { changeLanguage, decrypt, encrypt, loadLanguage, validateEmail } from '../common/common.helpers';
 
 @Component({
     selector: 'app-auth',
@@ -23,27 +22,15 @@ export class AuthComponent implements OnInit
     emailOk: boolean = true;
     passwordOk: boolean = true;
 
-    usernameMsg: string = 'Translation error';
-    emailMsg: string = 'Translation error';
-    passwordMsg: string = 'Translation error';
-
     inUsername: string = '';
     inEmail: string = '';
     inPassword: string = '';
     rememberMe: boolean = false;
 
-    translationSubGuard: Subscription
-
     constructor(private translate : TranslateService, private router: Router)
     {
         this.translate.addLangs(supportedLanguages);
         this.translate.setFallbackLang(defaultLanguage);
-
-        this.translationSubGuard = translate.stream('auth').subscribe((auth: any) => {
-            this.usernameMsg = auth.invalid_username;
-            this.emailMsg = auth.invalid_email;
-            this.passwordMsg = auth.invalid_password;
-        });
     }
 
     ngOnInit(): void
@@ -68,7 +55,7 @@ export class AuthComponent implements OnInit
         // document.cookie = `token=; path=/`;
 
         sessionStorage.setItem(tokenStorageKey, token.toString());
-        // this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
     }
 
     changeLanguage(lang: string): void
@@ -111,11 +98,11 @@ export class AuthComponent implements OnInit
         // TODO: Get token from server
         const token = 'PLACEHOLDER_AUTH_TOKEN';
         encrypt(token).then(encryptedToken => {
-            this.loign(encryptedToken);
+            this.login(encryptedToken);
         });
     }
 
-    loign(token: string): void
+    login(token: string): void
     {
         if (this.rememberMe)
         {
@@ -131,9 +118,19 @@ export class AuthComponent implements OnInit
 
     validateLogon(): void
     {
-        this.usernameOk = false;
-        this.emailOk = false;
+        this.usernameOk = true;
+        this.emailOk = true;
         this.passwordOk = true;
+
+        if (!validateEmail(this.inEmail))
+        {
+            this.emailOk = false;
+            return;
+        }
+
+        // Simulate invalid username and passowrd
+        this.usernameOk = false;
+        this.passwordOk = false;
     }
 
     reset(): void

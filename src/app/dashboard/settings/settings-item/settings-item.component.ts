@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
     selector: 'app-settings-item',
@@ -10,6 +10,7 @@ import { Component, input } from '@angular/core';
 export class SettingsItemComponent
 {
     title = input.required<string>();
+    onClick = output<void>();
 
     deployed: boolean = false;
     arrow: string = "assets/arrow_down.png";
@@ -18,5 +19,6 @@ export class SettingsItemComponent
     {
         this.deployed = !this.deployed;
         this.arrow = this.deployed ? "assets/arrow_up.png" : "assets/arrow_down.png";
+        this.onClick.emit();
     }
 }

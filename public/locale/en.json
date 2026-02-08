@@ -5,9 +5,11 @@
         "username": "Username",
         "email": "Email",
         "password": "Password",
+        "username_taken": "Username taken",
         "invalid_username": "Invalid username",
         "invalid_email": "Invalid email",
-        "invalid_password": "Invalid password"
+        "invalid_password": "Invalid password",
+        "remember_me": "Remember me"
     },
     "dashboard": {
         "sidebar": {
@@ -20,8 +22,23 @@
         },
         "settings": {
             "title": "Settings",
+            "cookies": "Cookies",
             "email": "Email",
-            "password": "Password"
+            "current_email": "Current email",
+            "new_email": "New email",
+            "change_email": "Change Email",
+            "password": "Password",
+            "old_password": "Old password",
+            "new_password": "New password",
+            "confirm_password": "Confirm new password",
+            "change_password": "Change Password",
+            "danger": "Danger zone",
+            "delete_account": "Delete Account",
+            "logout": "Logout",
+            "invalid_email": "Invalid email",
+            "invalid_password": "Invalid password",
+            "weak_password": "Password is too weak",
+            "mismatch_password": "Passwords do not match"
         }
     }
 }

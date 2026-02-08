@@ -47,10 +47,14 @@ export class DashboardComponent implements OnInit
     {
         // TODO: Validate token with server
         console.log('Validating token:', token);
+        const valid: boolean = true; // Placeholder for actual validation result
+
+        if (!valid || token === '') {
+            this.router.navigate(['/']);
+        }
         // Token is valid
         this.token = token;
         // Token is invalid
-        // this.router.navigate(['/']);
     }
 
     changeLanguage(lang: string): void

@@ -5,9 +5,11 @@
         "username": "Nazwa użytkownika",
         "email": "Email",
         "password": "Hasło",
+        "username_taken": "Nazwa użytkownika zajęta",
         "invalid_username": "Niepoprawna nazwa użytkownika",
         "invalid_email": "Niepoprawny email",
-        "invalid_password": "Błędne hasło"
+        "invalid_password": "Błędne hasło",
+        "remember_me": "Zapamiętaj mnie"
     },
     "dashboard": {
         "sidebar": {
@@ -20,8 +22,23 @@
         },
         "settings": {
             "title": "Ustawienia",
+            "cookies": "Ciasteczka",
             "email": "Email",
-            "password": "Hasło"
+            "current_email": "Aktualny email",
+            "new_email": "Nowy email",
+            "change_email": "Zmień email",
+            "password": "Hasło",
+            "old_password": "Stare hasło",
+            "new_password": "Nowe hasło",
+            "confirm_password": "Potwierdź hasło",
+            "change_password": "Zmień hasło",
+            "danger": "Strefa zagrożenia",
+            "delete_account": "Usuń konto",
+            "logout": "Wyloguj",
+            "invalid_email": "Niepoprawny email",
+            "invalid_password": "Błędne hasło",
+            "weak_password": "Hasło jest zbyt słabe",
+            "mismatch_password": "Hasła nie są takie same"
         }
     }
 }

@@ -30,6 +30,34 @@
     justify-content: flex-end;
 }
 
+.inputFail {
+    border: solid #841616;
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+}
+
+.hintIdle, .spacerFail {
+    display: none
+}
+
+.hintFail {
+    display: block;
+    color: #aa1616;
+    font-size: 12px;
+    align-self: end;
+}
+
+.spacerIdle {
+    height: 16px;
+    display: block;
+}
+
 .settings-wrapper.show {
     opacity: 1;
     visibility: visible;
@@ -38,6 +66,13 @@
 .title {
     color: #abbeaf;
     font-size: 20px;
+}
+
+.simple_item {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 app-settings-item {
@@ -56,6 +91,19 @@ app-settings-item {
 .item label {
     color: #abbeaf;
     font-size: 14px;
+}
+
+.email_info {
+    margin-bottom: 10px;
+}
+
+.submit_button {
+    margin-top: 4px;
+}
+
+.danger_button:hover{
+    background-color: darkred;
+    border-color: darkred;
 }
 
 .backdrop {
