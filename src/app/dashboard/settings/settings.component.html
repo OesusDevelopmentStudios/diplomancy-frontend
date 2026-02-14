@@ -1,4 +1,4 @@
-<div class="settings-wrapper" [class.show]="showSettings()">
+<div class="settings-wrapper" [class.show]="settingsOpen()">
     <div class="button_wrapper">
         <img class="img_button" src="assets/cancel.png" (click)="close()"/>
     </div>
@@ -7,7 +7,8 @@
         {{'dashboard.settings.cookies' | translate}}
         <app-switch [size]="'20px'" [(state)]="cookiesEnabled" (onChange)="changeCookiesSetting()"/>
     </div>
-    <app-settings-item title="{{'dashboard.settings.email' | translate}}" (onClick)="resetEmail()">
+    <app-settings-item title="{{'dashboard.settings.email' | translate}}" (onClick)="resetEmail()"
+        [(deployed)]="sectionEmailOpen">
         <div class="item">
             <div class="email_info">{{'dashboard.settings.current_email' | translate}}: {{user_email}}</div>
             <label for="new_email">{{'dashboard.settings.new_email' | translate}}:</label>
@@ -28,7 +29,8 @@
             </button>
         </div>
     </app-settings-item>
-    <app-settings-item title="{{'dashboard.settings.password' | translate}}" (onClick)="resetPassword()">
+    <app-settings-item title="{{'dashboard.settings.password' | translate}}" (onClick)="resetPassword()"
+        [(deployed)]="sectionPasswordOpen">
         <div class="item">
             <label for="new_password">{{'dashboard.settings.new_password' | translate}}:</label>
             <input type="password" id="new_password" [ngClass]="newPasswordOk ? 'inputIdle' : 'inputFail'"
@@ -56,11 +58,11 @@
             </button>
         </div>
     </app-settings-item>
-    <app-settings-item title="{{'dashboard.settings.danger' | translate}}">
+    <app-settings-item title="{{'dashboard.settings.danger' | translate}}" [(deployed)]="sectionDangerOpen">
         <div class="item">
             <button class="danger_button">{{'dashboard.settings.delete_account' | translate}}</button>
         </div>
     </app-settings-item>
     <button (click)="logout()">{{'dashboard.settings.logout' | translate}}</button>
 </div>
-<div class="backdrop" [class.show]="showSettings()"></div>
+<div class="backdrop" [class.show]="settingsOpen()"></div>

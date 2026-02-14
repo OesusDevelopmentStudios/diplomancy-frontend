@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit, model } from '@angular/core';
+import { Component, OnInit, effect, model } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -25,6 +25,10 @@ export class SettingsComponent implements OnInit
     cookiesEnabled: boolean = false;
     user_email: String = "us******le.com";
 
+    sectionEmailOpen: boolean = false;
+    sectionPasswordOpen: boolean = false;
+    sectionDangerOpen: boolean = false;
+
     emailOk: boolean = true;
     emailPasswordOk: boolean = true;
     passwordOk: boolean = true;
@@ -35,6 +39,18 @@ export class SettingsComponent implements OnInit
     password: string = '';
     newPassword: string = '';
     repeatPassword: string = '';
+
+    constructor()
+    {
+        effect(() => {
+            if (!this.settingsOpen())
+            {
+                this.sectionEmailOpen = false;
+                this.sectionPasswordOpen = false;
+                this.sectionDangerOpen = false;
+            }
+        });
+    }
 
     ngOnInit()
     {
@@ -59,11 +75,6 @@ export class SettingsComponent implements OnInit
         this.user_email = email.substring(0, 2) + '****' + email.substring(email.indexOf('@'));
     }
 
-    showSettings(): boolean
-    {
-        return this.settingsOpen();
-    }
-
     changeCookiesSetting(): void
     {
         this.cookiesEnabled = !this.cookiesEnabled;
@@ -81,6 +92,9 @@ export class SettingsComponent implements OnInit
     close(): void
     {
         this.settingsOpen.set(false);
+        this.sectionEmailOpen = false;
+        this.sectionPasswordOpen = false;
+        this.sectionDangerOpen = false;
     }
 
     logout(): void
