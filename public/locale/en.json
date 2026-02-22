@@ -12,9 +12,11 @@
         "remember_me": "Remember me"
     },
     "dashboard": {
+        "new_game": "New Game",
+        "search_game": "Search for a game",
         "sidebar": {
             "friends": "Friends",
-            "search_friend": "Search...",
+            "search_friend": "Search",
             "no_friends": "Add some friends to see them here!",
             "refresh": "Refresh",
             "show_blacklist": "Show Blacklist",

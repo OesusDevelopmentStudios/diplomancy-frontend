@@ -12,6 +12,8 @@
         "remember_me": "Zapamiętaj mnie"
     },
     "dashboard": {
+        "new_game": "Nowa gra",
+        "search_game": "Wyszukaj grę",
         "sidebar": {
             "friends": "Znajomi",
             "search_friend": "Szukaj...",
