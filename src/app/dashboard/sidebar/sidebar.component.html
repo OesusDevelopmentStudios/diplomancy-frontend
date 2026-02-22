@@ -4,7 +4,7 @@
             {{'dashboard.sidebar.friends' | translate}} {{sidebarOpen ? '▼' : '▲'}}
         </button>
     </div>
-    <div class="border">
+    <div class="border" [class.open]="sidebarOpen">
         <div class="friend_view" [class.open]="sidebarOpen">
             <div class="search_bar">
                 <form class="search">

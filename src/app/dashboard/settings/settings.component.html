@@ -10,6 +10,11 @@
     <app-settings-item title="{{'dashboard.settings.email' | translate}}" (onClick)="resetEmail()"
         [(deployed)]="sectionEmailOpen">
         <div class="item">
+            <div class="switch-wrapped">
+                {{'dashboard.settings.enmail_notifications' | translate}}
+                <app-switch [size]="'20px'" [(state)]="emailNotificationsEnabled"
+                    (onChange)="changeEmailNotificationsSetting()"/>
+            </div>
             <div class="email_info">{{'dashboard.settings.current_email' | translate}}: {{user_email}}</div>
             <label for="new_email">{{'dashboard.settings.new_email' | translate}}:</label>
             <input type="email" id="new_email" [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" [(ngModel)]="newEmail"/>

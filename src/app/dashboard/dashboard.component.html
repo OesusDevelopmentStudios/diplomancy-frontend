@@ -10,16 +10,21 @@
         </div>
     </div>
     <div class="content">
-        <div class="game_view">
-            <div class="main_control">
-                <div class="item_left">
-                    New Game
+        <div class="scrollable">
+            <div class="game_view">
+                <div class="main_control">
+                    <div class="item_left">
+                        New Game
+                    </div>
+                    <div class="item_right">
+                        Search for games
+                    </div>
                 </div>
-                <div class="item_right">
-                    Search for games
-                </div>
+                @for (game of gameData; track $index)
+                {
+                    <app-dash-item/>
+                }
             </div>
-
         </div>
         <app-sidebar/>
         </div>

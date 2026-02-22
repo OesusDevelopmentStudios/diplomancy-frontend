@@ -6,13 +6,15 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
+import { GameData } from '../common/common.game';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DashItemComponent } from './dash-item/dash-item.component';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [TranslateModule, FormsModule, SidebarComponent, SettingsComponent],
+    imports: [TranslateModule, FormsModule, SidebarComponent, SettingsComponent, DashItemComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -20,6 +22,7 @@ import { SettingsComponent } from './settings/settings.component';
 export class DashboardComponent implements OnInit
 {
     showSettings: boolean = false;
+    gameData: GameData[] = [];
 
     private token: String | null = null;
 
@@ -27,6 +30,12 @@ export class DashboardComponent implements OnInit
     {
         this.translate.addLangs(supportedLanguages);
         this.translate.setFallbackLang(defaultLanguage);
+
+        // TODO: Dummy game data, replace with actual data from server
+        for (let i = 0; i < 10; i++)
+        {
+            this.gameData.push(new GameData('game' + i, 'Game ' + (i + 1), Math.floor(Math.random() * 5)));
+        }
     }
 
     ngOnInit(): void

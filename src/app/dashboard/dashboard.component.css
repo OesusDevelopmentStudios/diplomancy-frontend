@@ -38,18 +38,33 @@
 .content {
     display: flex;
     background-color: #313136;
-    flex-grow: 1;
     width: 100%;
+    flex-grow: 1;
+    overflow-y: hidden;
 }
 
 /* Game View */
 
-.game_view {
+.scrollable {
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 15px;
+    flex-grow: 1;
+    overflow: scroll;
+    height: 100%;
+}
+
+.game_view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-rows: repeat(auto-fit, 200px);
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 30px;
 }
 
 .main_control {

@@ -24,6 +24,7 @@
             "title": "Settings",
             "cookies": "Cookies",
             "email": "Email",
+            "enmail_notifications": "Email notifications",
             "current_email": "Current email",
             "new_email": "New email",
             "change_email": "Change Email",

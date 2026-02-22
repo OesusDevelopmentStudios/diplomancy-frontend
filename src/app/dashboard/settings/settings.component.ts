@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit
 
     token : String = "";
     cookiesEnabled: boolean = false;
+    emailNotificationsEnabled: boolean = false;
     user_email: String = "us******le.com";
 
     sectionEmailOpen: boolean = false;
@@ -73,6 +74,9 @@ export class SettingsComponent implements OnInit
         // TODO: Load email from database
         const email = 'example@mail.net';
         this.user_email = email.substring(0, 2) + '****' + email.substring(email.indexOf('@'));
+
+        // Load email notifications setting from database, for now just set to false
+        this.emailNotificationsEnabled = false;
     }
 
     changeCookiesSetting(): void
@@ -87,6 +91,12 @@ export class SettingsComponent implements OnInit
             localStorage.setItem('cookies_enabled', 'false');
             this.wipeCookies();
         }
+    }
+
+    changeEmailNotificationsSetting(): void
+    {
+        this.emailNotificationsEnabled = !this.emailNotificationsEnabled;
+        // TODO: Sent new preference to backend and update in database
     }
 
     close(): void

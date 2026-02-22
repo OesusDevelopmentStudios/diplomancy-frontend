@@ -31,6 +31,10 @@ p {
     margin: 0px;
 }
 
+aside, div {
+    box-sizing: border-box;
+}
+
 input {
     background-color: #313136;
     color: #abbeaf;

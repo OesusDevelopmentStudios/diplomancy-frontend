@@ -30,11 +30,11 @@
 
 .wrapper {
     width : 90%;
-    max-height: 1px;
+    max-height: 0px;
     border-bottom: solid #abbeaf;
     margin-left: 5%;
     margin-right: 5%;
-    transition: max-height 1s ease;
+    transition: max-height 0.2s ease-in-out;
 }
 
 .wrapper.open {
@@ -42,10 +42,14 @@
 }
 
 .content {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s,opacity 0.2s ease-in-out;
 }
 
 .content.open {
+    visibility: visible;
+    opacity: 1;
     display: block;
     margin-top: 4px;
     margin-bottom: 4px;
