@@ -33,6 +33,10 @@
 
 /* Main content */
 
+.title {
+    font-family: mil-font;
+}
+
 .tab_button {
     padding-top: 10px;
     padding-bottom: 10px;

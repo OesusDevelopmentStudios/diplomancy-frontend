@@ -10,6 +10,10 @@
     justify-content: space-between;
 }
 
+.title {
+    font-family: mil-font;
+}
+
 .buttons_wrapper {
     display: flex;
     flex-direction: row;

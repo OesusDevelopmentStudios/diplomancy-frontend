@@ -11,6 +11,26 @@
         "invalid_password": "Błędne hasło",
         "remember_me": "Zapamiętaj mnie"
     },
+    "common": {
+        "country": {
+            "nor": "Norwegia",
+            "swe": "Szwecja",
+            "rus": "Rosja",
+            "ger": "Niemcy",
+            "fra": "Francja",
+            "spa": "Hiszpania",
+            "ita": "Włochy",
+            "gbr": "Wielka Brytania",
+            "aut_hun": "Austria-Węgry",
+            "ott_emp": "Imperium Osmańskie"
+        },
+        "phase": {
+            "move": "Ruch",
+            "retreat": "Wycofanie",
+            "reinforce": "Rozbudowa"
+        },
+        "unknown": "Nieznany"
+    },
     "dashboard": {
         "new_game": "Nowa gra",
         "search_game": "Wyszukaj grę",
@@ -42,6 +62,13 @@
             "invalid_password": "Błędne hasło",
             "weak_password": "Hasło jest zbyt słabe",
             "mismatch_password": "Hasła nie są takie same"
+        },
+        "item": {
+            "phase": "Faza",
+            "messages": "Oczekujące wiadomości",
+            "turn": "Tura",
+            "waiting": "Tura niekompletna",
+            "ready": "Oczekiwanie na innych graczy"
         }
     }
 }

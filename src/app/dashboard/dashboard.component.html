@@ -1,6 +1,6 @@
 <main>
     <div class="titlebar">
-        <h1>Diplomancy</h1>
+        <h1 class="title">Diplomancy</h1>
         <div class="buttons_wrapper">
             <img class="img_button" src="assets/pl.png" (click)="changeLanguage('pl')"/>
             <div class="btn_spacer"></div>
@@ -22,7 +22,7 @@
                 </div>
                 @for (game of gameData; track $index)
                 {
-                    <app-dash-item/>
+                    <app-dash-item [data]="game"/>
                 }
             </div>
         </div>

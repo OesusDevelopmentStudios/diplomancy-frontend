@@ -1,1 +1,38 @@
-<div class="wrapper"></div>
+<div class="wrapper" [class.caution]="!data().turnComplete && !isGameUrgent(data().deadline)"
+    [class.warning]="!data().turnComplete && isGameUrgent(data().deadline)">
+    <img class="flag" [src]="'assets/flags/' + toFileName(data().country)"/>
+    <div class="content">
+        <div class="name"> {{ data().name }} </div>
+        <div class="countdown" [class.warning]="!data().turnComplete && isGameUrgent(data().deadline)">
+            {{ toRemainingTime(data().deadline) }}
+        </div>
+        <div class="summary">
+            <div class="labels">
+                <div class="item">{{ "dashboard.item.phase" | translate }}</div>
+                <div class="item">{{ "dashboard.item.messages" | translate }}</div>
+                <div class="item">{{ "dashboard.item.turn" | translate }}</div>
+            </div>
+            <div class="values">
+                <div class="item">: {{ phaseToStr(data().phase) }}</div>
+                <div class="item">: {{ data().unread.length }} </div>
+                <div class="item">: {{ data().turn }}</div>
+            </div>
+        </div>
+
+        @if (data().turnComplete)
+        {
+            {{ "dashboard.item.ready" | translate }}
+        }
+        @else
+        {
+            <div class="incomplete" [class.warning]="!data().turnComplete && isGameUrgent(data().deadline)">
+                {{ "dashboard.item.waiting" | translate }}
+            </div>
+        }
+
+        <div class="footer">
+            <div>WW1</div>
+            <div>{{ countryToStr(data().country) }}</div>
+        </div>
+    </div>
+</div>

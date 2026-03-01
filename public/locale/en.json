@@ -11,6 +11,26 @@
         "invalid_password": "Invalid password",
         "remember_me": "Remember me"
     },
+    "common": {
+        "country": {
+            "nor": "Norway",
+            "swe": "Sweden",
+            "rus": "Russia",
+            "ger": "Germany",
+            "fra": "France",
+            "spa": "Spain",
+            "ita": "Italy",
+            "gbr": "Great Britain",
+            "aut_hun": "Austria-Hungary",
+            "ott_emp": "Ottoman Empire"
+        },
+        "phase": {
+            "move": "Move",
+            "retreat": "Retreat",
+            "reinforce": "Reinforce"
+        },
+        "unknown": "Unknown"
+    },
     "dashboard": {
         "new_game": "New Game",
         "search_game": "Search for a game",
@@ -42,6 +62,13 @@
             "invalid_password": "Invalid password",
             "weak_password": "Password is too weak",
             "mismatch_password": "Passwords do not match"
+        },
+        "item": {
+            "phase": "Phase",
+            "messages": "Pending messages",
+            "turn": "Turn",
+            "waiting": "Turn not complete",
+            "ready": "Waiting for other players"
         }
     }
 }

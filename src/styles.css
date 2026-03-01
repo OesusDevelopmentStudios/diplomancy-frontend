@@ -12,7 +12,7 @@ body {
     min-height: 100%;
     margin: 0;
     color: #abbeaf;
-    font-family: mil-font;
+    font-family: source-code-pro, monospace;
 }
 
 app-root:host {
