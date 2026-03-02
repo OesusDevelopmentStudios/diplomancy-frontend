@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 
-import { GameData } from '../../common/common.game';
-
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
-import { Phase, phaseAsText } from '../../common/enums/common.enums.phase';
-import { Country, countryAsText, toFileName } from '../../common/enums/common.enums.country';
+import { Phase, phaseAsText } from '../../../common/enums/common.enums.phase';
+import { Country, countryAsText, toFileName } from '../../../common/enums/common.enums.country';
+
+import { Game } from '../../data/dashboard.data.game';
 
 @Component({
     selector: 'app-dash-item',
@@ -16,7 +16,7 @@ import { Country, countryAsText, toFileName } from '../../common/enums/common.en
 
 export class DashItemComponent
 {
-    data = input.required<GameData>();
+    data = input.required<Game>();
 
     constructor(private translate: TranslateService) {}
 

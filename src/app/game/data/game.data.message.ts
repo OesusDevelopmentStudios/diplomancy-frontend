@@ -1,4 +1,4 @@
-import { Country } from "./enums/common.enums.country";
+import { Country } from "../../common/enums/common.enums.country";
 
 class Message
 {

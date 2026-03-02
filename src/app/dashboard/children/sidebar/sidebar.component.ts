@@ -3,11 +3,11 @@ import { NgClass } from '@angular/common';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { SwitchComponent } from '../../common/switch/switch.component';
-import { tokenStorageKey } from '../../common/common.data';
-import { decrypt } from '../../common/common.helpers';
+import { SwitchComponent } from '../../../common/switch/switch.component';
+import { tokenStorageKey } from '../../../common/common.data';
+import { decrypt } from '../../../common/common.helpers';
 
-import { Friend } from './sidebar.friend';
+import { Friend } from '../../data/dashboard.data.friend';
 
 @Component({
     selector: 'app-sidebar',
