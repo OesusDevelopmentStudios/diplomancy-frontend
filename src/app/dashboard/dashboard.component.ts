@@ -118,6 +118,11 @@ export class DashboardComponent implements OnInit
         // Token is invalid
     }
 
+    onGameSelected(gameId: string): void
+    {
+        this.router.navigate(['/game', gameId]);
+    }
+
     changeLanguage(lang: string): void
     {
         changeLanguage(this.translate, lang);

@@ -16,7 +16,7 @@
                 </div>
                 @for (game of gameData; track $index)
                 {
-                    <app-dash-item [data]="game"/>
+                    <app-dash-item [data]="game" (click)="onGameSelected(game.id)"/>
                 }
             </div>
         </div>
