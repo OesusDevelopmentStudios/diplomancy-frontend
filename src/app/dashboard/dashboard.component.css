@@ -14,17 +14,6 @@
     font-family: mil-font;
 }
 
-.buttons_wrapper {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    align-items: center;
-}
-
-.btn_spacer {
-    width: 10px;
-}
-
 .img_button {
     height: 50%;
     border-radius: 12px;

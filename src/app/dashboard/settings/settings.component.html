@@ -1,8 +1,15 @@
 <div class="settings-wrapper" [class.show]="settingsOpen()">
-    <div class="button_wrapper">
+    <div class="button_wrapper_right">
         <img class="img_button" src="assets/cancel.png" (click)="close()"/>
     </div>
     <p class="title">{{'dashboard.settings.title' | translate}}</p>
+    <div class="simple_item">
+        <div class="button_wrapper">
+            <img class="img_button" src="assets/pl.png " (click)="changeLanguage('pl')"/>
+            <div class="btn_spacer"></div>
+            <img class="img_button" src="assets/uk.png" (click)="changeLanguage('en')"/>
+        </div>
+    </div>
     <div class="simple_item">
         {{'dashboard.settings.cookies' | translate}}
         <app-switch [size]="'20px'" [(state)]="cookiesEnabled" (onChange)="changeCookiesSetting()"/>

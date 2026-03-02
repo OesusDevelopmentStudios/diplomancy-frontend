@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit, effect, model } from '@angular/core';
+import { Component, OnInit, effect, model, output } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 export class SettingsComponent implements OnInit
 {
     settingsOpen = model.required<boolean>();
+    onLanguageChange = output<string>();
 
     token : String = "";
     cookiesEnabled: boolean = false;
@@ -165,5 +166,10 @@ export class SettingsComponent implements OnInit
             const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
         });
+    }
+
+    changeLanguage(lang: string): void
+    {
+        this.onLanguageChange.emit(lang);
     }
 }

@@ -9,7 +9,7 @@
     left: 50%;
     margin-left: -175px;
     width: 350px;
-    height: 500px;
+    height: 535px;
     background-color: #313136;
     border: 2px solid #abbeaf;
     border-radius: 12px;
@@ -22,12 +22,23 @@
     padding-bottom: 15px;
 }
 
-.button_wrapper {
+.button_wrapper, .button_wrapper_right {
     width: 100%;
     height: 50px;
-    padding-right: 20px;
     display: flex;
+}
+
+.button_wrapper {
+    justify-content: center;
+}
+
+.button_wrapper_right {
+    padding-right: 20px;
     justify-content: flex-end;
+}
+
+.btn_spacer {
+    width: 10px;
 }
 
 .inputFail {
@@ -66,6 +77,7 @@
 .title {
     color: #abbeaf;
     font-size: 20px;
+    font-family: mil-font;
 }
 
 .simple_item {

@@ -1,13 +1,7 @@
 <main>
     <div class="titlebar">
         <h1 class="title">Diplomancy</h1>
-        <div class="buttons_wrapper">
-            <img class="img_button" src="assets/pl.png" (click)="changeLanguage('pl')"/>
-            <div class="btn_spacer"></div>
-            <img class="img_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
-            <div class="btn_spacer"></div>
-            <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
-        </div>
+        <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
     </div>
     <div class="content">
         <div class="scrollable">
@@ -28,5 +22,5 @@
         </div>
         <app-sidebar/>
         </div>
-    <app-settings [(settingsOpen)]="showSettings"/>
+    <app-settings [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
 </main>
