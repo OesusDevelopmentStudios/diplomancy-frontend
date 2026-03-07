@@ -13,10 +13,11 @@ import { Game } from './data/dashboard.data.game';
 import { SidebarComponent } from './children/sidebar/sidebar.component';
 import { SettingsComponent } from './children//settings/settings.component';
 import { DashItemComponent } from './children//dash-item/dash-item.component';
+import { SearchComponent } from './children/search/search.component';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [TranslateModule, FormsModule, SidebarComponent, SettingsComponent, DashItemComponent],
+    imports: [TranslateModule, FormsModule, SidebarComponent, SettingsComponent, DashItemComponent, SearchComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css'
 })
@@ -24,6 +25,7 @@ import { DashItemComponent } from './children//dash-item/dash-item.component';
 export class DashboardComponent implements OnInit
 {
     showSettings: boolean = false;
+    showSearch: boolean = false;
     gameData: Game[] = [];
 
     private token: String | null = null;
@@ -74,6 +76,11 @@ export class DashboardComponent implements OnInit
         this.showSettings = !this.showSettings;
     }
 
+    manageSearch(): void
+    {
+        this.showSearch = !this.showSearch;
+    }
+
     validateToken(token: string): void
     {
         // TODO: Validate token with server
@@ -97,5 +104,10 @@ export class DashboardComponent implements OnInit
     changeLanguage(lang: string): void
     {
         changeLanguage(this.translate, lang);
+    }
+
+    createNewGame(): void
+    {
+        this.router.navigate(['/create']);
     }
 }

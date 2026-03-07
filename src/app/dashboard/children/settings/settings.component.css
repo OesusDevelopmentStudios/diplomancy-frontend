@@ -22,6 +22,11 @@
     padding-bottom: 15px;
 }
 
+.settings-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 .button_wrapper, .button_wrapper_right {
     width: 100%;
     height: 50px;
@@ -67,11 +72,6 @@
 .spacerIdle {
     height: 16px;
     display: block;
-}
-
-.settings-wrapper.show {
-    opacity: 1;
-    visibility: visible;
 }
 
 .title {

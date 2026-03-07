@@ -1,0 +1,19 @@
+<div class="container" [class.show]="showSearch()">
+    <div class="header_nav">
+        <img class="img_button" src="assets/cancel.png" (click)="close()"/>
+    </div>
+    <div class="search_bar">
+        <input type="text" placeholder="Game Name"/>
+        <label for="game_mode">Game mode:</label>
+        <select id="game_mode">
+            <option value="all"> ALL </option>
+            <option value="ww1"> WW1 </option>
+        </select>
+        <label for="country_available">Available countries:</label>
+        <select id="country_available">
+            <option value="all"> ALL </option>
+            <option value="ww1"> WW1 </option>
+        </select>
+    </div>
+</div>
+<div class="backdrop" [class.show]="showSearch()"></div>

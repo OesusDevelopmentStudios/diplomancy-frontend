@@ -1,4 +1,5 @@
 <main>
+    <app-search [(showSearch)]="showSearch"/>
     <div class="titlebar">
         <h1 class="title">Diplomancy</h1>
         <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
@@ -7,10 +8,10 @@
         <div class="scrollable">
             <div class="game_view">
                 <div class="main_control">
-                    <div class="item_left">
+                    <div class="item_left" (click)="createNewGame()">
                         {{ 'dashboard.new_game' | translate }}
                     </div>
-                    <div class="item_right">
+                    <div class="item_right" (click)="manageSearch()">
                         {{ 'dashboard.search_game' | translate }}
                     </div>
                 </div>
@@ -21,6 +22,6 @@
             </div>
         </div>
         <app-sidebar/>
-        </div>
+    </div>
     <app-settings [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
 </main>

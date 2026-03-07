@@ -1,0 +1,51 @@
+.container
+{
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 96%;
+    height: 96%;
+    margin-top: 2%;
+    margin-left: 2%;
+    background-color: #313136;
+    border: 2px solid #abbeaf;
+    border-radius: 12px;
+    z-index: 2000;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.container.show
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1900;
+}
+
+.backdrop.show {
+    opacity: 0.8;
+    pointer-events: auto;
+}
+
+.header_nav {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    padding-right: 20px;
+    justify-content: flex-end;
+}
