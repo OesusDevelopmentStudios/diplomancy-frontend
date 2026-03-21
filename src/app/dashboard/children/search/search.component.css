@@ -1,14 +1,15 @@
-.container
-{
+.container {
     visibility: hidden;
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 96%;
-    height: 96%;
-    margin-top: 2%;
+    height: 95%;
+    margin-top: 1%;
     margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 4%;
     background-color: #313136;
     border: 2px solid #abbeaf;
     border-radius: 12px;
@@ -21,8 +22,7 @@
     transition: opacity 0.5s ease;
 }
 
-.container.show
-{
+.container.show {
     opacity: 1;
     visibility: visible;
 }
