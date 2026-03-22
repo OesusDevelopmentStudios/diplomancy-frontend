@@ -49,3 +49,35 @@
     padding-right: 20px;
     justify-content: flex-end;
 }
+
+.search_bar {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    margin-left: 2%;
+    width: 96%;
+}
+
+.main_options {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.main_options input {
+    display: flex;
+    flex: 1;
+    max-width: 60%;
+    height: 35px;
+    border-radius: 12px;
+}
+
+.advanced_options {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 35px;
+    gap: 50px;
+}

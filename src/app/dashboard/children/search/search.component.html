@@ -3,21 +3,24 @@
         <img class="img_button" src="assets/cancel.png" (click)="close()"/>
     </div>
     <div class="search_bar">
-        <input type="text" placeholder="Game Name"/>
-        <label for="game_mode">Game mode:</label>
-        <select id="game_mode">
-            <option value="all"> ALL </option>
-            <option value="ww1"> WW1 </option>
-        </select>
-        <label for="country_available">Available countries:</label>
-        <select id="country_available">
-            <option value="all"> ALL </option>
-            <option value="ww1"> WW1 </option>
-        </select>
-        <label for="friends_only">Friends only:</label>
-        <input type="checkbox" id="friends_only"/>
-        <label for="show_pswdd">Show passworded games:</label>
-        <input type="checkbox" id="show_pswdd"/>
+        <div class="main_options">
+            <input type="text" placeholder="{{ 'dashboard.search.search_hint' | translate }}"/>
+            <label for="game_mode">{{ 'dashboard.search.mode' | translate }}</label>
+            <select id="game_mode">
+                <option value="all"> ALL </option>
+                <option value="ww1"> WW1 </option>
+            </select>
+            <label for="country_available">{{ 'dashboard.search.countries' | translate}}</label>
+            <select id="country_available">
+                <option value="all"> ALL </option>
+                <option value="ww1"> WW1 </option>
+            </select>
+        </div>
+        <div class="advanced_options">
+            <app-checkbox> {{ 'dashboard.search.password' | translate }} </app-checkbox>
+            <app-checkbox> {{ 'dashboard.search.hot_join' | translate }} </app-checkbox>
+            <app-checkbox> {{ 'dashboard.search.friends' | translate }} </app-checkbox>
+        </div>
     </div>
 </div>
 <div class="backdrop" [class.show]="showSearch()"></div>

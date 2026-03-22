@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-checkbox',
     templateUrl: './checkbox.component.html',
-    styleUrls: ['./checkbox.component.css']
+    styleUrls: ['./checkbox.component.css'],
+    imports: [FormsModule]
 })
 
-export class CheckboxComponent implements OnInit
+export class CheckboxComponent
 {
-    constructor()
-    {}
 
-    ngOnInit()
-    {}
+    isChecked : boolean = false;
+
+    onClick()
+    {
+        this.isChecked = !this.isChecked;
+    }
 }

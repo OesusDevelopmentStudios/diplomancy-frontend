@@ -34,6 +34,14 @@
     "dashboard": {
         "new_game": "New Game",
         "search_game": "Search for a game",
+        "search": {
+            "search_hint": "Game name",
+            "mode": "Game mode",
+            "countries": "Available countries",
+            "password": "Hide games with password",
+            "hot_join": "Show games in progress",
+            "friends": "Games with friends only"
+        },
         "sidebar": {
             "friends": "Friends",
             "search_friend": "Search",

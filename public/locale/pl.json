@@ -34,6 +34,14 @@
     "dashboard": {
         "new_game": "Nowa gra",
         "search_game": "Wyszukaj grę",
+        "search": {
+            "search_hint": "Nazwa gry",
+            "mode": "Tryb gry",
+            "countries": "Dostępne kraje",
+            "password": "Ukryj gry z hasłem",
+            "hot_join": "Pokaż gry w toku",
+            "friends": "Tylko gry ze znajomymi"
+        },
         "sidebar": {
             "friends": "Znajomi",
             "search_friend": "Szukaj...",

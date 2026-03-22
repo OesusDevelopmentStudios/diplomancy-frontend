@@ -1,3 +1,6 @@
-<p>
-    checkbox works!
-</p>
+<div class="wrapper">
+    <div class="label"><ng-content/></div>
+    <div class="checkbox" [class.checked]="isChecked" (click)="onClick()">
+        <img [class.checked]="isChecked" src="assets/check.png"/>
+    </div>
+</div>

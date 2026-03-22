@@ -1,0 +1,39 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    width: max-content;
+}
+
+.checkbox {
+    display: flex;
+    margin-left: 12px;
+    aspect-ratio: 1/1;
+    background: #25252b;
+    height: 80%;
+    cursor: pointer;
+    border-radius: 12%;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    height: 80%;
+    max-width: 25px;
+    object-fit: contain;
+    display: block;
+    visibility: hidden;
+}
+
+img.checked {
+    visibility: visible;
+}
+
+.checkbox:hover {
+    filter: brightness(85%);
+}
+
+.checkbox.checked {
+    background: #abbeaf;
+}

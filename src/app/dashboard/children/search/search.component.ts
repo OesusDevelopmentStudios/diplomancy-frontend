@@ -1,8 +1,12 @@
 import { Component, model } from '@angular/core';
 
+import { TranslatePipe } from '@ngx-translate/core';
+
+import { CheckboxComponent } from '../../../common/checkbox/checkbox.component';
+
 @Component({
     selector: 'app-search',
-    imports: [],
+    imports: [CheckboxComponent, TranslatePipe],
     templateUrl: './search.component.html',
     styleUrl: './search.component.css'
 })
