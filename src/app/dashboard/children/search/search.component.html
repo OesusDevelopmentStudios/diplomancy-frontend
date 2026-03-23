@@ -5,11 +5,9 @@
     <div class="search_bar">
         <div class="main_options">
             <input type="text" placeholder="{{ 'dashboard.search.search_hint' | translate }}"/>
-            <label for="game_mode">{{ 'dashboard.search.mode' | translate }}</label>
-            <select id="game_mode">
-                <option value="all"> ALL </option>
-                <option value="ww1"> WW1 </option>
-            </select>
+            <app-dropdown [items]="gameModesAsText()" [default]="0" (selected)="updateMode($event)">
+                {{ 'dashboard.search.mode' | translate }}
+            </app-dropdown>
             <label for="country_available">{{ 'dashboard.search.countries' | translate}}</label>
             <select id="country_available">
                 <option value="all"> ALL </option>

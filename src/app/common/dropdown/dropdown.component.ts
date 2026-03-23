@@ -1,12 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
     selector: 'app-dropdown',
-    imports: [],
-    template: './dropdown.component.html',
+    templateUrl: './dropdown.component.html',
     styleUrl: './dropdown.component.css',
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class DropdownComponent
-{}
+{
+    items = input.required<Array<string>>();
+    default = input<number>(0);
+    selected = output<string>();
+
+    activeElement: number = this.default();
+}

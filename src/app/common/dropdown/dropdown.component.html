@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div class="label">
+        <ng-content/>
+    </div>
+    <div class="dropdown">
+        @for (item of items(); track $index)
+        {
+            <div class="item">
+                {{item}} ▼
+            </div>
+        }
+    </div>
+</div>

@@ -1,3 +1,12 @@
-:host {
-  display: block;
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    width: max-content;
+    gap: 15px;
+}
+
+.dropdown {
+    cursor: pointer;
 }

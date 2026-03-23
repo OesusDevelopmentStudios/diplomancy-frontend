@@ -12,6 +12,10 @@
         "remember_me": "Zapamiętaj mnie"
     },
     "common": {
+        "game_mode": {
+            "any": "Dowolny",
+            "ww1": "WW1"
+        },
         "country": {
             "nor": "Norwegia",
             "swe": "Szwecja",
