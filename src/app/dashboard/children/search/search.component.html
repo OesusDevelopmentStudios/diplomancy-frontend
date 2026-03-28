@@ -6,7 +6,7 @@
         <div class="main_options">
             <input type="text" placeholder="{{ 'dashboard.search.search_hint' | translate }}"/>
             <app-dropdown [items]="gameModesAsText()" [default]="0" (selected)="updateMode($event)">
-                {{ 'dashboard.search.mode' | translate }}
+                <span>{{ 'dashboard.search.mode' | translate }}</span>
             </app-dropdown>
             <label for="country_available">{{ 'dashboard.search.countries' | translate}}</label>
             <select id="country_available">

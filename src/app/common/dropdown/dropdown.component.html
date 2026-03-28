@@ -1,13 +1,26 @@
 <div class="wrapper">
     <div class="label">
-        <ng-content/>
+        <ng-content />:
     </div>
-    <div class="dropdown">
-        @for (item of items(); track $index)
-        {
-            <div class="item">
-                {{item}} ▼
+    <div class="selectable">
+        <div class="selected" [style.--width]="width">
+            <span>{{items()[activeElement]}}</span>
+            <span>▼</span>
+        </div>
+        <div class="dropdown" [style.--width]="width">
+            <div class="spacer"></div>
+            <div class="items_wrapper">
+                @for (item of items(); track $index)
+                {
+                    <div class="item" (click)="onSelected($index)">
+                        {{item}}
+                    </div>
+                    @if ($index < (items().length - 1))
+                    {
+                        <hr/>
+                    }
+                }
             </div>
-        }
+        </div>
     </div>
 </div>
