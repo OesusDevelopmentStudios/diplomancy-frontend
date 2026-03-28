@@ -28,7 +28,7 @@
                         {{ 'auth.invalid_password' | translate }}
                     </div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
-                    <app-checkbox> {{ 'auth.remember_me' | translate }} </app-checkbox>
+                    <app-checkbox (onChange)="rememberMe = $event"> {{ 'auth.remember_me' | translate }} </app-checkbox>
                     <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
                 </div>
                 <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">

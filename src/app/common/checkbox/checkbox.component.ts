@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -10,11 +10,12 @@ import { FormsModule } from "@angular/forms";
 
 export class CheckboxComponent
 {
-
+    onChange = output<boolean>();
     isChecked : boolean = false;
 
     onClick()
     {
         this.isChecked = !this.isChecked;
+        this.onChange.emit(this.isChecked)
     }
 }
