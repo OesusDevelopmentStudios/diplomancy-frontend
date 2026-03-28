@@ -12,7 +12,7 @@
     height: 535px;
     background-color: #313136;
     border: 2px solid #abbeaf;
-    border-radius: 12px;
+    border-radius: 8px;
     z-index: 2000;
     opacity: 0;
     transition: opacity 0.5s ease;

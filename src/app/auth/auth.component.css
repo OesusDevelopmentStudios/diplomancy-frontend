@@ -46,12 +46,12 @@
 
 .tab_button.active_left {
     background-color: #27272c;
-    border-top-left-radius: 12px;
+    border-top-left-radius: 8px;
 }
 
 .tab_button.active_right {
     background-color: #27272c;
-    border-top-right-radius: 12px;
+    border-top-right-radius: 8px;
 }
 
 .container {
@@ -150,7 +150,7 @@ input[type="checkbox"]:checked::after {
 
 .language_button {
     height: match-parent;
-    border-radius: 12px;
+    border-radius: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -164,5 +164,5 @@ input[type="checkbox"]:checked::after {
 .main_dialoge {
     background-color: #313136;
     border: 1px solid #abbeaf;
-    border-radius: 12px;
+    border-radius: 8px;
 }

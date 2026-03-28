@@ -81,7 +81,7 @@
     display: inline-block;
     box-sizing: border-box;
     height: 35px;
-    border-radius: 12px;
+    border-radius: 8px;
     width: 90%;
 }
 
@@ -118,12 +118,12 @@
 }
 
 .friend.single {
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .friend.first {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     border-bottom: #abbeaf 1px solid;
 }
 
@@ -132,8 +132,8 @@
 }
 
 .friend.last {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .friend .status.online {
@@ -161,7 +161,7 @@
 .friend_left .status {
     height: 25%;
     width: 4.5%;
-    border-radius: 12px;
+    border-radius: 8px;
     margin-right: 10px;
     cursor: help;
 }

@@ -52,7 +52,7 @@ button {
     width: max-content;
     align-self: center;
     background-color: #abbeaf;
-    border-radius: 12px;
+    border-radius: 8px;
     border: 2px solid #abbeaf;
 }
 
@@ -66,7 +66,7 @@ button:hover {
 
 .img_button {
     height: 50%;
-    border-radius: 12px;
+    border-radius: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
