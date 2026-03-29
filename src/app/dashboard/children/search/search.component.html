@@ -8,11 +8,9 @@
             <app-dropdown [items]="gameModesAsText()" [default]="0" (selected)="updateMode($event)">
                 <span>{{ 'dashboard.search.mode' | translate }}</span>
             </app-dropdown>
-            <label for="country_available">{{ 'dashboard.search.countries' | translate}}</label>
-            <select id="country_available">
-                <option value="all"> ALL </option>
-                <option value="ww1"> WW1 </option>
-            </select>
+            <app-drop-select [items]="countriesAsText()" (selected)="updateCountries($event)">
+                <span>{{ 'dashboard.search.countries' | translate }}</span>
+            </app-drop-select>
         </div>
         <div class="advanced_options">
             <app-checkbox> {{ 'dashboard.search.password' | translate }} </app-checkbox>

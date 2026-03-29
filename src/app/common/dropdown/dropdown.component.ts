@@ -10,10 +10,15 @@ export class DropdownComponent implements OnChanges
 {
     items = input.required<Array<string>>();
     default = input<number>(0);
-    selected = output<string>();
+    selected = output<number>();
 
-    activeElement: number = this.default();
+    activeElement: number = 0;
     width: string = "100px"
+
+    ngOnInit(): void
+    {
+        this.activeElement = this.default();
+    }
 
     ngOnChanges(): void
     {
@@ -32,6 +37,6 @@ export class DropdownComponent implements OnChanges
     onSelected(index: number): void
     {
         this.activeElement = index;
-        this.selected.emit(this.items().at(index)!);
+        this.selected.emit(index);
     }
 }

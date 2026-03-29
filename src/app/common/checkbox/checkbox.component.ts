@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, input, OnInit, output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -8,10 +8,15 @@ import { FormsModule } from "@angular/forms";
     imports: [FormsModule]
 })
 
-export class CheckboxComponent
+export class CheckboxComponent implements OnInit
 {
+    selected = input<boolean>(false);
     onChange = output<boolean>();
     isChecked : boolean = false;
+
+    ngOnInit(): void {
+        this.isChecked = this.selected();
+    }
 
     onClick()
     {
