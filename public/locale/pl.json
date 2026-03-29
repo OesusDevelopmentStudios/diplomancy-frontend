@@ -9,7 +9,10 @@
         "invalid_username": "Niepoprawna nazwa użytkownika",
         "invalid_email": "Niepoprawny email",
         "invalid_password": "Błędne hasło",
-        "remember_me": "Zapamiętaj mnie"
+        "remember_me": "Zapamiętaj mnie",
+        "cookies_info": "Ta strona używa ciasteczek do przechowywania tokena. Bez zakceptowania ciasteczek zostaniesz wylogowany po zamknięciu przeglądarki.",
+        "accept": "Zaakceptuj",
+        "decline": "Odrzuć"
     },
     "common": {
         "game_mode": {

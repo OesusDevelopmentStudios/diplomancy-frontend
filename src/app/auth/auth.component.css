@@ -118,6 +118,7 @@ input {
     justify-content: flex-end;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: 2000;
 }
 
 .language_button {
@@ -129,6 +130,51 @@ input {
 
 .lang_spacer {
     width: 10px;
+}
+
+/* Cookies banner */
+
+.cookies_backdrop {
+    position: fixed;
+    inset: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1900;
+}
+
+.cookies_backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.banner {
+    visibility: hidden;
+    position: fixed;
+    z-index: 2000;
+    width: 800px;
+    margin-left: -400px;
+    margin-top: -100px;
+    top: 50%;
+    left: 50%;
+    border: #abbeaf 2px solid;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #313136;
+}
+
+.banner.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.cookies_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
 /* Colours */

@@ -28,10 +28,23 @@ export class AuthComponent implements OnInit
     inPassword: string = '';
     rememberMe: boolean = false;
 
+    showCookiesBanner: boolean = false;
+    useCookies: boolean = false;
+
     constructor(private translate : TranslateService, private router: Router)
     {
         this.translate.addLangs(supportedLanguages);
         this.translate.setFallbackLang(defaultLanguage);
+
+        const cookiesEnabled = localStorage.getItem('cookies_enabled');
+        if (cookiesEnabled)
+        {
+            this.useCookies = cookiesEnabled === 'true';
+        }
+        else
+        {
+            this.showCookiesBanner = true;
+        }
     }
 
     ngOnInit(): void
@@ -105,7 +118,7 @@ export class AuthComponent implements OnInit
 
     login(token: string): void
     {
-        if (this.rememberMe)
+        if (this.rememberMe && this.useCookies)
         {
             const date = new Date();
             date.setDate(date.getDate() + 30);
@@ -139,5 +152,12 @@ export class AuthComponent implements OnInit
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;
+    }
+
+    switchCookiesConsent(consent: boolean): void
+    {
+        this.useCookies = consent;
+        localStorage.setItem('cookies_enabled', consent.toString());
+        this.showCookiesBanner = false;
     }
 }

@@ -63,4 +63,14 @@
         <div class="lang_spacer"></div>
         <img class="language_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
     </div>
+    <div class="cookies_backdrop" [class.show]="showCookiesBanner"></div>
+    <div class="banner" [class.show]="showCookiesBanner">
+        {{ 'auth.cookies_info' | translate }}
+        <div class="cookies_buttons">
+            <button class="cookies_button" (click)="switchCookiesConsent(true)">{{ 'auth.accept' | translate }}</button>
+            <button class="cookies_button" (click)="switchCookiesConsent(false)">
+                {{ 'auth.decline' | translate }}
+            </button>
+        </div>
+    </div>
 </main>
