@@ -1,80 +1,96 @@
-<div class="settings-wrapper" [class.show]="settingsOpen()">
+<div class="settings-wrapper" [class.show]="settingsOpen()" [class.danger]="confirmAccountDeletionAction">
     <div class="button_wrapper_right">
         <img class="img_button" src="assets/cancel.png" (click)="close()"/>
     </div>
-    <p class="title">{{'dashboard.settings.title' | translate}}</p>
-    <div class="simple_item">
-        <div class="button_wrapper">
-            <img class="img_button" src="assets/pl.png " (click)="changeLanguage('pl')"/>
-            <div class="btn_spacer"></div>
-            <img class="img_button" src="assets/uk.png" (click)="changeLanguage('en')"/>
+    <div class="settings_content" [class.show]="!confirmAccountDeletionAction">
+        <p class="title">{{'dashboard.settings.title' | translate}}</p>
+        <div class="simple_item">
+            <div class="button_wrapper">
+                <img class="img_button" src="assets/pl.png " (click)="changeLanguage('pl')"/>
+                <div class="btn_spacer"></div>
+                <img class="img_button" src="assets/uk.png" (click)="changeLanguage('en')"/>
+            </div>
+        </div>
+        <div class="simple_item">
+            {{'dashboard.settings.cookies' | translate}}
+            <app-switch [size]="'20px'" [(state)]="cookiesEnabled" (onChange)="changeCookiesSetting()"/>
+        </div>
+        <app-settings-item title="{{'dashboard.settings.email' | translate}}" (onClick)="resetEmail()"
+            [(deployed)]="sectionEmailOpen">
+            <div class="item">
+                <div class="switch-wrapped">
+                    {{'dashboard.settings.enmail_notifications' | translate}}
+                    <app-switch [size]="'20px'" [(state)]="emailNotificationsEnabled"
+                        (onChange)="changeEmailNotificationsSetting()"/>
+                </div>
+                <div class="email_info">{{'dashboard.settings.current_email' | translate}}: {{user_email}}</div>
+                <label for="new_email">{{'dashboard.settings.new_email' | translate}}:</label>
+                <input type="email" id="new_email" [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" [(ngModel)]="newEmail"/>
+                <div [ngClass]="emailOk ? 'hintIdle' : 'hintFail'">
+                    {{ 'dashboard.settings.invalid_email' | translate }}
+                </div>
+                <div [ngClass]="emailOk ? 'spacerIdle' : 'spacerFail'"></div>
+                <label for="password">{{'dashboard.settings.password' | translate}}:</label>
+                <input type="password" id="password" [ngClass]="emailPasswordOk ? 'inputIdle' : 'inputFail'"
+                    [(ngModel)]="password"/>
+                <div [ngClass]="emailPasswordOk ? 'hintIdle' : 'hintFail'">
+                    {{ 'dashboard.settings.invalid_password' | translate }}
+                </div>
+                <div [ngClass]="emailPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                <button class="submit_button" (click)="changeEmail()">
+                    {{'dashboard.settings.change_email' | translate}}
+                </button>
+            </div>
+        </app-settings-item>
+        <app-settings-item title="{{'dashboard.settings.password' | translate}}" (onClick)="resetPassword()"
+            [(deployed)]="sectionPasswordOpen">
+            <div class="item">
+                <label for="new_password">{{'dashboard.settings.new_password' | translate}}:</label>
+                <input type="password" id="new_password" [ngClass]="newPasswordOk ? 'inputIdle' : 'inputFail'"
+                    [(ngModel)]="newPassword"/>
+                <div [ngClass]="newPasswordOk ? 'hintIdle' : 'hintFail'">
+                    {{ 'dashboard.settings.weak_password' | translate }}
+                </div>
+                <div [ngClass]="newPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                <label for="confirm_password">{{'dashboard.settings.confirm_password' | translate}}:</label>
+                <input type="password" id="confirm_password" [ngClass]="repeatPasswordOk ? 'inputIdle' : 'inputFail'"
+                    [(ngModel)]="repeatPassword"/>
+                <div [ngClass]="repeatPasswordOk ? 'hintIdle' : 'hintFail'">
+                    {{ 'dashboard.settings.mismatch_password' | translate }}
+                </div>
+                <div [ngClass]="repeatPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                <label for="old_password">{{'dashboard.settings.old_password' | translate}}:</label>
+                <input type="password" id="old_password" [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'"
+                    [(ngModel)]="password"/>
+                <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">
+                    {{ 'dashboard.settings.invalid_password' | translate }}
+                </div>
+                <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
+                <button class="submit_button" (click)="changePassword()">
+                    {{'dashboard.settings.change_password' | translate}}
+                </button>
+            </div>
+        </app-settings-item>
+        <app-settings-item title="{{'dashboard.settings.danger' | translate}}" [(deployed)]="sectionDangerOpen">
+            <div class="item">
+                <button class="danger_button" (click)="deleteAccount()">
+                    {{'dashboard.settings.delete_account' | translate}}
+                </button>
+            </div>
+        </app-settings-item>
+        <button (click)="logout()">{{'dashboard.settings.logout' | translate}}</button>
+    </div>
+    <div class="danger_section" [class.show]="confirmAccountDeletionAction">
+        <div class="user_caution">
+            Your account will be permanently deleted. This action cannot be undone. To proceed, please enter your password and click the continue button.
+        </div>
+        <label for="password">{{'dashboard.settings.password' | translate}}:</label>
+        <input type="password" id="password" [ngClass]="emailPasswordOk ? 'inputIdle' : 'inputFail'"
+            [(ngModel)]="password"/>
+        <div class="danger_buttons">
+            <button>Placeholder 1</button>
+            <button>Placeholder 2</button>
         </div>
     </div>
-    <div class="simple_item">
-        {{'dashboard.settings.cookies' | translate}}
-        <app-switch [size]="'20px'" [(state)]="cookiesEnabled" (onChange)="changeCookiesSetting()"/>
-    </div>
-    <app-settings-item title="{{'dashboard.settings.email' | translate}}" (onClick)="resetEmail()"
-        [(deployed)]="sectionEmailOpen">
-        <div class="item">
-            <div class="switch-wrapped">
-                {{'dashboard.settings.enmail_notifications' | translate}}
-                <app-switch [size]="'20px'" [(state)]="emailNotificationsEnabled"
-                    (onChange)="changeEmailNotificationsSetting()"/>
-            </div>
-            <div class="email_info">{{'dashboard.settings.current_email' | translate}}: {{user_email}}</div>
-            <label for="new_email">{{'dashboard.settings.new_email' | translate}}:</label>
-            <input type="email" id="new_email" [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" [(ngModel)]="newEmail"/>
-            <div [ngClass]="emailOk ? 'hintIdle' : 'hintFail'">
-                {{ 'dashboard.settings.invalid_email' | translate }}
-            </div>
-            <div [ngClass]="emailOk ? 'spacerIdle' : 'spacerFail'"></div>
-            <label for="password">{{'dashboard.settings.password' | translate}}:</label>
-            <input type="password" id="password" [ngClass]="emailPasswordOk ? 'inputIdle' : 'inputFail'"
-                [(ngModel)]="password"/>
-            <div [ngClass]="emailPasswordOk ? 'hintIdle' : 'hintFail'">
-                {{ 'dashboard.settings.invalid_password' | translate }}
-            </div>
-            <div [ngClass]="emailPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
-            <button class="submit_button" (click)="changeEmail()">
-                {{'dashboard.settings.change_email' | translate}}
-            </button>
-        </div>
-    </app-settings-item>
-    <app-settings-item title="{{'dashboard.settings.password' | translate}}" (onClick)="resetPassword()"
-        [(deployed)]="sectionPasswordOpen">
-        <div class="item">
-            <label for="new_password">{{'dashboard.settings.new_password' | translate}}:</label>
-            <input type="password" id="new_password" [ngClass]="newPasswordOk ? 'inputIdle' : 'inputFail'"
-                [(ngModel)]="newPassword"/>
-            <div [ngClass]="newPasswordOk ? 'hintIdle' : 'hintFail'">
-                {{ 'dashboard.settings.weak_password' | translate }}
-            </div>
-            <div [ngClass]="newPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
-            <label for="confirm_password">{{'dashboard.settings.confirm_password' | translate}}:</label>
-            <input type="password" id="confirm_password" [ngClass]="repeatPasswordOk ? 'inputIdle' : 'inputFail'"
-                [(ngModel)]="repeatPassword"/>
-            <div [ngClass]="repeatPasswordOk ? 'hintIdle' : 'hintFail'">
-                {{ 'dashboard.settings.mismatch_password' | translate }}
-            </div>
-            <div [ngClass]="repeatPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
-            <label for="old_password">{{'dashboard.settings.old_password' | translate}}:</label>
-            <input type="password" id="old_password" [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'"
-                [(ngModel)]="password"/>
-            <div [ngClass]="passwordOk ? 'hintIdle' : 'hintFail'">
-                {{ 'dashboard.settings.invalid_password' | translate }}
-            </div>
-            <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
-            <button class="submit_button" (click)="changePassword()">
-                {{'dashboard.settings.change_password' | translate}}
-            </button>
-        </div>
-    </app-settings-item>
-    <app-settings-item title="{{'dashboard.settings.danger' | translate}}" [(deployed)]="sectionDangerOpen">
-        <div class="item">
-            <button class="danger_button">{{'dashboard.settings.delete_account' | translate}}</button>
-        </div>
-    </app-settings-item>
-    <button (click)="logout()">{{'dashboard.settings.logout' | translate}}</button>
 </div>
 <div class="backdrop" [class.show]="settingsOpen()"></div>

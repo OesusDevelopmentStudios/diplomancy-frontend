@@ -43,6 +43,8 @@ export class SettingsComponent implements OnInit
     newPassword: string = '';
     repeatPassword: string = '';
 
+    confirmAccountDeletionAction: boolean = false;
+
     constructor()
     {
         effect(() => {
@@ -51,6 +53,7 @@ export class SettingsComponent implements OnInit
                 this.sectionEmailOpen = false;
                 this.sectionPasswordOpen = false;
                 this.sectionDangerOpen = false;
+                this.confirmAccountDeletionAction = false;
             }
         });
     }
@@ -107,6 +110,7 @@ export class SettingsComponent implements OnInit
         this.sectionEmailOpen = false;
         this.sectionPasswordOpen = false;
         this.sectionDangerOpen = false;
+        this.confirmAccountDeletionAction = false;
     }
 
     logout(): void
@@ -172,5 +176,10 @@ export class SettingsComponent implements OnInit
     changeLanguage(lang: string): void
     {
         this.onLanguageChange.emit(lang);
+    }
+
+    deleteAccount(): void
+    {
+        this.confirmAccountDeletionAction = true;
     }
 }

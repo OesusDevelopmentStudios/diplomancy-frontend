@@ -27,6 +27,14 @@
     visibility: visible;
 }
 
+.settings-wrapper.danger {
+    margin-left: -425px;
+    margin-top: -195px;
+    height: 340px;
+    width: 650px;
+    transition: height 0.3s ease, width 0.3s ease, margin 0.3s ease;
+}
+
 .button_wrapper, .button_wrapper_right {
     width: 100%;
     height: 50px;
@@ -35,6 +43,18 @@
 
 .button_wrapper {
     justify-content: center;
+}
+
+.settings_content {
+    display: none;
+}
+
+.settings_content.show {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .button_wrapper_right {
@@ -125,6 +145,27 @@ app-settings-item {
 .danger_button:hover{
     background-color: darkred;
     border-color: darkred;
+}
+
+.danger_section {
+    display: none;
+}
+
+.danger_section.show {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 10px;
+}
+
+.danger_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.user_caution {
+    text-align: justify;
 }
 
 .backdrop {
