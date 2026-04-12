@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core';
+import { Component, computed, effect, model } from '@angular/core';
 
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -20,12 +20,25 @@ export class SearchComponent
 {
     showSearch = model.required<boolean>();
 
-    mode: GameMode = GameMode.ANY;
     gameModes: Array<GameMode> = [GameMode.ANY, GameMode.WW1]
     ww1Countries: Array<number> = [Country.NOR, Country.SWE, Country.RUS, Country.GER, Country.FRA, Country.SPA,
                                    Country.ITA, Country.GBR, Country.AUT_HUN, Country.OTT_EMP]
 
-    constructor(private translate: TranslateService) {}
+    query: string = '';
+    mode: GameMode = GameMode.ANY;
+    countries: Array<number> = [];
+    hidePasswordGames: boolean = false;
+    allowsHotJoin: boolean = false;
+    friendsOnly: boolean = false;
+
+    constructor(private translate: TranslateService)
+    {
+        effect(() => {
+            if (this.showSearch()) {
+                this.updateSearch(this.query);
+            }
+        });
+    }
 
     close(): void
     {
@@ -35,7 +48,7 @@ export class SearchComponent
     updateMode(mode: number): void
     {
         this.mode = this.gameModes[mode];
-        console.log("Selected: " + this.mode)
+        this.updateSearch(this.query);
     }
 
     gameModesAsText(): Array<string>
@@ -51,7 +64,8 @@ export class SearchComponent
 
     updateCountries(countries: Array<number>): void
     {
-        console.log("Selected: " + countries)
+        this.countries = countries;
+        this.updateSearch(this.query);
     }
 
     countriesAsText(): Array<string>
@@ -66,5 +80,23 @@ export class SearchComponent
         }
 
         return result;
+    }
+
+    updateSearchSettings(hidePasswordGames: boolean, allowsHotJoin: boolean, friendsOnly: boolean): void
+    {
+        this.hidePasswordGames = hidePasswordGames;
+        this.allowsHotJoin = allowsHotJoin;
+        this.friendsOnly = friendsOnly;
+
+        this.updateSearch(this.query);
+    }
+
+    updateSearch(input: string): void
+    {
+        this.query = input;
+        console.log("Search query: " + input + ", hide password games: " + this.hidePasswordGames
+            + ", allows hot join: " + this.allowsHotJoin + ", friends only: " + this.friendsOnly + ", mode: "
+            + this.mode + ", countries: " + this.countries);
+        // TODO: Send search request to backend, for now generate dummy data
     }
 }

@@ -4,7 +4,8 @@
     </div>
     <div class="search_bar">
         <div class="main_options">
-            <input type="text" placeholder="{{ 'dashboard.search.search_hint' | translate }}"/>
+            <input #query type="text" placeholder="{{ 'dashboard.search.search_hint' | translate }}"
+                (input)="updateSearch(query.value)" (keydown.enter)="$event.preventDefault()"/>
             <app-dropdown [items]="gameModesAsText()" [default]="0" (selected)="updateMode($event)">
                 <span>{{ 'dashboard.search.mode' | translate }}</span>
             </app-dropdown>
@@ -13,10 +14,19 @@
             </app-drop-select>
         </div>
         <div class="advanced_options">
-            <app-checkbox> {{ 'dashboard.search.password' | translate }} </app-checkbox>
-            <app-checkbox> {{ 'dashboard.search.hot_join' | translate }} </app-checkbox>
-            <app-checkbox> {{ 'dashboard.search.friends' | translate }} </app-checkbox>
+            <app-checkbox (onChange)="updateSearchSettings($event, allowsHotJoin, friendsOnly)">
+                {{ 'dashboard.search.password' | translate }}
+            </app-checkbox>
+            <app-checkbox (onChange)="updateSearchSettings(hidePasswordGames, $event, friendsOnly)">
+                {{ 'dashboard.search.hot_join' | translate }}
+            </app-checkbox>
+            <app-checkbox (onChange)="updateSearchSettings(hidePasswordGames, allowsHotJoin, $event)">
+                {{ 'dashboard.search.friends' | translate }}
+            </app-checkbox>
         </div>
+    </div>
+    <div class="item_list">
+
     </div>
 </div>
 <div class="backdrop" [class.show]="showSearch()"></div>

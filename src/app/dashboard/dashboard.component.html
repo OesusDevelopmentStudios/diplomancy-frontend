@@ -1,5 +1,6 @@
 <main>
     <app-search [(showSearch)]="showSearch"/>
+    <app-settings [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
     <div class="titlebar">
         <h1 class="title">Diplomancy</h1>
         <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
@@ -23,5 +24,4 @@
         </div>
         <app-sidebar/>
     </div>
-    <app-settings [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
 </main>
