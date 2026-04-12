@@ -76,7 +76,10 @@
             "invalid_email": "Invalid email",
             "invalid_password": "Invalid password",
             "weak_password": "Password is too weak",
-            "mismatch_password": "Passwords do not match"
+            "mismatch_password": "Passwords do not match",
+            "caution_message": "Your account will be permanently deleted. This action cannot be undone. To proceed, please enter your password and click the \"Proceed\" button.",
+            "confirm_delete": "Proceed",
+            "cancel": "Cancel"
         },
         "item": {
             "phase": "Phase",

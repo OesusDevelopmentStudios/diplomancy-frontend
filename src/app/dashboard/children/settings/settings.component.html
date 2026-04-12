@@ -73,7 +73,7 @@
         </app-settings-item>
         <app-settings-item title="{{'dashboard.settings.danger' | translate}}" [(deployed)]="sectionDangerOpen">
             <div class="item">
-                <button class="danger_button" (click)="deleteAccount()">
+                <button class="danger_button" (click)="startAccountDeletion()">
                     {{'dashboard.settings.delete_account' | translate}}
                 </button>
             </div>
@@ -81,15 +81,19 @@
         <button (click)="logout()">{{'dashboard.settings.logout' | translate}}</button>
     </div>
     <div class="danger_section" [class.show]="confirmAccountDeletionAction">
-        <div class="user_caution">
-            Your account will be permanently deleted. This action cannot be undone. To proceed, please enter your password and click the continue button.
-        </div>
+        <div class="user_caution"> {{'dashboard.settings.caution_message' | translate}} </div>
         <label for="password">{{'dashboard.settings.password' | translate}}:</label>
-        <input type="password" id="password" [ngClass]="emailPasswordOk ? 'inputIdle' : 'inputFail'"
+        <input type="password" id="password" [ngClass]="removeAccountPasswordOk ? 'inputIdle' : 'inputFail'"
             [(ngModel)]="password"/>
+        <div [ngClass]="removeAccountPasswordOk ? 'hintIdle' : 'hintFail'">
+            {{ 'dashboard.settings.invalid_password' | translate }}
+        </div>
+        <div [ngClass]="removeAccountPasswordOk ? 'spacerIdle' : 'spacerFail'"></div>
         <div class="danger_buttons">
-            <button>Placeholder 1</button>
-            <button>Placeholder 2</button>
+            <button (click)="cancelAccountDeletion()">{{'dashboard.settings.cancel' | translate}}</button>
+            <button class="danger_button" (click)="removeAccount()">
+                {{'dashboard.settings.confirm_delete' | translate}}
+            </button>
         </div>
     </div>
 </div>

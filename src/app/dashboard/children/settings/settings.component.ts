@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit
     passwordOk: boolean = true;
     newPasswordOk: boolean = true;
     repeatPasswordOk: boolean = true;
+    removeAccountPasswordOk: boolean = true;
 
     newEmail: string = '';
     password: string = '';
@@ -54,6 +55,7 @@ export class SettingsComponent implements OnInit
                 this.sectionPasswordOpen = false;
                 this.sectionDangerOpen = false;
                 this.confirmAccountDeletionAction = false;
+                this.removeAccountPasswordOk = true;
             }
         });
     }
@@ -111,6 +113,7 @@ export class SettingsComponent implements OnInit
         this.sectionPasswordOpen = false;
         this.sectionDangerOpen = false;
         this.confirmAccountDeletionAction = false;
+        this.removeAccountPasswordOk = true;
     }
 
     logout(): void
@@ -178,8 +181,28 @@ export class SettingsComponent implements OnInit
         this.onLanguageChange.emit(lang);
     }
 
-    deleteAccount(): void
+    startAccountDeletion(): void
     {
         this.confirmAccountDeletionAction = true;
+    }
+
+    cancelAccountDeletion(): void
+    {
+        this.confirmAccountDeletionAction = false;
+        this.removeAccountPasswordOk = true;
+    }
+
+    removeAccount(): void
+    {
+        // TODO: Verify password
+        this.removeAccountPasswordOk = false;
+        if (!this.removeAccountPasswordOk)
+        {
+            return;
+        }
+        // TODO: Send deletion request to the backend, wipe all data and log out on success
+
+        // this.wipeCookies();
+        // this.logout();
     }
 }

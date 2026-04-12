@@ -28,10 +28,10 @@
 }
 
 .settings-wrapper.danger {
-    margin-left: -425px;
+    margin-left: -400px;
     margin-top: -195px;
     height: 340px;
-    width: 650px;
+    width: 750px;
     transition: height 0.3s ease, width 0.3s ease, margin 0.3s ease;
 }
 

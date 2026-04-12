@@ -76,7 +76,10 @@
             "invalid_email": "Niepoprawny email",
             "invalid_password": "Błędne hasło",
             "weak_password": "Hasło jest zbyt słabe",
-            "mismatch_password": "Hasła nie są takie same"
+            "mismatch_password": "Hasła nie są takie same",
+            "caution_message": "Twoje konto zostanie trwale usunięte. Tej czynności nie można cofnąć. Aby kontynuować, wpisz swoje hasło i kliknij przycisk \"Kontynuuj\".",
+            "confirm_delete": "Kontynuuj",
+            "cancel": "Anuluj"
         },
         "item": {
             "phase": "Faza",
