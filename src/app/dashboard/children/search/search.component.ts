@@ -8,6 +8,8 @@ import { DropSelectComponent } from '../../../common/drop-select/drop-select.com
 
 import { GameMode, gameModeAsText } from '../../../common/enums/common.enums.game-mode';
 import { Country, countryAsText } from '../../../common/enums/common.enums.country';
+import { SerachResult } from '../../data/dashboard.data.search-result';
+import { Phase } from '../../../common/enums/common.enums.phase';
 
 @Component({
     selector: 'app-search',
@@ -30,6 +32,14 @@ export class SearchComponent
     hidePasswordGames: boolean = false;
     allowsHotJoin: boolean = false;
     friendsOnly: boolean = false;
+
+    searchResults: Array<SerachResult> = [];
+
+    /* Dummy data for items, replace with actual data from server */
+    dummyCountries: Country[] = [Country.NOR, Country.SWE, Country.RUS, Country.GER, Country.FRA, Country.SPA,
+                                 Country.ITA, Country.GBR, Country.AUT_HUN, Country.OTT_EMP];
+    phases: Phase[] = [Phase.SETUP, Phase.MOVE, Phase.RETREAT, Phase.REINFORCE];
+    /* Dummy data end */
 
     constructor(private translate: TranslateService)
     {
@@ -98,5 +108,57 @@ export class SearchComponent
             + ", allows hot join: " + this.allowsHotJoin + ", friends only: " + this.friendsOnly + ", mode: "
             + this.mode + ", countries: " + this.countries);
         // TODO: Send search request to backend, for now generate dummy data
+        this.handleQueryResults();
+    }
+
+    handleQueryResults(): void
+    {
+        this.searchResults = [];
+
+        // TODO: Dummy search results, replace with actual data from server
+        for (let i = 0; i < 100; i++)
+        {
+            let availableCountriesCount = Math.floor(Math.random() * 10) % 3 + 1;
+            let availableCountries: Array<Country> = [];
+            for (let j = 0; j < availableCountriesCount; j++)
+            {
+                const country = this.ww1Countries[Math.floor(Math.random() * this.ww1Countries.length)];
+                if (!availableCountries.includes(country))
+                {
+                    availableCountries.push(country);
+                }
+            }
+
+            let hasFriends = Math.random() < 0.5;
+            let hasPassword = Math.random() < 0.5;
+            let phase = this.phases[Math.floor(Math.random() * this.phases.length)];
+
+            if (this.friendsOnly && !hasFriends)
+            {
+                continue;
+            }
+
+            if (this.hidePasswordGames && hasPassword)
+            {
+                continue;
+            }
+
+            if (!this.allowsHotJoin && phase != Phase.SETUP)
+            {
+                continue;
+            }
+
+            if (this.countries.length > 0 && !availableCountries.some(country => this.countries.includes(country)))
+            {
+                continue;
+            }
+
+            this.searchResults.push(
+                new SerachResult('game' + (i + 1), 'Game Name ' + (i + 1), GameMode.WW1, availableCountries, phase,
+                                 Math.floor(Math.random() * 10), hasPassword));
+        }
+        // Dummy data end TODO: Replace with fetching from server
+
+        console.log("Generated " + this.searchResults.length + " search results");
     }
 }

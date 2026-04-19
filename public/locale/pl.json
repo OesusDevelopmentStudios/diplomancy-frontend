@@ -32,6 +32,7 @@
             "ott_emp": "Imperium Osmańskie"
         },
         "phase": {
+            "setup": "Przygotowanie do gry",
             "move": "Ruch",
             "retreat": "Wycofanie",
             "reinforce": "Rozbudowa"

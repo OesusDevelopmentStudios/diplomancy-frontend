@@ -32,6 +32,7 @@
             "ott_emp": "Ottoman Empire"
         },
         "phase": {
+            "setup": "Setup",
             "move": "Move",
             "retreat": "Retreat",
             "reinforce": "Reinforce"
