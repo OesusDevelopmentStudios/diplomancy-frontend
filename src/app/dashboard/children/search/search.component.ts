@@ -132,6 +132,13 @@ export class SearchComponent
             let hasFriends = Math.random() < 0.5;
             let hasPassword = Math.random() < 0.5;
             let phase = this.phases[Math.floor(Math.random() * this.phases.length)];
+            let turn = (phase == Phase.SETUP) ? 0 : Math.floor(Math.random() * 10);
+
+            let gameName = 'Game Name ' + (i + 1);
+            if (!gameName.toLowerCase().includes(this.query.toLowerCase()))
+            {
+                continue;
+            }
 
             if (this.friendsOnly && !hasFriends)
             {
@@ -154,11 +161,21 @@ export class SearchComponent
             }
 
             this.searchResults.push(
-                new SerachResult('game' + (i + 1), 'Game Name ' + (i + 1), GameMode.WW1, availableCountries, phase,
-                                 Math.floor(Math.random() * 10), hasPassword));
+                new SerachResult('game' + (i + 1), gameName, GameMode.WW1, availableCountries, phase,
+                                 turn, hasPassword));
         }
         // Dummy data end TODO: Replace with fetching from server
 
         console.log("Generated " + this.searchResults.length + " search results");
+    }
+
+    isGameInProgress(phase: Phase): boolean
+    {
+        return phase != Phase.SETUP;
+    }
+
+    modeToStr(mode: GameMode): string
+    {
+        return gameModeAsText(mode, this.translate);
     }
 }

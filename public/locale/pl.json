@@ -48,7 +48,21 @@
             "countries": "Dostępne kraje",
             "password": "Ukryj gry z hasłem",
             "hot_join": "Pokaż gry w toku",
-            "friends": "Tylko gry ze znajomymi"
+            "friends": "Tylko gry ze znajomymi",
+            "found_single": "Znaleziono 1 grę",
+            "found_two": "Znaleziono 2 gry",
+            "found": "Znaleziono {{count}} gier",
+            "table": {
+                "name": "Nazwa",
+                "mode": "Tryb",
+                "countries": "Dostępne kraje",
+                "state": "Stan",
+                "turn": "Tura",
+                "password": "Ma hasło?",
+                "in_progress": "W toku",
+                "new": "Nowa",
+                "join": "Dołącz"
+            }
         },
         "sidebar": {
             "friends": "Znajomi",

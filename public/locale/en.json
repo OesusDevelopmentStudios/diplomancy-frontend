@@ -48,7 +48,21 @@
             "countries": "Available countries",
             "password": "Hide games with password",
             "hot_join": "Show games in progress",
-            "friends": "Games with friends only"
+            "friends": "Games with friends only",
+            "found_single": "Found 1 game",
+            "found_two": "Found 2 games",
+            "found": "Found {{count}} games",
+            "table": {
+                "name": "Name",
+                "mode": "Mode",
+                "countries": "Available countries",
+                "state": "State",
+                "turn": "Turn",
+                "password": "Has password?",
+                "in_progress": "In progress",
+                "new": "New",
+                "join": "Join"
+            }
         },
         "sidebar": {
             "friends": "Friends",

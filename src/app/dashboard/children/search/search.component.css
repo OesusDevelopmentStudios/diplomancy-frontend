@@ -81,3 +81,91 @@
     height: 35px;
     gap: 50px;
 }
+
+/* Table styling */
+.item_list {
+    border: #abbeaf 2px solid;
+    border-radius: 8px;
+    margin-top: 25px;
+    width: 92%;
+    height: 100%;
+    margin-right: 4%;
+    margin-left: 4%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.table_header{
+    display: flex;
+    width: 100%;
+    min-height: 55px;
+    background-color: #25252b;
+}
+
+.header_1, .header_2, .header_3, .header_4, .header_5, .header_6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 10px;
+    font-weight: bold;
+    border-right: 1px solid #abbeaf;
+}
+
+.header_1, .column_1 {
+    width: 30%;
+}
+
+.header_2, .column_2 {
+    width: 5%;
+}
+
+.header_3, .column_3 {
+    width: 5%;
+}
+
+.header_4, .column_4 {
+    width: 30%;
+}
+
+.header_5, .column_5 {
+    width: 10%;
+}
+
+.header_6, .column_6 {
+    width: 10%;
+}
+
+.column_7 {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.table_row {
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    max-height: 40px;
+    align-items: center;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.table_row.even_row {
+    background-color: #2a2a30;
+}
+
+.column_1, .column_2, .column_3, .column_4, .column_5, .column_6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 10px;
+    border-right: 1px solid #abbeaf;
+}
+
+.column_7 button{
+    margin: 0px;
+}

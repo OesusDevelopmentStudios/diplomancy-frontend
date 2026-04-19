@@ -26,12 +26,50 @@
         </div>
     </div>
     <div class="item_list">
+        <div class="table_header">
+            <div class="header_1">{{ 'dashboard.search.table.name' | translate }}</div>
+            <div class="header_2">{{ 'dashboard.search.table.mode' | translate }}</div>
+            <div class="header_3">{{ 'dashboard.search.table.turn' | translate }}</div>
+            <div class="header_4">{{ 'dashboard.search.table.countries' | translate }}</div>
+            <div class="header_5">{{ 'dashboard.search.table.state' | translate }}</div>
+            <div class="header_6">{{ 'dashboard.search.table.password' | translate }}</div>
+            <div class="header_7"></div>
+        </div>
         @for (item of searchResults; track $index)
         {
-            <div class="item">
-                {{ item.name }}
+            <div class="table_row" [class.even_row]="$index % 2 == 0">
+                <div class="column_1">{{ item.name }}</div>
+                <div class="column_2">{{ modeToStr(item.gameMode) }}</div>
+                <div class="column_3">{{ item.turn }}</div>
+                <div class="column_4">{{ item.availableCountries.length }}</div>
+                <div class="column_5">
+                    @if(isGameInProgress(item.phase))
+                    {
+                        {{ 'dashboard.search.table.in_progress' | translate }}
+                    }
+                    @else
+                    {
+                        {{ 'dashboard.search.table.new' | translate }}
+                    }
+                </div>
+                <div class="column_6">{{ item.hasPassword ? 'Yes' : 'No' }}</div>
+                <div class="column_7">
+                    <button>{{ 'dashboard.search.table.join' | translate }}</button>
+                </div>
             </div>
         }
     </div>
+    @if (searchResults.length == 1)
+    {
+        {{ 'dashboard.search.found_single' | translate:{ count: searchResults.length, xcount: searchResults.length } }}
+    }
+    @else if (searchResults.length == 2)
+    {
+        {{ 'dashboard.search.found_two' | translate:{ count: searchResults.length, xcount: searchResults.length } }}
+    }
+    @else
+    {
+        {{ 'dashboard.search.found' | translate:{ count: searchResults.length, xcount: searchResults.length } }}
+    }
 </div>
 <div class="backdrop" [class.show]="showSearch()"></div>
