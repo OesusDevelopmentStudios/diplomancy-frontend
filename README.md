@@ -1,7 +1,7 @@
 # diplomancy-frontend
 Frontend for Diplomancy browser game
 
-Backend: https://github.com/OesusDevelopmentStudios/diplomancy-backend *Note*: Please use dev branch
+Backend: https://github.com/OesusDevelopmentStudios/diplomancy-backend/tree/dev
 
 # Development
 To start the development enviroment:
