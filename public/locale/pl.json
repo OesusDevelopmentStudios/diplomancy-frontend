@@ -106,5 +106,9 @@
             "waiting": "Tura niekompletna",
             "ready": "Oczekiwanie na innych graczy"
         }
+    },
+    "not_found": {
+        "message": "Ups! Ta strona nie istnieje.",
+        "home": "Powrót do strony głównej"
     }
 }

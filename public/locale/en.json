@@ -106,5 +106,9 @@
             "waiting": "Turn not complete",
             "ready": "Waiting for other players"
         }
+    },
+    "not_found": {
+        "message": "Whoop! The page you are looking for does not exist.",
+        "home": "Return to the main page"
     }
 }

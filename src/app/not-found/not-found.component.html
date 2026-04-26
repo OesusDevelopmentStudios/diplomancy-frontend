@@ -1,3 +1,6 @@
 <main>
-    <p>not-found works!</p>
+    <div class="wrapper">
+        <h1>{{ 'not_found.message' | translate }}</h1>
+        <button (click)="returnHome()">{{ 'not_found.home' | translate }}</button>
+    </div>
 </main>
