@@ -2,9 +2,9 @@ import { Component, computed, effect, model } from '@angular/core';
 
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
-import { CheckboxComponent } from '../../../common/checkbox/checkbox.component';
-import { DropdownComponent } from '../../../common/dropdown/dropdown.component';
-import { DropSelectComponent } from '../../../common/drop-select/drop-select.component';
+import { CheckboxComponent } from '../../../common/components/checkbox/checkbox.component';
+import { DropdownComponent } from '../../../common/components/dropdown/dropdown.component';
+import { DropSelectComponent } from '../../../common/components/drop-select/drop-select.component';
 
 import { GameMode, gameModeAsText } from '../../../common/enums/common.enums.game-mode';
 import { Country, countryAsText, toFileName } from '../../../common/enums/common.enums.country';

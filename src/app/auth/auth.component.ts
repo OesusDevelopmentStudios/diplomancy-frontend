@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
 import { changeLanguage, decrypt, encrypt, loadLanguage, validateEmail } from '../common/common.helpers';
-import { CheckboxComponent } from '../common/checkbox/checkbox.component';
+import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
 
 @Component({
     selector: 'app-auth',

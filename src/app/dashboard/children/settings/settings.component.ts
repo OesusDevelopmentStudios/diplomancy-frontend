@@ -6,7 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { tokenStorageKey } from '../../../common/common.data';
 import { decrypt, validateEmail } from '../../../common/common.helpers';
 
-import { SwitchComponent } from '../../../common/switch/switch.component';
+import { SwitchComponent } from '../../../common/components/switch/switch.component';
 
 import { SettingsItemComponent } from '../settings-item/settings-item.component';
 import { FormsModule } from '@angular/forms';
