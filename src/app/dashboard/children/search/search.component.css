@@ -104,6 +104,11 @@
     background-color: #25252b;
 }
 
+.country_icon {
+    height: 20px;
+    margin-right: 5px;
+}
+
 .header_1, .header_2, .header_3, .header_4, .header_5, .header_6 {
     display: flex;
     align-items: center;
@@ -112,9 +117,8 @@
     font-weight: bold;
     border-right: 1px solid #abbeaf;
 }
-
 .header_1, .column_1 {
-    width: 30%;
+    width: 28%;
 }
 
 .header_2, .column_2 {
@@ -130,7 +134,7 @@
 }
 
 .header_5, .column_5 {
-    width: 10%;
+    width: 12%;
 }
 
 .header_6, .column_6 {

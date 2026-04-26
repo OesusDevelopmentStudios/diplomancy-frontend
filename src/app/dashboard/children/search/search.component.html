@@ -9,7 +9,8 @@
             <app-dropdown [items]="gameModesAsText()" [default]="0" (selected)="updateMode($event)">
                 <span>{{ 'dashboard.search.mode' | translate }}</span>
             </app-dropdown>
-            <app-drop-select [items]="countriesAsText()" (selected)="updateCountries($event)">
+            <app-drop-select [items]="countriesAsText()" (selected)="updateCountries($event)"
+                [text]="'dashboard.search.selcted' | translate">
                 <span>{{ 'dashboard.search.countries' | translate }}</span>
             </app-drop-select>
         </div>
@@ -41,7 +42,12 @@
                 <div class="column_1">{{ item.name }}</div>
                 <div class="column_2">{{ modeToStr(item.gameMode) }}</div>
                 <div class="column_3">{{ item.turn }}</div>
-                <div class="column_4">{{ item.availableCountries.length }}</div>
+                <div class="column_4">
+                    @for (country of item.availableCountries; track $index)
+                    {
+                        <img class="country_icon" src="{{ toCountryFlag(item.availableCountries[$index]) }}"/>
+                    }
+                </div>
                 <div class="column_5">
                     @if(isGameInProgress(item.phase))
                     {
@@ -52,7 +58,7 @@
                         {{ 'dashboard.search.table.new' | translate }}
                     }
                 </div>
-                <div class="column_6">{{ item.hasPassword ? 'Yes' : 'No' }}</div>
+                <div class="column_6">{{ item.hasPassword ? ('common.yes' | translate) : ('common.no' | translate) }}</div>
                 <div class="column_7">
                     <button>{{ 'dashboard.search.table.join' | translate }}</button>
                 </div>

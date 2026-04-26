@@ -13,6 +13,7 @@ export class DropSelectComponent implements OnChanges
 {
     items = input.required<Array<string>>();
     default = input<Array<number>>([]);
+    text = input<string>("{}");
     selected = output<Array<number>>();
 
     selectedElements: Array<number> = [];

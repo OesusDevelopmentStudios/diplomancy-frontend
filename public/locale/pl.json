@@ -15,6 +15,8 @@
         "decline": "Odrzuć"
     },
     "common": {
+        "yes": "Tak",
+        "no": "Nie",
         "game_mode": {
             "any": "Dowolny",
             "ww1": "WW1"
@@ -46,6 +48,7 @@
             "search_hint": "Nazwa gry",
             "mode": "Tryb gry",
             "countries": "Dostępne kraje",
+            "selcted": "Wybrano ({})",
             "password": "Ukryj gry z hasłem",
             "hot_join": "Pokaż gry w toku",
             "friends": "Tylko gry ze znajomymi",

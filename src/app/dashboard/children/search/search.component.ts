@@ -7,7 +7,7 @@ import { DropdownComponent } from '../../../common/dropdown/dropdown.component';
 import { DropSelectComponent } from '../../../common/drop-select/drop-select.component';
 
 import { GameMode, gameModeAsText } from '../../../common/enums/common.enums.game-mode';
-import { Country, countryAsText } from '../../../common/enums/common.enums.country';
+import { Country, countryAsText, toFileName } from '../../../common/enums/common.enums.country';
 import { SerachResult } from '../../data/dashboard.data.search-result';
 import { Phase } from '../../../common/enums/common.enums.phase';
 
@@ -177,5 +177,10 @@ export class SearchComponent
     modeToStr(mode: GameMode): string
     {
         return gameModeAsText(mode, this.translate);
+    }
+
+    toCountryFlag(id: number): string
+    {
+        return 'assets/flags/' + toFileName(id);
     }
 }
