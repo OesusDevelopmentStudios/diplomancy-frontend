@@ -5,7 +5,7 @@
         "username": "Username",
         "email": "Email",
         "password": "Password",
-        "username_taken": "Username taken",
+        "username_empty": "Username is empty",
         "invalid_username": "Invalid username",
         "invalid_email": "Invalid email",
         "invalid_password": "Invalid password",

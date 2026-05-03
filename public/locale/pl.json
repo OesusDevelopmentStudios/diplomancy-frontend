@@ -5,7 +5,7 @@
         "username": "Nazwa użytkownika",
         "email": "Email",
         "password": "Hasło",
-        "username_taken": "Nazwa użytkownika zajęta",
+        "username_empty": "Nazwa użytkownika jest pusta",
         "invalid_username": "Niepoprawna nazwa użytkownika",
         "invalid_email": "Niepoprawny email",
         "invalid_password": "Błędne hasło",

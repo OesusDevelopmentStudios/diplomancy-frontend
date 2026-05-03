@@ -47,6 +47,12 @@ export function validateEmail(email: string): boolean
     return regex.test(email);
 }
 
+export function validatePassword(password: string): boolean
+{
+    const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
+    return regex.test(password);
+}
+
 export async function encrypt(text : string): Promise<string>
 {
     const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -75,4 +81,9 @@ export async function decrypt(secret : string): Promise<string>
         console.error('Decryption error:', error);
         return '';
     }
+}
+
+export async function sleep(miliseconds: number): Promise<void> 
+{
+    return new Promise((resolve) => setTimeout(resolve, miliseconds));
 }

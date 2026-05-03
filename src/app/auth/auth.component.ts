@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
-import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { changeLanguage, decrypt, encrypt, loadLanguage, validateEmail } from '../common/common.helpers';
+import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from '../common/common.data';
+import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, validatePassword } from '../common/common.helpers';
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
 
 @Component({
@@ -30,6 +31,8 @@ export class AuthComponent implements OnInit
 
     showCookiesBanner: boolean = false;
     useCookies: boolean = false;
+
+    private http = inject(HttpClient);
 
     constructor(private translate : TranslateService, private router: Router)
     {
@@ -130,21 +133,32 @@ export class AuthComponent implements OnInit
         this.router.navigate(['/dashboard']);
     }
 
-    validateLogon(): void
+    async validateLogon(): Promise<void>
     {
-        this.usernameOk = true;
+        // Reset validation states
         this.emailOk = true;
         this.passwordOk = true;
+        this.usernameOk = true;
 
-        if (!validateEmail(this.inEmail))
+        // Allow UI to update before performing validation
+        await sleep(10);
+
+        // Validate all data
+        this.emailOk = validateEmail(this.inEmail);
+        this.passwordOk = validatePassword(this.inPassword);
+        this.usernameOk = this.inUsername.trim().length > 0;
+
+        // Return if any validation failed
+        if (!this.emailOk || !this.passwordOk || !this.usernameOk)
         {
-            this.emailOk = false;
             return;
         }
 
-        // Simulate invalid username and passowrd
-        this.usernameOk = false;
-        this.passwordOk = false;
+
+        const json = {"email": this.inEmail, "username": this.inUsername, "password": this.inPassword}
+        this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe((response) => {
+            console.log('Response:', response);
+        });
     }
 
     reset(): void
