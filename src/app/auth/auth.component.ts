@@ -154,10 +154,15 @@ export class AuthComponent implements OnInit
             return;
         }
 
+        this.logon()
+    }
 
+    logon()
+    {
         const json = {"email": this.inEmail, "username": this.inUsername, "password": this.inPassword}
-        this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe((response) => {
-            console.log('Response:', response);
+        this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe({
+            next(data) { console.log("Response: ", data) },
+            error(error) { console.error("Error: ", error) }
         });
     }
 
