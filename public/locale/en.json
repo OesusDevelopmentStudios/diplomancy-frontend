@@ -10,7 +10,7 @@
         "invalid_email": "Invalid email",
         "invalid_password": "Invalid password",
         "remember_me": "Remember me",
-        "cookies_info": "This website uses cookies to store token. Without accepting cookies you will be logged out when you close the browser.",
+        "cookies_info": "This website uses cookies to store the session token. Without accepting cookies you will be logged out when you close the browser.",
         "accept": "Accept",
         "decline": "Decline"
     },
