@@ -5,12 +5,22 @@
     filter: brightness(80%)
 }
 
-.tab_button.active_left, .tab_button.active_right {
+.tab_button.active {
     cursor: default;
 }
 
-.tab_button.disabled {
+.tab_button.disabled_left, .tab_button.disabled_right {
     cursor: pointer;
+}
+
+.tab_button.disabled_left {
+    border-top-left-radius: 8px;
+    background-color: #27272c;
+}
+
+.tab_button.disabled_right {
+    border-top-right-radius: 8px;
+    background-color: #27272c;
 }
 
 .login.active {
@@ -42,16 +52,6 @@
     padding-bottom: 10px;
     width: 50%;
     text-align: center;
-}
-
-.tab_button.active_left {
-    background-color: #27272c;
-    border-top-left-radius: 8px;
-}
-
-.tab_button.active_right {
-    background-color: #27272c;
-    border-top-right-radius: 8px;
 }
 
 .container {

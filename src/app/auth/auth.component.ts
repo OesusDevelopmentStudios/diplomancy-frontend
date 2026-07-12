@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from '../common/common.data';
 import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, validatePassword } from '../common/common.helpers';
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
+import { Response } from '../common/enums/common.enums.response';
 
 @Component({
     selector: 'app-auth',
@@ -23,6 +24,7 @@ export class AuthComponent implements OnInit
     usernameOk: boolean = true;
     emailOk: boolean = true;
     passwordOk: boolean = true;
+    serverOk: boolean = true;
 
     inUsername: string = '';
     inEmail: string = '';
@@ -31,6 +33,8 @@ export class AuthComponent implements OnInit
 
     showCookiesBanner: boolean = false;
     useCookies: boolean = false;
+
+    serverMessage = "Placeholder message"
 
     private http = inject(HttpClient);
 
@@ -161,9 +165,26 @@ export class AuthComponent implements OnInit
     {
         const json = {"email": this.inEmail, "username": this.inUsername, "password": this.inPassword}
         this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe({
-            next(data) { console.log("Response: ", data) },
-            error(error) { console.error("Error: ", error) }
+            next: (data) => { console.log("Response: ", data) },
+            error: (error) => { this.onLogonFailed(error.status) }
         });
+    }
+
+    onLogonFailed(status: number)
+    {
+        this.serverOk = false;
+
+        switch (status)
+        {
+            case Response.BAD_REQUEST: this.serverMessage = "Malformed request! Try again"; break;
+            case Response.CONFLICT: this.serverMessage = "An account allready exist for this email."; break;
+            default: this.serverMessage = "An unknown error has occured. Please try again later"; break;
+        }
+
+        // TODO:
+        // 1. Fix password parsing error. Should be more verbose (What exactly is missing?)
+        // 2. Switch to new result view afer pressing the logon button (server response/information about generated username)
+        // 3. Add username validation (Cannot contain #)
     }
 
     reset(): void
@@ -171,6 +192,7 @@ export class AuthComponent implements OnInit
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;
+        this.serverOk = true;
     }
 
     switchCookiesConsent(consent: boolean): void
