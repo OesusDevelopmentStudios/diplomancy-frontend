@@ -134,7 +134,7 @@ input {
 
 /* Cookies banner */
 
-.cookies_backdrop {
+.backdrop {
     position: fixed;
     inset: 0;
     bottom: 0;
@@ -145,7 +145,7 @@ input {
     z-index: 1900;
 }
 
-.cookies_backdrop.show {
+.backdrop.show {
     opacity: 1;
     pointer-events: auto;
 }

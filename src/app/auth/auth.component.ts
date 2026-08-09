@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from '../common/common.data';
 import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, validatePassword } from '../common/common.helpers';
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
-import { Response } from '../common/enums/common.enums.response';
+import { Response, toResponse } from '../common/enums/common.enums.response';
 
 @Component({
     selector: 'app-auth',
@@ -31,10 +31,12 @@ export class AuthComponent implements OnInit
     inPassword: string = '';
     rememberMe: boolean = false;
 
+    showBackdrop: boolean = false;
+    showNotification: boolean = false;
     showCookiesBanner: boolean = false;
     useCookies: boolean = false;
 
-    serverMessage = "Placeholder message"
+    username: string = '';
 
     private http = inject(HttpClient);
 
@@ -50,6 +52,7 @@ export class AuthComponent implements OnInit
         }
         else
         {
+            this.showBackdrop = true;
             this.showCookiesBanner = true;
         }
     }
@@ -148,9 +151,9 @@ export class AuthComponent implements OnInit
         await sleep(10);
 
         // Validate all data
-        this.emailOk = validateEmail(this.inEmail);
-        this.passwordOk = validatePassword(this.inPassword);
-        this.usernameOk = this.inUsername.trim().length > 0;
+        // this.emailOk = validateEmail(this.inEmail);
+        // this.passwordOk = validatePassword(this.inPassword);
+        // this.usernameOk = this.inUsername.trim().length > 0;
 
         // Return if any validation failed
         if (!this.emailOk || !this.passwordOk || !this.usernameOk)
@@ -165,20 +168,31 @@ export class AuthComponent implements OnInit
     {
         const json = {"email": this.inEmail, "username": this.inUsername, "password": this.inPassword}
         this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe({
-            next: (data) => { console.log("Response: ", data) },
-            error: (error) => { this.onLogonFailed(error.status) }
+            next: (data) => { this.onLogonSuccess(data) },
+            error: (error) => { this.onLogonFailed(toResponse(error.status)) }
         });
     }
 
-    onLogonFailed(status: number)
+    onLogonSuccess(data: any)
+    {
+        if (!data.hasOwnProperty("username"))
+        {
+            console.error("Invalid server response!")
+            return
+        }
+
+        this.username = data.username;
+    }
+
+    onLogonFailed(status: Response)
     {
         this.serverOk = false;
 
         switch (status)
         {
-            case Response.BAD_REQUEST: this.serverMessage = "Malformed request! Try again"; break;
-            case Response.CONFLICT: this.serverMessage = "An account allready exist for this email."; break;
-            default: this.serverMessage = "An unknown error has occured. Please try again later"; break;
+            // case Response.BAD_REQUEST: this.serverMessage = "Malformed request! Try again"; break;
+            // case Response.CONFLICT: this.serverMessage = "An account allready exist for this email."; break;
+            // default: this.serverMessage = "An unknown error has occured. Please try again later"; break;
         }
 
         // TODO:
@@ -200,5 +214,6 @@ export class AuthComponent implements OnInit
         this.useCookies = consent;
         localStorage.setItem('cookies_enabled', consent.toString());
         this.showCookiesBanner = false;
+        this.showBackdrop = false;
     }
 }
