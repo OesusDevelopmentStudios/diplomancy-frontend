@@ -43,7 +43,7 @@
                     <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="new_username"
                         name="new_username" [(ngModel)]="inUsername">
                     <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">
-                        {{ 'auth.username_empty' | translate }}
+                        {{ 'auth.invalid_username' | translate }}
                     </div>
                     <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="new_password">{{ 'auth.password' | translate }}:</label>

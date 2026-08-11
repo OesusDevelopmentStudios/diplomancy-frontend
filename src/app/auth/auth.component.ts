@@ -10,6 +10,7 @@ import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from
 import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, validatePassword } from '../common/common.helpers';
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
 import { Response, toResponse } from '../common/enums/common.enums.response';
+import { Reason, toReason } from './enums/auth.enums.reason';
 
 @Component({
     selector: 'app-auth',
@@ -169,7 +170,7 @@ export class AuthComponent implements OnInit
         const json = {"email": this.inEmail, "username": this.inUsername, "password": this.inPassword}
         this.http.post(`${apiBaseUrl}/auth/logon`, json).subscribe({
             next: (data) => { this.onLogonSuccess(data) },
-            error: (error) => { this.onLogonFailed(toResponse(error.status)) }
+            error: (data) => { this.onLogonFailed(toResponse(data.status), toReason(data.error.detail)) }
         });
     }
 
@@ -177,6 +178,7 @@ export class AuthComponent implements OnInit
     {
         if (!data.hasOwnProperty("username"))
         {
+            // TODO: handleAbnormalResponse()
             console.error("Invalid server response!")
             return
         }
@@ -184,12 +186,13 @@ export class AuthComponent implements OnInit
         this.username = data.username;
     }
 
-    onLogonFailed(status: Response)
+    onLogonFailed(status: Response, detail: Reason[])
     {
         this.serverOk = false;
 
         switch (status)
         {
+            case Response.BAD_REQUEST: this.handleBadRequest(detail); return;
             // case Response.BAD_REQUEST: this.serverMessage = "Malformed request! Try again"; break;
             // case Response.CONFLICT: this.serverMessage = "An account allready exist for this email."; break;
             // default: this.serverMessage = "An unknown error has occured. Please try again later"; break;
@@ -199,6 +202,23 @@ export class AuthComponent implements OnInit
         // 1. Fix password parsing error. Should be more verbose (What exactly is missing?)
         // 2. Switch to new result view afer pressing the logon button (server response/information about generated username)
         // 3. Add username validation (Cannot contain #)
+    }
+
+    handleBadRequest(reasons: Reason[])
+    {
+        if (!reasons.length)
+        {
+            // TODO: handleAbnormalResponse()
+        }
+
+        reasons.forEach((reason) => {
+            switch(reason)
+            {
+                case Reason.BAD_PASSWORD: this.passwordOk = false; break;
+                case Reason.BAD_USERNAME: this.usernameOk = false; break;
+                case Reason.BAD_EMAIL: this.emailOk = false; break;
+            }
+        })
     }
 
     reset(): void
