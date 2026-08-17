@@ -151,13 +151,10 @@ export class AuthComponent implements OnInit
         // Allow UI to update before performing validation
         await sleep(10);
 
-        // Validate all data
-        // this.emailOk = validateEmail(this.inEmail);
-        // this.passwordOk = validatePassword(this.inPassword);
-        // TODO: Username cannot contain "#"
-        // this.usernameOk = this.inUsername.trim().length > 0;
+        this.emailOk = validateEmail(this.inEmail);
+        this.passwordOk = validatePassword(this.inPassword);
+        this.usernameOk = this.inUsername.trim().length > 0 && !this.inUsername.includes("#");
 
-        // Return if any validation failed
         if (!this.emailOk || !this.passwordOk || !this.usernameOk)
         {
             return;
@@ -177,8 +174,7 @@ export class AuthComponent implements OnInit
 
     onLogonSuccess(data: any)
     {
-        // For now proceed directly to login. In the future I would like to add email confirmation system
-
+        // TODO: For now proceed directly to login. In the future I would like to add email confirmation system
         if (!data.hasOwnProperty("username"))
         {
             this.handleAbnormalResponse();
@@ -186,8 +182,8 @@ export class AuthComponent implements OnInit
         }
 
         this.username = data.username;
-
-        // TODO: Proceed to login.
+        this.showBackdrop = true;
+        this.showNotification = true;
     }
 
     onLogonFailed(status: Response, detail: Reason[])

@@ -83,8 +83,12 @@
         <img class="language_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
     </div>
     <div class="backdrop" [class.show]="showBackdrop"></div>
-    <div class="notification">
-
+    <div class="notification" [class.show]="showNotification">
+        <p> {{ 'auth.logon_success' | translate }} </p>
+        <p> {{ 'auth.username_notif' | translate }}: <b><i>{{ username }}</i></b> </p>
+        <button>
+            {{ 'auth.proceed_login' | translate }} ➜
+        </button>
     </div>
     <div class="banner" [class.show]="showCookiesBanner">
         {{ 'auth.cookies_info' | translate }}

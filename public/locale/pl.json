@@ -13,7 +13,10 @@
         "cookies_info": "Ta strona używa ciasteczek do przechowywania tokena sesji. Bez zakceptowania ciasteczek zostaniesz wylogowany po zamknięciu przeglądarki.",
         "accept": "Zaakceptuj",
         "decline": "Odrzuć",
-        "internal_server_error": "Niepoprawna odpowiedź serwera. Spróbuj później"
+        "internal_server_error": "Niepoprawna odpowiedź serwera. Spróbuj później",
+        "logon_success": "Nowe konto zostało pomyślnie utworzone",
+        "username_notif": "Twoja nazwa użytkownika to",
+        "proceed_login": "Kontynuj do logowania"
     },
     "common": {
         "yes": "Tak",

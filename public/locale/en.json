@@ -13,7 +13,10 @@
         "cookies_info": "This website uses cookies to store the session token. Without accepting cookies you will be logged out when you close the browser.",
         "accept": "Accept",
         "decline": "Decline",
-        "internal_server_error": "Invalid server response. Please try again later."
+        "internal_server_error": "Invalid server response. Please try again later.",
+        "logon_success": "New account has been successfully created",
+        "username_notif": "Your username is",
+        "proceed_login": "Continue to login"
     },
     "common": {
         "yes": "Yes",
