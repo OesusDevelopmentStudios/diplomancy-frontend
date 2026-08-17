@@ -5,27 +5,10 @@
     filter: brightness(80%)
 }
 
-.tab_button.active {
-    cursor: default;
-}
-
-.tab_button.disabled_left, .tab_button.disabled_right {
-    cursor: pointer;
-}
-
-.tab_button.disabled_left {
-    border-top-left-radius: 8px;
-    background-color: #27272c;
-}
-
-.tab_button.disabled_right {
-    border-top-right-radius: 8px;
-    background-color: #27272c;
-}
-
 .login.active {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .login.disabled {
@@ -35,6 +18,7 @@
 .logon.active {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .logon.disabled {
@@ -47,11 +31,43 @@
     font-family: mil-font;
 }
 
-.tab_button {
+.tab_button_left, .tab_button_right {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 50%;
     text-align: center;
+    background-size: 200% 100%;
+    transition: background-position 500ms;
+}
+
+.tab_button_left {
+    border-top-left-radius: 8px;
+    background-image: linear-gradient(to right, #27272c 50%, transparent 50%);
+    background-position: -100% 0;
+
+}
+
+.tab_button_right {
+    border-top-right-radius: 8px;
+    background-image: linear-gradient(to left, transparent 50%, #27272c 50%);
+    background-position: 100% 0;
+}
+
+.tab_button_left.active, .tab_button_right.active {
+    cursor: default;
+}
+
+.tab_button_left.disabled, .tab_button_right.disabled {
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.tab_button_left.disabled {
+    background-position: 0 -100%;
+}
+
+.tab_button_right.disabled {
+    background-position: 0 100%;
 }
 
 .container {
@@ -64,11 +80,14 @@
 
 .mode_wrapper {
     padding: 20px;
+    height: 280px;
 }
 
 .nav {
     display: flex;
     flex-direction: row;
+    height: 45px;
+    width: 100%;
     justify-content: space-evenly;
 }
 
@@ -93,19 +112,39 @@ input {
     75% { transform: translateX(-4px); }
 }
 
+.sb_wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+
+}
+
+.submit_button {
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
 .hintIdle, .spacerFail {
     display: none
 }
 
-.hintFail {
+.hintFail, .hintButtonFail {
     display: block;
     color: #aa1616;
     font-size: 12px;
+}
+
+.hintFail {
     align-self: end;
 }
 
+.hintButtonFail {
+    align-self: center;
+}
+
 .spacerIdle {
-    height: 16px;
+    height: 17px;
     display: block;
 }
 
@@ -180,6 +219,8 @@ input {
 /* Colours */
 
 .main_dialoge {
+    width: 400px;
+    height: 325px;
     background-color: #313136;
     border: 1px solid #abbeaf;
     border-radius: 8px;

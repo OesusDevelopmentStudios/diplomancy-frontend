@@ -32,6 +32,7 @@ export class GameComponent implements OnInit
             this.validateToken(decryptedToken);
         });
     }
+
     validateToken(token: string): void
     {
         // TODO: Validate token with server

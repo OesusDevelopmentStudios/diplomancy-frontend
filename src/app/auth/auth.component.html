@@ -3,17 +3,17 @@
         <h1 class="title">Diplomancy</h1>
         <div class="main_dialoge">
             <div class="nav">
-                <div class="tab_button" [ngClass]="mode == 'login' ? 'active' : 'disabled_left'"
-                        (click)="switchMode('login')">
+                <div class="tab_button_left" [ngClass]="mode == Mode.LOGIN ? 'active' : 'disabled'"
+                        (click)="switchMode(Mode.LOGIN)">
                     {{ 'auth.login' | translate }}
                 </div>
-                <div class="tab_button" [ngClass]="mode == 'logon' ? 'active' : 'disabled_right'"
-                        (click)="switchMode('logon')">
+                <div class="tab_button_right" [ngClass]="mode == Mode.LOGON ? 'active' : 'disabled'"
+                        (click)="switchMode(Mode.LOGON)">
                     {{ 'auth.logon' | translate }}
                 </div>
             </div>
             <div class="mode_wrapper">
-                <div class="login" [ngClass]="mode == 'login' ? 'active' : 'disabled'">
+                <div class="login" [ngClass]="mode == Mode.LOGIN ? 'active' : 'disabled'">
                     <label for="username">{{ 'auth.username' | translate }}/{{ 'auth.email' | translate }}:</label>
                     <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="username" name="username"
                         [(ngModel)]="inUsername">
@@ -29,14 +29,27 @@
                     </div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <app-checkbox (onChange)="rememberMe = $event"> {{ 'auth.remember_me' | translate }} </app-checkbox>
-                    <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
+                    <div class="sb_wrapper">
+                        <button class="submit_button" (click)="validateLogin()">{{ 'auth.login' | translate }}</button>
+                        <div [ngClass]="serverOk ? 'hintIdle' : 'hintButtonFail'">
+                            {{ 'auth.internal_server_error' | translate}}
+                        </div>
+                        <div [ngClass]="serverOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    </div>
                 </div>
-                <div class="logon" [ngClass]="mode == 'logon' ? 'active' : 'disabled'">
+                <div class="logon" [ngClass]="mode == Mode.LOGON ? 'active' : 'disabled'">
                     <label for="new_email">{{ 'auth.email' | translate}}:</label>
                     <input [ngClass]="emailOk ? 'inputIdle' : 'inputFail'" type="email" id="new_email" name="new_email"
                         [(ngModel)]="inEmail">
                     <div [ngClass]="emailOk ? 'hintIdle' : 'hintFail'">
-                        {{ 'auth.invalid_email' | translate }}
+                        @if (emailReason === EmailReason.GENERIC)
+                        {
+                            {{ 'auth.invalid_email' | translate }}
+                        }
+                        @else
+                        {
+                            {{ 'auth.email_taken' | translate }}
+                        }
                     </div>
                     <div [ngClass]="emailOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="new_username">{{ 'auth.username' | translate }}:</label>
@@ -53,7 +66,13 @@
                         {{ 'auth.invalid_password' | translate }}
                     </div>
                     <div [ngClass]="passwordOk ? 'spacerIdle' : 'spacerFail'"></div>
-                    <button class="submit_button" (click)="validateLogon()">{{ 'auth.logon' | translate }}</button>
+                    <div class="sb_wrapper">
+                        <button class="submit_button" (click)="validateLogon()">{{ 'auth.logon' | translate }}</button>
+                        <div [ngClass]="serverOk ? 'hintIdle' : 'hintButtonFail'">
+                            {{ 'auth.internal_server_error' | translate}}
+                        </div>
+                        <div [ngClass]="serverOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    </div>
                 </div>
             </div>
         </div>

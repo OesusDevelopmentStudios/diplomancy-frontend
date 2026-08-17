@@ -11,6 +11,8 @@ import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, v
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
 import { Response, toResponse } from '../common/enums/common.enums.response';
 import { Reason, toReason } from './enums/auth.enums.reason';
+import { EmailReason } from './enums/auth.enums.email-reason';
+import { Mode } from './enums/auth.enums.mode';
 
 @Component({
     selector: 'app-auth',
@@ -21,7 +23,12 @@ import { Reason, toReason } from './enums/auth.enums.reason';
 
 export class AuthComponent implements OnInit
 {
-    mode: string = 'login';
+    EmailReason = EmailReason;
+    Mode = Mode;
+
+    mode: Mode = Mode.LOGIN;
+    emailReason: EmailReason = EmailReason.GENERIC;
+
     usernameOk: boolean = true;
     emailOk: boolean = true;
     passwordOk: boolean = true;
@@ -88,19 +95,17 @@ export class AuthComponent implements OnInit
         changeLanguage(this.translate, lang);
     }
 
-    switchMode(mode: string): void
+    switchMode(mode: Mode): void
     {
         if (this.mode === mode) return;
 
-        this.usernameOk = true;
-        this.emailOk = true;
-        this.passwordOk = true;
+        this.reset();
         this.mode = mode;
     }
 
     onKeyPress(): void
     {
-        if (this.mode === 'login')
+        if (this.mode === Mode.LOGIN)
         {
             this.validateLogin();
         }
@@ -112,9 +117,7 @@ export class AuthComponent implements OnInit
 
     validateLogin(): void
     {
-        this.usernameOk = true;
-        this.emailOk = true;
-        this.passwordOk = true;
+        this.reset()
 
         // TODO: Placeholder for real authentication logic
         console.log('Remember me:', this.rememberMe);
@@ -143,10 +146,7 @@ export class AuthComponent implements OnInit
 
     async validateLogon(): Promise<void>
     {
-        // Reset validation states
-        this.emailOk = true;
-        this.passwordOk = true;
-        this.usernameOk = true;
+        this.reset()
 
         // Allow UI to update before performing validation
         await sleep(10);
@@ -154,6 +154,7 @@ export class AuthComponent implements OnInit
         // Validate all data
         // this.emailOk = validateEmail(this.inEmail);
         // this.passwordOk = validatePassword(this.inPassword);
+        // TODO: Username cannot contain "#"
         // this.usernameOk = this.inUsername.trim().length > 0;
 
         // Return if any validation failed
@@ -176,39 +177,35 @@ export class AuthComponent implements OnInit
 
     onLogonSuccess(data: any)
     {
+        // For now proceed directly to login. In the future I would like to add email confirmation system
+
         if (!data.hasOwnProperty("username"))
         {
-            // TODO: handleAbnormalResponse()
-            console.error("Invalid server response!")
+            this.handleAbnormalResponse();
             return
         }
 
         this.username = data.username;
+
+        // TODO: Proceed to login.
     }
 
     onLogonFailed(status: Response, detail: Reason[])
     {
-        this.serverOk = false;
-
         switch (status)
         {
             case Response.BAD_REQUEST: this.handleBadRequest(detail); return;
-            // case Response.BAD_REQUEST: this.serverMessage = "Malformed request! Try again"; break;
-            // case Response.CONFLICT: this.serverMessage = "An account allready exist for this email."; break;
-            // default: this.serverMessage = "An unknown error has occured. Please try again later"; break;
+            case Response.CONFLICT: this.handleConflict(); return;
+            default: this.handleAbnormalResponse();
         }
-
-        // TODO:
-        // 1. Fix password parsing error. Should be more verbose (What exactly is missing?)
-        // 2. Switch to new result view afer pressing the logon button (server response/information about generated username)
-        // 3. Add username validation (Cannot contain #)
     }
 
     handleBadRequest(reasons: Reason[])
     {
         if (!reasons.length)
         {
-            // TODO: handleAbnormalResponse()
+            this.handleAbnormalResponse()
+            return;
         }
 
         reasons.forEach((reason) => {
@@ -221,8 +218,20 @@ export class AuthComponent implements OnInit
         })
     }
 
+    handleConflict()
+    {
+        this.emailReason = EmailReason.TAKEN;
+        this.emailOk = false;
+    }
+
+    handleAbnormalResponse()
+    {
+        this.serverOk = false;
+    }
+
     reset(): void
     {
+        this.emailReason = EmailReason.GENERIC;
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;

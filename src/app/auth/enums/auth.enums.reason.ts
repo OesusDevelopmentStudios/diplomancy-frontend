@@ -1,8 +1,8 @@
 enum Reason
 {
-    BAD_PASSWORD = 0,
-    BAD_USERNAME = 1,
-    BAD_EMAIL = 2
+    BAD_PASSWORD,
+    BAD_USERNAME,
+    BAD_EMAIL
 }
 
 function toReason(raw: any[]): Reason[]

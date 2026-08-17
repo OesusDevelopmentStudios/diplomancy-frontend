@@ -7,11 +7,13 @@
         "password": "Hasło",
         "invalid_username": "Niepoprawna nazwa użytkownika",
         "invalid_email": "Niepoprawny email",
+        "email_taken": "Adres już jest w użyciu.",
         "invalid_password": "Błędne hasło",
         "remember_me": "Zapamiętaj mnie",
         "cookies_info": "Ta strona używa ciasteczek do przechowywania tokena sesji. Bez zakceptowania ciasteczek zostaniesz wylogowany po zamknięciu przeglądarki.",
         "accept": "Zaakceptuj",
-        "decline": "Odrzuć"
+        "decline": "Odrzuć",
+        "internal_server_error": "Niepoprawna odpowiedź serwera. Spróbuj później"
     },
     "common": {
         "yes": "Tak",
