@@ -14,13 +14,13 @@
             </div>
             <div class="mode_wrapper">
                 <div class="login" [ngClass]="mode == Mode.LOGIN ? 'active' : 'disabled'">
-                    <label for="username">{{ 'auth.username' | translate }}/{{ 'auth.email' | translate }}:</label>
-                    <input [ngClass]="usernameOk ? 'inputIdle' : 'inputFail'" type="text" id="username" name="username"
-                        [(ngModel)]="inUsername">
-                    <div [ngClass]="usernameOk ? 'hintIdle' : 'hintFail'">
-                        {{ 'auth.invalid_username' | translate }}
+                    <label for="user_id">{{ 'auth.username' | translate }}/{{ 'auth.email' | translate }}:</label>
+                    <input [ngClass]="userIdOk ? 'inputIdle' : 'inputFail'" type="text" id="user_id" name="user_id"
+                        [(ngModel)]="inUserId">
+                    <div [ngClass]="userIdOk ? 'hintIdle' : 'hintFail'">
+                        {{ 'auth.invalid_user_id' | translate }}
                     </div>
-                    <div [ngClass]="usernameOk ? 'spacerIdle' : 'spacerFail'"></div>
+                    <div [ngClass]="userIdOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="password">{{ 'auth.password' | translate }}:</label>
                     <input [ngClass]="passwordOk ? 'inputIdle' : 'inputFail'" type="password" id="password"
                         name="password" [(ngModel)]="inPassword">

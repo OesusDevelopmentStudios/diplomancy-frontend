@@ -38,11 +38,13 @@ export class AuthComponent implements OnInit
     mode: Mode = Mode.LOGIN;
     emailReason: EmailReason = EmailReason.GENERIC;
 
+    userIdOk: boolean = true;
     usernameOk: boolean = true;
     emailOk: boolean = true;
     passwordOk: boolean = true;
     serverOk: boolean = true;
 
+    inUserId: string = '';
     inUsername: string = '';
     inEmail: string = '';
     inPassword: string = '';
@@ -131,7 +133,7 @@ export class AuthComponent implements OnInit
         this.clearInput();
         this.showBackdrop = false;
         this.showNotification = false;
-        this.inUsername = this.username;
+        this.inUserId = this.username;
     }
 
     async validateLogin(): Promise<void>
@@ -140,16 +142,18 @@ export class AuthComponent implements OnInit
 
         // Allow UI to update before performing validation
         await sleep(10);
-        if (this.inUsername.includes("#"))
+        if (this.inUserId.includes("#"))
         {
-            this.usernameOk = validateUsername(this.inUsername)
+            this.userIdOk = validateUsername(this.inUserId)
         }
         else
         {
-            this.usernameOk = validateEmail(this.inUsername)
+            this.userIdOk = validateEmail(this.inUserId)
         }
 
-        if (!this.usernameOk)
+        this.passwordOk = this.inPassword.length != 0
+
+        if (!this.userIdOk || !this.passwordOk)
         {
             return;
         }
@@ -169,7 +173,7 @@ export class AuthComponent implements OnInit
 
     login(): void
     {
-        const json = {"id": this.inUsername, "password": this.inPassword, "remember": this.rememberMe }
+        const json = {"id": this.inUserId, "password": this.inPassword, "remember": this.rememberMe }
         this.http.post(`${apiBaseUrl}/auth/login`, json).subscribe({
             next: (data) => { this.onLoginSuccess(data); },
             error: (data) => { console.log("Error: " + data); }
@@ -257,6 +261,8 @@ export class AuthComponent implements OnInit
                 case Reason.BAD_PASSWORD: this.passwordOk = false; break;
                 case Reason.BAD_USERNAME: this.usernameOk = false; break;
                 case Reason.BAD_EMAIL: this.emailOk = false; break;
+                case Reason.BAD_USER_ID: this.userIdOk = false; break;
+                // case Reason.MISSING_REMEMBER_VALUE: TODO: Handle
             }
         })
     }
@@ -275,6 +281,7 @@ export class AuthComponent implements OnInit
     reset(): void
     {
         this.emailReason = EmailReason.GENERIC;
+        this.userIdOk = true;
         this.usernameOk = true;
         this.emailOk = true;
         this.passwordOk = true;
@@ -283,6 +290,7 @@ export class AuthComponent implements OnInit
 
     clearInput()
     {
+        this.inUserId = '';
         this.inUsername = '';
         this.inPassword = '';
         this.inEmail = '';

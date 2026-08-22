@@ -6,6 +6,7 @@
         "email": "Email",
         "password": "Hasło",
         "invalid_username": "Niepoprawna nazwa użytkownika",
+        "invalid_user_id": "Nieprawidłowa nazwa użytkownika lub adres e-mail",
         "invalid_email": "Niepoprawny email",
         "email_taken": "Adres już jest w użyciu.",
         "invalid_password": "Błędne hasło",

@@ -5,6 +5,7 @@
         "username": "Username",
         "email": "Email",
         "password": "Password",
+        "invalid_user_id": "Not a valid username or email",
         "invalid_username": "Invalid username",
         "invalid_email": "Invalid email",
         "email_taken": "An account already exists for this email address",
