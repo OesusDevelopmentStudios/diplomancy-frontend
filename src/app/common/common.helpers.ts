@@ -47,6 +47,22 @@ export function validateEmail(email: string): boolean
     return regex.test(email);
 }
 
+export function validateUsername(username: string): boolean
+{
+    if (!username.includes("#"))
+    {
+        return false;
+    }
+
+    var parts: string[] = username.split("#");
+    if (parts.length != 2 || parts[1].length != 4)
+    {
+        return false
+    }
+
+    return true;
+}
+
 export function validatePassword(password: string): boolean
 {
     const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
@@ -83,7 +99,7 @@ export async function decrypt(secret : string): Promise<string>
     }
 }
 
-export async function sleep(miliseconds: number): Promise<void> 
+export async function sleep(miliseconds: number): Promise<void>
 {
     return new Promise((resolve) => setTimeout(resolve, miliseconds));
 }

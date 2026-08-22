@@ -7,7 +7,16 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
 import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from '../common/common.data';
-import { changeLanguage, decrypt, encrypt, loadLanguage, sleep, validateEmail, validatePassword } from '../common/common.helpers';
+import {
+    changeLanguage,
+    decrypt,
+    encrypt,
+    loadLanguage,
+    sleep,
+    validateEmail,
+    validatePassword,
+    validateUsername
+} from '../common/common.helpers';
 import { CheckboxComponent } from '../common/components/checkbox/checkbox.component';
 import { Response, toResponse } from '../common/enums/common.enums.response';
 import { Reason, toReason } from './enums/auth.enums.reason';
@@ -125,24 +134,47 @@ export class AuthComponent implements OnInit
         this.inUsername = this.username;
     }
 
-    validateLogin(): void
+    async validateLogin(): Promise<void>
     {
         this.reset()
 
+        // Allow UI to update before performing validation
+        await sleep(10);
+        if (this.inUsername.includes("#"))
+        {
+            this.usernameOk = validateUsername(this.inUsername)
+        }
+        else
+        {
+            this.usernameOk = validateEmail(this.inUsername)
+        }
+
+        if (!this.usernameOk)
+        {
+            return;
+        }
+
+        this.login();
+
         // TODO: Placeholder for real authentication logic
-        console.log('Remember me:', this.rememberMe);
-        console.log('Logging in with', this.inUsername, this.inPassword);
+        // console.log('Remember me:', this.rememberMe);
+        // console.log('Logging in with', this.inUsername, this.inPassword);
 
         // TODO: Get token from server
-        const token = 'PLACEHOLDER_AUTH_TOKEN';
-        encrypt(token).then(encryptedToken => {
-            this.login(encryptedToken);
-        });
+        // const token = 'PLACEHOLDER_AUTH_TOKEN';
+        // encrypt(token).then(encryptedToken => {
+        //     this.login(encryptedToken);
+        // });
     }
 
-    login(token: string): void
+    login(): void
     {
-        if (this.rememberMe && this.useCookies)
+        const json = {"id": this.inUsername, "password": this.inPassword, "remember": this.rememberMe }
+        this.http.post(`${apiBaseUrl}/auth/login`, json).subscribe({
+            next: (data) => { this.onLoginSuccess(data); },
+            error: (data) => { console.log("Error: " + data); }
+        })
+        /*if (this.rememberMe && this.useCookies)
         {
             const date = new Date();
             date.setDate(date.getDate() + 30);
@@ -151,7 +183,12 @@ export class AuthComponent implements OnInit
         }
 
         sessionStorage.setItem(tokenStorageKey, token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);*/
+    }
+
+    onLoginSuccess(data: any)
+    {
+        console.log("OK: " + data);
     }
 
     async validateLogon(): Promise<void>
