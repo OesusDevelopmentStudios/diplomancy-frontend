@@ -80,13 +80,13 @@
     <div class="footer">
         <img class="language_button" src="assets/pl.png" (click)="changeLanguage('pl')"/>
         <div class="lang_spacer"></div>
-        <img class="language_button" src="assets/uk.png"(click)="changeLanguage('en')"/>
+        <img class="language_button" src="assets/uk.png" (click)="changeLanguage('en')"/>
     </div>
     <div class="backdrop" [class.show]="showBackdrop"></div>
     <div class="notification" [class.show]="showNotification">
         <p> {{ 'auth.logon_success' | translate }} </p>
         <p> {{ 'auth.username_notif' | translate }}: <b><i>{{ username }}</i></b> </p>
-        <button>
+        <button (click)="proceedToLogin()">
             {{ 'auth.proceed_login' | translate }} ➜
         </button>
     </div>

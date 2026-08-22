@@ -100,6 +100,7 @@ export class AuthComponent implements OnInit
         if (this.mode === mode) return;
 
         this.reset();
+        this.clearInput();
         this.mode = mode;
     }
 
@@ -113,6 +114,15 @@ export class AuthComponent implements OnInit
         {
             this.validateLogon();
         }
+    }
+
+    proceedToLogin()
+    {
+        this.mode = Mode.LOGIN
+        this.clearInput();
+        this.showBackdrop = false;
+        this.showNotification = false;
+        this.inUsername = this.username;
     }
 
     validateLogin(): void
@@ -232,6 +242,13 @@ export class AuthComponent implements OnInit
         this.emailOk = true;
         this.passwordOk = true;
         this.serverOk = true;
+    }
+
+    clearInput()
+    {
+        this.inUsername = '';
+        this.inPassword = '';
+        this.inEmail = '';
     }
 
     switchCookiesConsent(consent: boolean): void
