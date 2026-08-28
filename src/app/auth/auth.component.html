@@ -18,7 +18,14 @@
                     <input [ngClass]="userIdOk ? 'inputIdle' : 'inputFail'" type="text" id="user_id" name="user_id"
                         [(ngModel)]="inUserId">
                     <div [ngClass]="userIdOk ? 'hintIdle' : 'hintFail'">
-                        {{ 'auth.invalid_user_id' | translate }}
+                        @if (userIdReason === UserIdReason.BAD_USERNAME)
+                        {
+                            {{ 'auth.invalid_user_id' | translate }}
+                        }
+                        @else
+                        {
+                            {{ 'auth.account_not_exists' | translate }}
+                        }
                     </div>
                     <div [ngClass]="userIdOk ? 'spacerIdle' : 'spacerFail'"></div>
                     <label for="password">{{ 'auth.password' | translate }}:</label>

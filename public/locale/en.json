@@ -1,5 +1,6 @@
 {
     "auth": {
+        "account_not_exists": "Account does not not exist",
         "login": "Login",
         "logon": "Logon",
         "username": "Username",

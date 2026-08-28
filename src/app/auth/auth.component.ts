@@ -21,6 +21,7 @@ import { CheckboxComponent } from '../common/components/checkbox/checkbox.compon
 import { Response, toResponse } from '../common/enums/common.enums.response';
 import { Reason, toReason } from './enums/auth.enums.reason';
 import { EmailReason } from './enums/auth.enums.email-reason';
+import { UserIdReason } from './enums/auth.enums.user_id-reason';
 import { Mode } from './enums/auth.enums.mode';
 
 @Component({
@@ -33,10 +34,12 @@ import { Mode } from './enums/auth.enums.mode';
 export class AuthComponent implements OnInit
 {
     EmailReason = EmailReason;
+    UserIdReason = UserIdReason;
     Mode = Mode;
 
     mode: Mode = Mode.LOGIN;
     emailReason: EmailReason = EmailReason.GENERIC;
+    userIdReason: UserIdReason = UserIdReason.BAD_USERNAME;
 
     userIdOk: boolean = true;
     usernameOk: boolean = true;
@@ -159,16 +162,6 @@ export class AuthComponent implements OnInit
         }
 
         this.login();
-
-        // TODO: Placeholder for real authentication logic
-        // console.log('Remember me:', this.rememberMe);
-        // console.log('Logging in with', this.inUsername, this.inPassword);
-
-        // TODO: Get token from server
-        // const token = 'PLACEHOLDER_AUTH_TOKEN';
-        // encrypt(token).then(encryptedToken => {
-        //     this.login(encryptedToken);
-        // });
     }
 
     login(): void
@@ -176,23 +169,46 @@ export class AuthComponent implements OnInit
         const json = {"id": this.inUserId, "password": this.inPassword, "remember": this.rememberMe }
         this.http.post(`${apiBaseUrl}/auth/login`, json).subscribe({
             next: (data) => { this.onLoginSuccess(data); },
-            error: (data) => { console.log("Error: " + data); }
+            error: (data) => { this.onLoginFailed(toResponse(data.status), toReason(data.error.detail)) }
         })
-        /*if (this.rememberMe && this.useCookies)
-        {
-            const date = new Date();
-            date.setDate(date.getDate() + 30);
-            console.log('Token will expire on:', date.toUTCString());
-            document.cookie = `token=${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
-        }
-
-        sessionStorage.setItem(tokenStorageKey, token);
-        this.router.navigate(['/dashboard']);*/
     }
 
     onLoginSuccess(data: any)
     {
-        console.log("OK: " + data);
+        if (!data.hasOwnProperty("token"))
+        {
+            this.handleAbnormalResponse();
+            return
+        }
+
+        encrypt(data.token).then(token => {
+            if (this.rememberMe && this.useCookies)
+            {
+                const date = new Date();
+                date.setDate(date.getDate() + 30);
+                console.log('Token will expire on:', date.toUTCString());
+                document.cookie = `token=${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
+            }
+
+            sessionStorage.setItem(tokenStorageKey, token);
+            this.router.navigate(['/dashboard']);
+        })
+    }
+
+    onLoginFailed(status: Response, detail: Reason[]): void
+    {
+        switch (status)
+        {
+            case Response.BAD_REQUEST: this.handleBadRequest(detail); return;
+            case Response.NOT_FOUND:
+                this.userIdReason = UserIdReason.NOT_EXISTS;
+                this.userIdOk = false;
+                return;
+            case Response.UNAUTHORIZED:
+                this.passwordOk = false;
+                return;
+            default: this.handleAbnormalResponse();
+        }
     }
 
     async validateLogon(): Promise<void>
@@ -262,7 +278,9 @@ export class AuthComponent implements OnInit
                 case Reason.BAD_USERNAME: this.usernameOk = false; break;
                 case Reason.BAD_EMAIL: this.emailOk = false; break;
                 case Reason.BAD_USER_ID: this.userIdOk = false; break;
-                // case Reason.MISSING_REMEMBER_VALUE: TODO: Handle
+                case Reason.MISSING_REMEMBER_VALUE:
+                    console.error("Server reported incomplete message!")
+                    this.handleAbnormalResponse();
             }
         })
     }
@@ -281,6 +299,7 @@ export class AuthComponent implements OnInit
     reset(): void
     {
         this.emailReason = EmailReason.GENERIC;
+        this.userIdReason = UserIdReason.BAD_USERNAME;
         this.userIdOk = true;
         this.usernameOk = true;
         this.emailOk = true;
