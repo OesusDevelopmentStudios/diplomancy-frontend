@@ -66,9 +66,10 @@ export class DashboardComponent implements OnInit
     {
         loadLanguage(this.translate);
         const token = sessionStorage.getItem(tokenStorageKey)
-        decrypt(token ? token : '').then(decryptedToken => {
-            this.validateToken(decryptedToken);
-        });
+        // TODO:
+        // decrypt(token ? token : '').then(decryptedToken => {
+        //     this.validateToken(decryptedToken);
+        // });
     }
 
     manageSettings(): void

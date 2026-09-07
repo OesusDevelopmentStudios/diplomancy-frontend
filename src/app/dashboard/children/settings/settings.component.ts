@@ -63,9 +63,10 @@ export class SettingsComponent implements OnInit
     ngOnInit()
     {
         const token = sessionStorage.getItem(tokenStorageKey)
-        decrypt(token ? token : '').then(decryptedToken => {
-            this.token = decryptedToken;
-        });
+        // TODO:
+        //decrypt(token ? token : '').then(decryptedToken => {
+        //    this.token = decryptedToken;
+        //});
 
         this.loadSettings();
     }

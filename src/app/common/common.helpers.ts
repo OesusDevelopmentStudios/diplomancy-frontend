@@ -63,13 +63,33 @@ export function validateUsername(username: string): boolean
     return true;
 }
 
+export function saveCookie(key: string, value: string, expires: boolean = false)
+{
+    if (expires)
+    {
+        const date = new Date();
+        date.setDate(date.getDate() + 30);
+        console.log('Token will expire on:', date.toUTCString());
+        document.cookie = `${key}=${value}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
+    }
+    else
+    {
+        document.cookie = `${key}=${value}; path=/`; // TODO: secure; <- add this in production with HTTPS
+    }
+}
+
+export function getCookie(key: string): string | null
+{
+    return document.cookie.split('; ').find(row => row.startsWith(`${key}=`))?.split('=')[1] || null;
+}
+
 export function validatePassword(password: string): boolean
 {
     const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
     return regex.test(password);
 }
 
-export async function encrypt(text : string): Promise<string>
+export async function encrypt(text: string): Promise<string>
 {
     const iv = window.crypto.getRandomValues(new Uint8Array(12));
     const data = new TextEncoder().encode(text);
@@ -81,7 +101,7 @@ export async function encrypt(text : string): Promise<string>
     return btoa(String.fromCharCode(...ivBuffer));
 }
 
-export async function decrypt(secret : string): Promise<string>
+export async function decrypt(secret: string): Promise<string | null>
 {
     try
     {
@@ -95,7 +115,7 @@ export async function decrypt(secret : string): Promise<string>
     catch (error)
     {
         console.error('Decryption error:', error);
-        return '';
+        return null;
     }
 }
 

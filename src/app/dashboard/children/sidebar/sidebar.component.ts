@@ -4,8 +4,6 @@ import { NgClass } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { SwitchComponent } from '../../../common/components/switch/switch.component';
-import { tokenStorageKey } from '../../../common/common.data';
-import { decrypt } from '../../../common/common.helpers';
 
 import { Friend } from '../../data/dashboard.data.friend';
 
@@ -16,26 +14,16 @@ import { Friend } from '../../data/dashboard.data.friend';
     styleUrl: './sidebar.component.css'
 })
 
-export class SidebarComponent implements OnInit
+export class SidebarComponent
 {
     sidebarOpen: boolean = false;
     showBlacklist: boolean = false;
     matchedFriends: Friend[] = [];
     matchedEnemies: Friend[] = []
 
-    token : String = "";
-
     private friends: Friend[] = [];
     private enemies: Friend[] = [];
     private filter: string = "";
-
-    ngOnInit()
-    {
-        const token = sessionStorage.getItem(tokenStorageKey)
-        decrypt(token ? token : '').then(decryptedToken => {
-            this.token = decryptedToken;
-        });
-    }
 
     toggleSidebar(): void
     {

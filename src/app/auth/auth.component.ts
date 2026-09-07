@@ -6,12 +6,20 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
-import { supportedLanguages, defaultLanguage, tokenStorageKey, apiBaseUrl } from '../common/common.data';
+import {
+    apiBaseUrl,
+    defaultLanguage,
+    supportedLanguages,
+    tokenStorageKey,
+    usernameStorageKey
+} from '../common/common.data';
 import {
     changeLanguage,
     decrypt,
     encrypt,
+    getCookie,
     loadLanguage,
+    saveCookie,
     sleep,
     validateEmail,
     validatePassword,
@@ -82,26 +90,46 @@ export class AuthComponent implements OnInit
     ngOnInit(): void
     {
         loadLanguage(this.translate);
-        this.loadTokenAndRedirect();
+        // TODO: Grab local storage first (Verify token)
+        if (this.useCookies)
+        {
+            this.loadCookies();
+        }
     }
 
-    loadTokenAndRedirect(): void
+    loadCookies(): void
     {
-        const token: string = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || '';
+        const userId: string | null = getCookie("userId");
+        if (userId)
+        {
+            this.inUserId = userId;
+        }
+
+        const token: string | null = getCookie("token")
         if (!token)
         {
             return;
         }
 
-        // TODO: Validate token with server
-        decrypt(token).then(decryptedToken => {
-            console.log('Decrypted token: ', decryptedToken);
+        decrypt(token).then(decryptedToken => { this.verifyToken(decryptedToken)});
+    }
+
+    verifyToken(token: string | null)
+    {
+        if (!token)
+        {
+            return;
+        }
+
+        const json = {"token": token }
+        this.http.post(`${apiBaseUrl}/auth/validate`, json).subscribe({
+            next: (data) => { console.log(data) }
         });
+        // TODO: Validate token with server
+        // sessionStorage.setItem(tokenStorageKey, token.toString());
+        // this.router.navigate(['/dashboard']);
         // TODO: If not valid remove cookie
         // document.cookie = `token=; path=/`;
-
-        sessionStorage.setItem(tokenStorageKey, token.toString());
-        this.router.navigate(['/dashboard']);
     }
 
     changeLanguage(lang: string): void
@@ -175,7 +203,7 @@ export class AuthComponent implements OnInit
 
     onLoginSuccess(data: any)
     {
-        if (!data.hasOwnProperty("token"))
+        if (!data.hasOwnProperty("token") || !data.hasOwnProperty("username"))
         {
             this.handleAbnormalResponse();
             return
@@ -184,13 +212,12 @@ export class AuthComponent implements OnInit
         encrypt(data.token).then(token => {
             if (this.rememberMe && this.useCookies)
             {
-                const date = new Date();
-                date.setDate(date.getDate() + 30);
-                console.log('Token will expire on:', date.toUTCString());
-                document.cookie = `token=${token}; expires=${date.toUTCString()}; path=/`; // TODO: secure; <- add this in production with HTTPS
+                saveCookie("token", token, true)
+                saveCookie("userId", this.inUserId)
             }
 
             sessionStorage.setItem(tokenStorageKey, token);
+            sessionStorage.setItem(usernameStorageKey, data.username)
             this.router.navigate(['/dashboard']);
         })
     }
