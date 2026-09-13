@@ -90,11 +90,35 @@ export class AuthComponent implements OnInit
     ngOnInit(): void
     {
         loadLanguage(this.translate);
-        // TODO: Grab local storage first (Verify token)
+
+        const sessionToken = sessionStorage.getItem(usernameStorageKey);
+        if (sessionToken)
+        {
+            this.verifyToken
+        }
+
         if (this.useCookies)
         {
             this.loadCookies();
         }
+    }
+
+    checkLocalStorage(): boolean
+    {
+        const sessionUserId = sessionStorage.getItem(usernameStorageKey)
+        if (sessionUserId)
+        {
+            this.inUserId = sessionUserId;
+        }
+
+        const sessionToken = sessionStorage.getItem(tokenStorageKey)
+        if (sessionToken)
+        {
+            decrypt(sessionToken).then(decryptedToken => { this.verifyToken(decryptedToken)});
+            return true;
+        }
+
+        return false;
     }
 
     loadCookies(): void
@@ -123,13 +147,38 @@ export class AuthComponent implements OnInit
 
         const json = {"token": token }
         this.http.post(`${apiBaseUrl}/auth/validate`, json).subscribe({
-            next: (data) => { console.log(data) }
+            next: (data) => { this.onVerifySuccess(token, data); },
+            error: (_) => { this.onVerifyFailed(); }
         });
-        // TODO: Validate token with server
-        // sessionStorage.setItem(tokenStorageKey, token.toString());
-        // this.router.navigate(['/dashboard']);
-        // TODO: If not valid remove cookie
-        // document.cookie = `token=; path=/`;
+    }
+
+    onVerifySuccess(token: string, data: any): void
+    {
+        if (!data.hasOwnProperty("username"))
+        {
+            return
+        }
+
+        encrypt(token).then(encryptedToken => {
+            if (this.useCookies)
+            {
+                saveCookie("token", encryptedToken, true)
+                saveCookie("userId", data.username)
+            }
+
+            sessionStorage.setItem(tokenStorageKey, token);
+            sessionStorage.setItem(usernameStorageKey, data.username)
+            this.router.navigate(['/dashboard']);
+        })
+    }
+
+    onVerifyFailed(): void
+    {
+        sessionStorage.removeItem(tokenStorageKey)
+        if (this.useCookies)
+        {
+            document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00; path=/`;
+        }
     }
 
     changeLanguage(lang: string): void

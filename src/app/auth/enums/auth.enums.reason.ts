@@ -4,7 +4,8 @@ enum Reason
     BAD_USERNAME,
     BAD_EMAIL,
     BAD_USER_ID,
-    MISSING_REMEMBER_VALUE
+    MISSING_REMEMBER_VALUE,
+    MISSING_TOKEN_VALUE
 }
 
 function toReason(raw: any[]): Reason[]
@@ -23,6 +24,7 @@ function toReason(raw: any[]): Reason[]
             case 2: result.push(Reason.BAD_EMAIL); break
             case 3: result.push(Reason.BAD_USER_ID); break;
             case 4: result.push(Reason.MISSING_REMEMBER_VALUE); break;
+            case 5: result.push(Reason.MISSING_TOKEN_VALUE);
         }
     })
 
