@@ -1,10 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit, effect, model, output } from '@angular/core';
+import { Component, OnInit, effect, input, model, output } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { tokenStorageKey } from '../../../common/common.data';
-import { decrypt, validateEmail } from '../../../common/common.helpers';
+import { deleteCookie, validateEmail } from '../../../common/common.helpers';
 
 import { SwitchComponent } from '../../../common/components/switch/switch.component';
 
@@ -20,10 +20,10 @@ import { FormsModule } from '@angular/forms';
 
 export class SettingsComponent implements OnInit
 {
+    token = input.required<string|null>();
     settingsOpen = model.required<boolean>();
     onLanguageChange = output<string>();
 
-    token : String = "";
     cookiesEnabled: boolean = false;
     emailNotificationsEnabled: boolean = false;
     user_email: String = "us******le.com";
@@ -57,17 +57,29 @@ export class SettingsComponent implements OnInit
                 this.confirmAccountDeletionAction = false;
                 this.removeAccountPasswordOk = true;
             }
+
+            if (this.token())
+            {
+                this.getDataFromBackend();
+            }
         });
+    }
+
+    getDataFromBackend(): void
+    {
+        console.log("Fetching data from backend: " + this.token())
+        // TODO: impl
+
+        // TODO: Load email from database
+        const email = 'example@mail.net';
+        this.user_email = email.substring(0, 2) + '****' + email.substring(email.indexOf('@'));
+
+        // Load email notifications setting from database, for now just set to false
+        this.emailNotificationsEnabled = false;
     }
 
     ngOnInit()
     {
-        const token = sessionStorage.getItem(tokenStorageKey)
-        // TODO:
-        //decrypt(token ? token : '').then(decryptedToken => {
-        //    this.token = decryptedToken;
-        //});
-
         this.loadSettings();
     }
 
@@ -78,13 +90,6 @@ export class SettingsComponent implements OnInit
         {
             this.cookiesEnabled = cookiesEnabled === 'true';
         }
-
-        // TODO: Load email from database
-        const email = 'example@mail.net';
-        this.user_email = email.substring(0, 2) + '****' + email.substring(email.indexOf('@'));
-
-        // Load email notifications setting from database, for now just set to false
-        this.emailNotificationsEnabled = false;
     }
 
     changeCookiesSetting(): void
@@ -109,6 +114,8 @@ export class SettingsComponent implements OnInit
 
     close(): void
     {
+        console.log("Token is: " + this.token())
+
         this.settingsOpen.set(false);
         this.sectionEmailOpen = false;
         this.sectionPasswordOpen = false;
@@ -119,9 +126,10 @@ export class SettingsComponent implements OnInit
 
     logout(): void
     {
+        // TODO: Also end session in the backend
         if (this.cookiesEnabled)
         {
-            document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            deleteCookie(tokenStorageKey)
         }
 
         sessionStorage.removeItem(tokenStorageKey);

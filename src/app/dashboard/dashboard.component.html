@@ -1,9 +1,16 @@
 <main>
     <app-search [(showSearch)]="showSearch"/>
-    <app-settings [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
+    <app-settings  [token]="token" [(settingsOpen)]="showSettings" (onLanguageChange)="changeLanguage($event)"/>
     <div class="titlebar">
-        <h1 class="title">Diplomancy</h1>
-        <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
+        <div class="bar_left">
+            <h1 class="title">Diplomancy</h1>
+        </div>
+        <div class="bar_center">
+            <h4>{{username}}</h4>
+        </div>
+        <div class="bar_right">
+            <img class="img_button" src="assets/settings.png" (click)="manageSettings()"/>
+        </div>
     </div>
     <div class="content">
         <div class="scrollable">

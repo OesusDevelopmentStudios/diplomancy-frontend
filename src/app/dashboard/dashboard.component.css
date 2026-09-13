@@ -1,13 +1,35 @@
 /* Titlebar */
 
 .titlebar {
-    align-items: center;
     display: flex;
     flex-direction: row;
-    height: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    justify-content: space-between;
+}
+
+.bar_left, .bar_center, .bar_right {
+    height: 50px;
+    width: 33.3%;
+}
+
+.bar_left h1, .bar_center h4 {
+    margin: 0px;
+}
+
+.bar_left {
+    align-content: center;
+}
+
+.bar_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bar_right {
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 .title {

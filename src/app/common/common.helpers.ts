@@ -83,6 +83,11 @@ export function getCookie(key: string): string | null
     return document.cookie.split('; ').find(row => row.startsWith(`${key}=`))?.split('=')[1] || null;
 }
 
+export function deleteCookie(key: string)
+{
+    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
 export function validatePassword(password: string): boolean
 {
     const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');

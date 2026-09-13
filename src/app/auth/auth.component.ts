@@ -11,11 +11,13 @@ import {
     defaultLanguage,
     supportedLanguages,
     tokenStorageKey,
+    userIdStorageKey,
     usernameStorageKey
 } from '../common/common.data';
 import {
     changeLanguage,
     decrypt,
+    deleteCookie,
     encrypt,
     getCookie,
     loadLanguage,
@@ -123,13 +125,13 @@ export class AuthComponent implements OnInit
 
     loadCookies(): void
     {
-        const userId: string | null = getCookie("userId");
+        const userId: string | null = getCookie(userIdStorageKey);
         if (userId)
         {
             this.inUserId = userId;
         }
 
-        const token: string | null = getCookie("token")
+        const token: string|null = getCookie(tokenStorageKey)
         if (!token)
         {
             return;
@@ -138,7 +140,7 @@ export class AuthComponent implements OnInit
         decrypt(token).then(decryptedToken => { this.verifyToken(decryptedToken)});
     }
 
-    verifyToken(token: string | null)
+    verifyToken(token: string|null)
     {
         if (!token)
         {
@@ -162,8 +164,8 @@ export class AuthComponent implements OnInit
         encrypt(token).then(encryptedToken => {
             if (this.useCookies)
             {
-                saveCookie("token", encryptedToken, true)
-                saveCookie("userId", data.username)
+                saveCookie(tokenStorageKey, encryptedToken, true)
+                saveCookie(userIdStorageKey, data.username)
             }
 
             sessionStorage.setItem(tokenStorageKey, token);
@@ -177,7 +179,7 @@ export class AuthComponent implements OnInit
         sessionStorage.removeItem(tokenStorageKey)
         if (this.useCookies)
         {
-            document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00; path=/`;
+            deleteCookie(tokenStorageKey);
         }
     }
 
@@ -261,8 +263,8 @@ export class AuthComponent implements OnInit
         encrypt(data.token).then(token => {
             if (this.rememberMe && this.useCookies)
             {
-                saveCookie("token", token, true)
-                saveCookie("userId", this.inUserId)
+                saveCookie(tokenStorageKey, token, true)
+                saveCookie(userIdStorageKey, this.inUserId)
             }
 
             sessionStorage.setItem(tokenStorageKey, token);

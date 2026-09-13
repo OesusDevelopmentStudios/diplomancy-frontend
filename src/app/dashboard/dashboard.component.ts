@@ -1,11 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { supportedLanguages, defaultLanguage, tokenStorageKey } from '../common/common.data';
-import { loadLanguage, decrypt, changeLanguage } from '../common/common.helpers';
+import {
+    apiBaseUrl,
+    defaultLanguage,
+    supportedLanguages,
+    tokenStorageKey,
+    usernameStorageKey
+} from '../common/common.data';
+import { loadLanguage, decrypt, changeLanguage} from '../common/common.helpers';
 import { Country } from '../common/enums/common.enums.country';
 import { Phase } from '../common/enums/common.enums.phase';
 import { Game } from './data/dashboard.data.game';
@@ -14,6 +20,7 @@ import { SidebarComponent } from './children/sidebar/sidebar.component';
 import { SettingsComponent } from './children//settings/settings.component';
 import { DashItemComponent } from './children//dash-item/dash-item.component';
 import { SearchComponent } from './children/search/search.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-dashboard',
@@ -27,8 +34,10 @@ export class DashboardComponent implements OnInit
     showSettings: boolean = false;
     showSearch: boolean = false;
     gameData: Game[] = [];
+    username: string = "";
+    token: string | null = null;
 
-    private token: String | null = null;
+    private http = inject(HttpClient)
 
     /* Dummy data for items, replace with actual data from server */
     countries: Country[] = [Country.NOR, Country.SWE, Country.RUS, Country.GER, Country.FRA, Country.SPA, Country.ITA,
@@ -66,10 +75,15 @@ export class DashboardComponent implements OnInit
     {
         loadLanguage(this.translate);
         const token = sessionStorage.getItem(tokenStorageKey)
-        // TODO:
-        // decrypt(token ? token : '').then(decryptedToken => {
-        //     this.validateToken(decryptedToken);
-        // });
+        if (!token)
+        {
+            this.router.navigate(['/']);
+            return;
+        }
+
+        decrypt(token).then(decryptedToken => {
+            this.verifyToken(decryptedToken);
+        });
     }
 
     manageSettings(): void
@@ -82,19 +96,38 @@ export class DashboardComponent implements OnInit
         this.showSearch = !this.showSearch;
     }
 
-    validateToken(token: string): void
+    verifyToken(token: string|null): void
     {
-        // TODO: Validate token with server
-        console.log('Validating token:', token);
-        const valid: boolean = true; // Placeholder for actual validation result
-
-        if (!valid || token === '')
+        if (!token)
         {
-            this.router.navigate(['/']);
+            this.onVerifyFailed();
+            return;
         }
-        // Token is valid
+
+        const json = {"token": token }
+        this.http.post(`${apiBaseUrl}/auth/validate`, json).subscribe({
+            next: (data) => { this.onVerifySuccess(token, data); },
+            error: (_) => { this.onVerifyFailed(); }
+        });
+    }
+
+    onVerifySuccess(token: string, data: any): void
+    {
+        if (!data.hasOwnProperty("username"))
+        {
+            this.onVerifyFailed();
+            return;
+        }
+
         this.token = token;
-        // Token is invalid
+        this.username = data.username;
+        sessionStorage.setItem(usernameStorageKey, data.username);
+    }
+
+    onVerifyFailed()
+    {
+        sessionStorage.removeItem(tokenStorageKey);
+        this.router.navigate(['/']);
     }
 
     onGameSelected(gameId: string): void
