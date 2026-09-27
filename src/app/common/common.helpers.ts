@@ -74,7 +74,7 @@ export function saveCookie(key: string, value: string, expires: boolean = false)
     }
     else
     {
-        document.cookie = `${key}=${value}; path=/`; // TODO: secure; <- add this in production with HTTPS
+        document.cookie = `${key}=${value}; path=/`;
     }
 }
 

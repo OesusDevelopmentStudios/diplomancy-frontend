@@ -93,10 +93,10 @@ export class AuthComponent implements OnInit
     {
         loadLanguage(this.translate);
 
-        const sessionToken = sessionStorage.getItem(usernameStorageKey);
+        const sessionToken = sessionStorage.getItem(tokenStorageKey);
         if (sessionToken)
         {
-            this.verifyToken
+            this.verifyToken(sessionToken)
         }
 
         if (this.useCookies)
@@ -168,7 +168,7 @@ export class AuthComponent implements OnInit
                 saveCookie(userIdStorageKey, data.username)
             }
 
-            sessionStorage.setItem(tokenStorageKey, token);
+            sessionStorage.setItem(tokenStorageKey, encryptedToken);
             sessionStorage.setItem(usernameStorageKey, data.username)
             this.router.navigate(['/dashboard']);
         })
@@ -260,14 +260,14 @@ export class AuthComponent implements OnInit
             return
         }
 
-        encrypt(data.token).then(token => {
+        encrypt(data.token).then(encryptedToken => {
             if (this.rememberMe && this.useCookies)
             {
-                saveCookie(tokenStorageKey, token, true)
+                saveCookie(tokenStorageKey, encryptedToken, true)
                 saveCookie(userIdStorageKey, this.inUserId)
             }
 
-            sessionStorage.setItem(tokenStorageKey, token);
+            sessionStorage.setItem(tokenStorageKey, encryptedToken);
             sessionStorage.setItem(usernameStorageKey, data.username)
             this.router.navigate(['/dashboard']);
         })

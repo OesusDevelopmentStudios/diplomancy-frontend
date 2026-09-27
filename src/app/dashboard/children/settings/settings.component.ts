@@ -1,15 +1,16 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit, effect, input, model, output } from '@angular/core';
+import { Component, OnInit, effect, input, model, output, inject } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { tokenStorageKey } from '../../../common/common.data';
+import { apiBaseUrl, tokenStorageKey } from '../../../common/common.data';
 import { deleteCookie, validateEmail } from '../../../common/common.helpers';
 
 import { SwitchComponent } from '../../../common/components/switch/switch.component';
 
 import { SettingsItemComponent } from '../settings-item/settings-item.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-settings',
@@ -45,6 +46,8 @@ export class SettingsComponent implements OnInit
     repeatPassword: string = '';
 
     confirmAccountDeletionAction: boolean = false;
+
+    private http = inject(HttpClient)
 
     constructor()
     {
@@ -126,13 +129,24 @@ export class SettingsComponent implements OnInit
 
     logout(): void
     {
-        // TODO: Also end session in the backend
         if (this.cookiesEnabled)
         {
             deleteCookie(tokenStorageKey)
         }
 
         sessionStorage.removeItem(tokenStorageKey);
+        const json = {"token": this.token()}
+        this.http.post(`${apiBaseUrl}/auth/logout`, json).subscribe({
+            next: (_) => { this.finalizeLogout(); },
+            error: (_) => {
+                console.error("Failed to close session cleanly!");
+                this.finalizeLogout();
+            }
+        })
+    }
+
+    finalizeLogout()
+    {
         window.location.reload();
     }
 
