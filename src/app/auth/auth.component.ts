@@ -92,14 +92,7 @@ export class AuthComponent implements OnInit
     ngOnInit(): void
     {
         loadLanguage(this.translate);
-
-        const sessionToken = sessionStorage.getItem(tokenStorageKey);
-        if (sessionToken)
-        {
-            this.verifyToken(sessionToken)
-        }
-
-        if (this.useCookies)
+        if (!this.checkLocalStorage() && this.useCookies)
         {
             this.loadCookies();
         }
@@ -356,9 +349,6 @@ export class AuthComponent implements OnInit
                 case Reason.BAD_USERNAME: this.usernameOk = false; break;
                 case Reason.BAD_EMAIL: this.emailOk = false; break;
                 case Reason.BAD_USER_ID: this.userIdOk = false; break;
-                case Reason.MISSING_REMEMBER_VALUE:
-                    console.error("Server reported incomplete message!")
-                    this.handleAbnormalResponse();
             }
         })
     }
